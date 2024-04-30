@@ -3,8 +3,13 @@ extends CharacterBody2D
 const MAX_SPEED = 500
 const ACCELERATION_SMOOTHING = 25
 
+@onready var timer = $Timer
+
+var start_pos
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	start_pos = global_position
 	pass # Replace with function body.
 
 
@@ -14,3 +19,6 @@ func _process(delta):
 	
 	velocity = velocity.lerp(-target_velocity, 1 - exp(-delta * ACCELERATION_SMOOTHING))
 	move_and_slide()
+	
+	if timer.time_left == 0:
+		queue_free()

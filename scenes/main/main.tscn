@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://fybn4cxq6epe"]
+[gd_scene load_steps=3 format=3 uid="uid://fybn4cxq6epe"]
 
 [ext_resource type="TileSet" uid="uid://c8qvj247x6ny6" path="res://resources/space_tileset.tres" id="1_r1hyo"]
 [ext_resource type="PackedScene" uid="uid://dirgwundhi3xq" path="res://scenes/player/player.tscn" id="2_sbarx"]
-[ext_resource type="PackedScene" uid="uid://bxp05dl1dhxw6" path="res://scenes/blaster_bolt/blaster_bolt.tscn" id="3_w8bof"]
 
 [node name="Main" type="Node"]
 
@@ -13,19 +12,3 @@ layer_0/tile_data = PackedInt32Array(1835054, 1, 0, 1769518, 1, 0, 1703982, 1, 0
 
 [node name="Player" parent="." instance=ExtResource("2_sbarx")]
 position = Vector2(299, 235)
-
-[node name="Blaster_bolt" parent="." instance=ExtResource("3_w8bof")]
-position = Vector2(336, 314)
-rotation = 0.878687
-
-[node name="Blaster_bolt2" parent="." instance=ExtResource("3_w8bof")]
-position = Vector2(364, 398)
-
-[node name="Blaster_bolt3" parent="." instance=ExtResource("3_w8bof")]
-position = Vector2(400, 364)
-
-[node name="Blaster_bolt4" parent="." instance=ExtResource("3_w8bof")]
-position = Vector2(440, 398)
-
-[node name="Blaster_bolt5" parent="." instance=ExtResource("3_w8bof")]
-position = Vector2(317, 420)
