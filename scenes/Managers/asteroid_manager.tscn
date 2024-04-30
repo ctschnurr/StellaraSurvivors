@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://gpcxji3gk5nw"]
+
+[ext_resource type="Script" path="res://Asteroid_manager.gd" id="1_38ubf"]
+[ext_resource type="PackedScene" uid="uid://batiubvruu51j" path="res://scenes/asteroids/asteroid.tscn" id="2_ws0e7"]
+
+[node name="Asteroid_manager" type="Node"]
+script = ExtResource("1_38ubf")
+small_asteroid = ExtResource("2_ws0e7")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
