@@ -1,0 +1,6 @@
+res://scenes/main/main.tscn
+res://resources/space_tileset.tres
+res://scenes/player/player.tscn
+res://scenes/player/player.gd
+res://scenes/blaster_bolt/blaster_bolt.tscn
+res://Blaster_bolt.gd
