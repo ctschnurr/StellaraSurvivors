@@ -1,7 +1,8 @@
+RigidBody2D
+CollisionShape2D
 Timer
 Node
 AnimationPlayer
-CollisionShape2D
 Sprite2D
 CharacterBody2D
 Node2D

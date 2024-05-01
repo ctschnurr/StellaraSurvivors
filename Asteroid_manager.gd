@@ -8,10 +8,8 @@ var asteroids_list: Array
 
 
 func _ready():
-	spawn_asteroids()
-
-func _process(_delta):
 	$Timer.timeout.connect(on_timer_timeout)
+	spawn_asteroids()
 
 func on_timer_timeout():
 	if asteroids_list.size() <= MAX_ASTEROIDS:
@@ -19,10 +17,10 @@ func on_timer_timeout():
 
 
 func spawn_asteroids():
-	var spawn_number = randf_range(15, 20)
+	var spawn_number = randf_range(3, 5)
 	for n in spawn_number:
 		var asteroid_instance = small_asteroid.instantiate() as Node2D
 		add_child(asteroid_instance)
-		asteroid_instance.global_position = Vector2(-100, randf_range(400, 700))
+		asteroid_instance.global_position = Vector2(-100, randf_range(300, 900))
 		asteroids_list.append(asteroid_instance)
 

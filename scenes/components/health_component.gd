@@ -25,9 +25,7 @@ func damage(damage_amount: float):
 func check_death():
 		if current_health == 0:
 			animation_player.set_current_animation("Death")
-			animation_player.play
 			
 			died.emit()
 		else:
 			animation_player.set_current_animation("Damage")
-			animation_player.play
