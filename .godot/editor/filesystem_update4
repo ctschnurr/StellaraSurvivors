@@ -8,3 +8,7 @@ res://scenes/components/hitbox_component.tscn
 res://scenes/components/hurtbox_component.tscn
 res://scenes/Managers/asteroid_manager.tscn
 res://scenes/asteroids/asteroid.gd
+res://Blaster_bolt.gd
+res://Game_camera.gd
+res://scenes/game_camera/game_camera.tscn
+res://Asteroid_manager.gd

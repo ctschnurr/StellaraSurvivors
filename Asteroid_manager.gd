@@ -21,6 +21,6 @@ func spawn_asteroids():
 	for n in spawn_number:
 		var asteroid_instance = small_asteroid.instantiate() as Node2D
 		add_child(asteroid_instance)
-		asteroid_instance.global_position = Vector2(-100, randf_range(300, 900))
+		asteroid_instance.global_position = Vector2(-500, randf_range(300, 900))
 		asteroids_list.append(asteroid_instance)
 

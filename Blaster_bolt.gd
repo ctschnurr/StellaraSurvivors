@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Blaster_bolt
 
 const MAX_SPEED = 500
 const ACCELERATION_SMOOTHING = 25
