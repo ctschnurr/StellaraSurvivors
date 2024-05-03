@@ -1,14 +1,11 @@
-res://scenes/main/main.tscn
+res://scenes/Managers/asteroid_manager.tscn
 res://resources/space_tileset.tres
+res://scenes/asteroids/asteroid.gd
+res://scenes/main/main.tscn
 res://scenes/player/player.tscn
 res://scenes/blaster_bolt/blaster_bolt.tscn
 res://scenes/asteroids/asteroid.tscn
 res://scenes/components/health_component.tscn
 res://scenes/components/hitbox_component.tscn
 res://scenes/components/hurtbox_component.tscn
-res://scenes/Managers/asteroid_manager.tscn
-res://scenes/asteroids/asteroid.gd
-res://Blaster_bolt.gd
-res://Game_camera.gd
 res://scenes/game_camera/game_camera.tscn
-res://Asteroid_manager.gd
