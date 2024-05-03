@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const MAX_SPEED = 150
+const MAX_SPEED = 200
 const ACCELERATION_SMOOTHING = 25
 
 @export var blaster_bolt_scene: PackedScene

@@ -9,3 +9,5 @@ res://scenes/components/health_component.tscn
 res://scenes/components/hitbox_component.tscn
 res://scenes/components/hurtbox_component.tscn
 res://scenes/game_camera/game_camera.tscn
+res://scenes/player/player.gd
+res://Asteroid_manager.gd

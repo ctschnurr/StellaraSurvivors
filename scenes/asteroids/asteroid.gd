@@ -23,8 +23,12 @@ func _process(_delta):
 	asteroid_sprite.rotation += asteroid_rotation
 	velocity = asteroid_direction * asteroid_speed
 	move_and_slide()
+	
+	if global_position.x > 5000 or global_position.x < -2000:
+		queue_free()
+		
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	queue_redraw()
 	
 	var raycast_left_direction = asteroid_direction.rotated(-0.8)
