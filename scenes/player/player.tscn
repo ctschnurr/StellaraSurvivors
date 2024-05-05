@@ -1,24 +1,156 @@
-[gd_scene load_steps=5 format=3 uid="uid://dirgwundhi3xq"]
+[gd_scene load_steps=24 format=3 uid="uid://dirgwundhi3xq"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_6xqvq"]
-[ext_resource type="Texture2D" uid="uid://c8ktacjsl5c5e" path="res://scenes/player/player_placeholder.png" id="1_vi843"]
 [ext_resource type="PackedScene" uid="uid://bxp05dl1dhxw6" path="res://scenes/blaster_bolt/blaster_bolt.tscn" id="2_l3qom"]
+[ext_resource type="Texture2D" uid="uid://dc763s87fheu4" path="res://assets/player_idle.png" id="3_bs7db"]
+[ext_resource type="Texture2D" uid="uid://yxcaoxiptd5d" path="res://assets/player_movement.png" id="4_0ftfx"]
+[ext_resource type="Texture2D" uid="uid://ccdqt1ucer72s" path="res://assets/ship_cannon.png" id="4_6y5io"]
+[ext_resource type="Texture2D" uid="uid://dntky5xyv71i7" path="res://assets/engine_beam.png" id="5_udybl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tn5mh"]
+atlas = ExtResource("3_bs7db")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3x6ue"]
+atlas = ExtResource("3_bs7db")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pp7gt"]
+atlas = ExtResource("3_bs7db")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uepmm"]
+atlas = ExtResource("3_bs7db")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mg0r"]
+atlas = ExtResource("3_bs7db")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjy8d"]
+atlas = ExtResource("3_bs7db")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7g2h"]
+atlas = ExtResource("3_bs7db")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdoh2"]
+atlas = ExtResource("3_bs7db")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcu3r"]
+atlas = ExtResource("4_0ftfx")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgdld"]
+atlas = ExtResource("4_0ftfx")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ui5fv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tn5mh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3x6ue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pp7gt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uepmm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mg0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjy8d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7g2h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdoh2")
+}],
+"loop": true,
+"name": &"player_idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcu3r")
+}],
+"loop": true,
+"name": &"player_move_d",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tgdld")
+}],
+"loop": true,
+"name": &"player_move_h&v",
+"speed": 12.0
+}]
+
+[sub_resource type="Curve" id="Curve_tx7bn"]
+_data = [Vector2(0, 0.296703), 0.0, -0.296703, 0, 1, Vector2(1, 0), -0.296703, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_doqou"]
+curve = SubResource("Curve_tx7bn")
+
+[sub_resource type="Gradient" id="Gradient_te1nc"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0.282353, 0.498039, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7eot2"]
+gradient = SubResource("Gradient_te1nc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uk5xo"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+damping_min = 5.0
+damping_max = 5.0
+scale_min = 1.1
+scale_max = 1.1
+color_ramp = SubResource("GradientTexture1D_7eot2")
+alpha_curve = SubResource("CurveTexture_doqou")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e3u53"]
 radius = 25.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("fire_position")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("fire_position", "ship_cannon", "ship_body")]
 motion_mode = 1
 script = ExtResource("1_6xqvq")
 blaster_bolt_scene = ExtResource("2_l3qom")
-fire_position = NodePath("fire_position")
+fire_position = NodePath("Ship_Cannon/fire_position")
+ship_cannon = NodePath("Ship_Cannon")
+ship_body = NodePath("Ship_Body")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_vi843")
+[node name="Ship_Body" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ui5fv")
+animation = &"player_move_h&v"
+autoplay = "player_idle"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Ship_Body"]
+z_index = -1
+rotation = -3.14159
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_uk5xo")
+texture = ExtResource("5_udybl")
+lifetime = 0.5
+speed_scale = 5.0
+
+[node name="Ship_Cannon" type="Sprite2D" parent="."]
+texture = ExtResource("4_6y5io")
+
+[node name="fire_position" type="Node2D" parent="Ship_Cannon"]
+position = Vector2(0, -27)
+rotation = 0.00410047
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_e3u53")
-
-[node name="fire_position" type="Node2D" parent="."]
-position = Vector2(0, -35)
-rotation = 0.00410047
