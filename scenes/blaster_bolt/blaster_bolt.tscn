@@ -8,8 +8,9 @@
 radius = 3.0
 height = 15.0
 
-[node name="Blaster_bolt" type="CharacterBody2D"]
+[node name="Blaster_bolt" type="CharacterBody2D" node_paths=PackedStringArray("hit_box")]
 script = ExtResource("1_c7080")
+hit_box = NodePath("HitboxComponent/HitBox")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_kk561")
@@ -22,7 +23,8 @@ autostart = true
 [node name="HitboxComponent" parent="." instance=ExtResource("3_qgnsm")]
 collision_layer = 2
 collision_mask = 2
+damage = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+[node name="HitBox" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(0, -3.5)
 shape = SubResource("CapsuleShape2D_a2d8e")

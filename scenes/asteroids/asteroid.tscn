@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://batiubvruu51j"]
+[gd_scene load_steps=11 format=3 uid="uid://batiubvruu51j"]
 
 [ext_resource type="Script" path="res://scenes/asteroids/asteroid.gd" id="1_e7n4j"]
 [ext_resource type="Texture2D" uid="uid://bd7c37w1m8a2q" path="res://scenes/asteroids/asteroid_sm01.png" id="1_gdfdo"]
 [ext_resource type="PackedScene" uid="uid://dqf2fq7p7ip" path="res://scenes/components/health_component.tscn" id="3_fb6pk"]
 [ext_resource type="PackedScene" uid="uid://bcmna6wa42j0q" path="res://scenes/components/hurtbox_component.tscn" id="4_8y7tw"]
+[ext_resource type="PackedScene" uid="uid://cxmypx8uu0kun" path="res://scenes/components/hitbox_component.tscn" id="5_vp8vg"]
 
 [sub_resource type="Animation" id="Animation_ce6m8"]
 resource_name = "Damage"
@@ -36,20 +37,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(100, 100, 100, 0)]
 }
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HealthComponent")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"free_me"
-}]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lbpxx"]
 _data = {
@@ -80,11 +67,22 @@ shape = SubResource("CircleShape2D_026wd")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("3_fb6pk")]
 animation_player = NodePath("../AnimationPlayer")
+max_health = 5.0
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_8y7tw")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "hitbox") instance=ExtResource("4_8y7tw")]
 collision_layer = 2
 collision_mask = 2
 health_component = NodePath("../HealthComponent")
+hitbox = NodePath("../HitboxComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_rvlpy")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("5_vp8vg")]
+collision_layer = 1
+collision_mask = 1
+hurtbox = NodePath("../HurtboxComponent")
+damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_rvlpy")

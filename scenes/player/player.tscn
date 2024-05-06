@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dirgwundhi3xq"]
+[gd_scene load_steps=30 format=3 uid="uid://dirgwundhi3xq"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_6xqvq"]
 [ext_resource type="PackedScene" uid="uid://bxp05dl1dhxw6" path="res://scenes/blaster_bolt/blaster_bolt.tscn" id="2_l3qom"]
@@ -6,6 +6,68 @@
 [ext_resource type="Texture2D" uid="uid://yxcaoxiptd5d" path="res://assets/player_movement.png" id="4_0ftfx"]
 [ext_resource type="Texture2D" uid="uid://ccdqt1ucer72s" path="res://assets/ship_cannon.png" id="4_6y5io"]
 [ext_resource type="Texture2D" uid="uid://dntky5xyv71i7" path="res://assets/engine_beam.png" id="5_udybl"]
+[ext_resource type="PackedScene" uid="uid://dqf2fq7p7ip" path="res://scenes/components/health_component.tscn" id="7_arbtb"]
+[ext_resource type="PackedScene" uid="uid://bcmna6wa42j0q" path="res://scenes/components/hurtbox_component.tscn" id="8_nnxdr"]
+
+[sub_resource type="Animation" id="Animation_tpkcl"]
+resource_name = "Damage"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ship_Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1e-05, 1e-05, 1e-05, 1e-05, 1e-05),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ship_Cannon:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1e-05, 1e-05, 1e-05, 1e-05, 1e-05),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_o1bsu"]
+resource_name = "Death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ship_Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1e-05, 0.702397, 1e-05),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(100, 100, 100, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ship_Cannon:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1e-05, 0.702397, 1e-05),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(100, 100, 100, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rxc7s"]
+_data = {
+"Damage": SubResource("Animation_tpkcl"),
+"Death": SubResource("Animation_o1bsu")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tn5mh"]
 atlas = ExtResource("3_bs7db")
@@ -121,15 +183,24 @@ hue_variation_min = 1.0
 hue_variation_max = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e3u53"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_80xxi"]
 radius = 25.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("fire_position", "ship_cannon", "ship_body")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("fire_position", "ship_cannon", "ship_body", "hurt_box")]
 motion_mode = 1
 script = ExtResource("1_6xqvq")
 blaster_bolt_scene = ExtResource("2_l3qom")
 fire_position = NodePath("Ship_Cannon/fire_position")
 ship_cannon = NodePath("Ship_Cannon")
 ship_body = NodePath("Ship_Body")
+hurt_box = NodePath("HurtboxComponent/HurtBox")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rxc7s")
+}
 
 [node name="Ship_Body" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ui5fv")
@@ -154,3 +225,13 @@ rotation = 0.00410047
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_e3u53")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("7_arbtb")]
+animation_player = NodePath("../AnimationPlayer")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_nnxdr")]
+collision_mask = 1
+health_component = NodePath("../HealthComponent")
+
+[node name="HurtBox" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_80xxi")

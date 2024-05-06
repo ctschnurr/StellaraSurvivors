@@ -7,6 +7,7 @@ const ACCELERATION_SMOOTHING = 5
 @export var fire_position: Node2D
 @export var ship_cannon: Sprite2D
 @export var ship_body: AnimatedSprite2D
+@export var hurt_box: CollisionShape2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

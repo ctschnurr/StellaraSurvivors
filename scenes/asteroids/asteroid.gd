@@ -41,7 +41,7 @@ func _physics_process(_delta):
 		
 func fire_raycast(direction: Vector2):
 	var space_state = get_world_2d().direct_space_state
-	var raycast = PhysicsRayQueryParameters2D.create(global_position, global_position + (direction * 15))
+	var raycast = PhysicsRayQueryParameters2D.create(global_position, global_position + (direction * 20))
 	raycast.exclude = [self]
 	
 	var raycast_output = space_state.intersect_ray(raycast)
@@ -69,13 +69,13 @@ func collision_cooldown():
 	was_hit = false
 	
 	
-#func _draw():
-#	var look_left = asteroid_direction.rotated(-0.75)
-#	var look_right = asteroid_direction.rotated(0.75)
-		
-#	draw_line(Vector2.ZERO, (Vector2.ZERO + asteroid_direction) * 20, Color.GREEN if !has_hit else Color.RED)
-#	draw_line(Vector2.ZERO, look_left * 20, Color.GREEN if !has_hit else Color.RED)
-#	draw_line(Vector2.ZERO, look_right * 20, Color.GREEN if !has_hit else Color.RED)
+func _draw():
+	var look_left = asteroid_direction.rotated(-0.75)
+	var look_right = asteroid_direction.rotated(0.75)
+	
+	draw_line(Vector2.ZERO, (Vector2.ZERO + asteroid_direction) * 20, Color.GREEN if !has_hit else Color.RED)
+	draw_line(Vector2.ZERO, look_left * 20, Color.GREEN if !has_hit else Color.RED)
+	draw_line(Vector2.ZERO, look_right * 20, Color.GREEN if !has_hit else Color.RED)
 
 		
 
