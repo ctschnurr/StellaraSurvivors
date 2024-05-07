@@ -8,7 +8,7 @@
 
 [sub_resource type="Animation" id="Animation_ce6m8"]
 resource_name = "Damage"
-length = 0.4
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -16,10 +16,10 @@ tracks/0/path = NodePath("Asteroid_sprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1e-05, 1e-05, 1e-05, 1e-05, 1e-05),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1e-05, 1e-05, 1e-05),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_ptf8c"]
@@ -45,7 +45,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_026wd"]
-radius = 13.0
+radius = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rvlpy"]
 radius = 13.0
@@ -66,6 +66,7 @@ texture = ExtResource("1_gdfdo")
 shape = SubResource("CircleShape2D_026wd")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("3_fb6pk")]
+unique_name_in_owner = true
 animation_player = NodePath("../AnimationPlayer")
 max_health = 5.0
 

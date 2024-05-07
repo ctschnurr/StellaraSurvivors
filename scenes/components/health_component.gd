@@ -25,9 +25,10 @@ func check_death():
 		if current_health == 0:
 			animation_player.play("Death")
 			await animation_player.animation_finished
+			died.emit()
 			owner.queue_free()
 			
 		else:
-			animation_player.set_current_animation("Damage")
+			animation_player.play("Damage")
 			await animation_player.animation_finished
 			vulnerable = true

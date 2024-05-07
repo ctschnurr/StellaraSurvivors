@@ -17,51 +17,14 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var movement_vector = get_movement_vector()
-	if (movement_vector.x > 0):
-		if (movement_vector.y == 0):
-			ship_body.play("player_move_h&v")
-			ship_body.rotation = deg_to_rad(-90)
-			
-		if (movement_vector.y > 0):
-			ship_body.play("player_move_d")
-			ship_body.rotation = deg_to_rad(-90)
-			
-		if (movement_vector.y < 0):
-			ship_body.play("player_move_d")
-			ship_body.rotation = deg_to_rad(180)
-			
-	if (movement_vector.x < 0):
-		if (movement_vector.y == 0):
-			ship_body.play("player_move_h&v")
-			ship_body.rotation = deg_to_rad(90)
-			
-		if (movement_vector.y > 0):
-			ship_body.play("player_move_d")
-			ship_body.rotation = deg_to_rad(0)
-			
-		if (movement_vector.y < 0):
-			ship_body.play("player_move_d")
-			ship_body.rotation = deg_to_rad(90)
-			
-	if (movement_vector.x == 0):
-		if(movement_vector.y > 0):
-			ship_body.play("player_move_h&v")
-			ship_body.rotation = deg_to_rad(0)
-			
-		if(movement_vector.y < 0):
-			ship_body.play("player_move_h&v")
-			ship_body.rotation = deg_to_rad(180)
-			
-		if(movement_vector.y == 0):
-			ship_body.play("player_idle")
-			ship_body.rotation = deg_to_rad(0)
-
-	
+	animate_player(movement_vector)	
 	var direction = movement_vector.normalized()
 	var target_velocity = direction * MAX_SPEED
 	
 	velocity = velocity.lerp(target_velocity, 1 - exp(-delta * ACCELERATION_SMOOTHING))
 	move_and_slide()
+	
+	constrain_player()
 
 	var look_direction = get_global_mouse_position()	
 	ship_cannon.look_at(look_direction)
@@ -81,3 +44,50 @@ func get_movement_vector():
 	var y_movement = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	
 	return Vector2(x_movement, y_movement)
+
+
+func constrain_player():
+	if global_position.x > 600: global_position.x = 600
+	if global_position.x < -600: global_position.x = -600
+	if global_position.y > 320: global_position.y = 320
+	if global_position.y < -320: global_position.y = -320
+
+func animate_player(direction: Vector2):
+	if (direction.x > 0):
+		if (direction.y == 0):
+			ship_body.play("player_move_h&v")
+			ship_body.rotation = deg_to_rad(-90)
+			
+		if (direction.y > 0):
+			ship_body.play("player_move_d")
+			ship_body.rotation = deg_to_rad(-90)
+			
+		if (direction.y < 0):
+			ship_body.play("player_move_d")
+			ship_body.rotation = deg_to_rad(180)
+			
+	if (direction.x < 0):
+		if (direction.y == 0):
+			ship_body.play("player_move_h&v")
+			ship_body.rotation = deg_to_rad(90)
+			
+		if (direction.y > 0):
+			ship_body.play("player_move_d")
+			ship_body.rotation = deg_to_rad(0)
+			
+		if (direction.y < 0):
+			ship_body.play("player_move_d")
+			ship_body.rotation = deg_to_rad(90)
+			
+	if (direction.x == 0):
+		if(direction.y > 0):
+			ship_body.play("player_move_h&v")
+			ship_body.rotation = deg_to_rad(0)
+			
+		if(direction.y < 0):
+			ship_body.play("player_move_h&v")
+			ship_body.rotation = deg_to_rad(180)
+			
+		if(direction.y == 0):
+			ship_body.play("player_idle")
+			ship_body.rotation = deg_to_rad(0)

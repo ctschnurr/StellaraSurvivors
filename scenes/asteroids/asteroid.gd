@@ -3,6 +3,8 @@ class_name Asteroid
 
 @export var asteroid_sprite: Sprite2D
 
+@onready var health_component = %HealthComponent
+
 var asteroid_rotation
 var asteroid_speed
 var asteroid_direction
@@ -15,7 +17,7 @@ var was_hit:bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	asteroid_rotation = randf_range(-0.025, 0.025)
-	asteroid_speed = randf_range(50, 100)
+	asteroid_speed = randf_range(100, 150)
 	asteroid_direction = set_movement_vector()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,8 +26,10 @@ func _process(_delta):
 	velocity = asteroid_direction * asteroid_speed
 	move_and_slide()
 	
-	if global_position.x > 5000 or global_position.x < -2000:
+	if global_position.x > 650 or (asteroid_direction.x < 0 and global_position.x < -650):
 		queue_free()
+		
+	if asteroid_direction.x < 0 and global_position.x < -650: queue_free()
 		
 
 func _physics_process(_delta):
@@ -41,7 +45,7 @@ func _physics_process(_delta):
 		
 func fire_raycast(direction: Vector2):
 	var space_state = get_world_2d().direct_space_state
-	var raycast = PhysicsRayQueryParameters2D.create(global_position, global_position + (direction * 20))
+	var raycast = PhysicsRayQueryParameters2D.create(global_position, global_position + (direction * 15))
 	raycast.exclude = [self]
 	
 	var raycast_output = space_state.intersect_ray(raycast)
@@ -49,14 +53,18 @@ func fire_raycast(direction: Vector2):
 	if !raycast_output.is_empty():
 		has_hit = true
 		var collision_normal: Vector2 = raycast_output.normal
-		var new_direction = direction.reflect(collision_normal).normalized()
+		var new_direction = collision_normal
+		
+		var new_speed = asteroid_speed * 0.5
 		
 		if raycast_output.collider is Asteroid:
-			raycast_output.collider.asteroid_direction = asteroid_direction.normalized() * 0.8
-			raycast_output.collider.asteroid_speed = asteroid_speed * 0.8
+			new_speed = raycast_output.collider.asteroid_speed * 0.75
+			raycast_output.collider.asteroid_direction = direction.normalized()
+			if asteroid_speed > 25: raycast_output.collider.asteroid_speed = asteroid_speed * 0.75
 			raycast_output.collider.collision_cooldown()
 			raycast_output.collider.was_hit = true
-			
+		
+		if new_speed > 25: asteroid_speed = new_speed
 		asteroid_direction = new_direction
 		collision_cooldown()
 		
@@ -69,19 +77,19 @@ func collision_cooldown():
 	was_hit = false
 	
 	
-func _draw():
-	var look_left = asteroid_direction.rotated(-0.75)
-	var look_right = asteroid_direction.rotated(0.75)
-	
-	draw_line(Vector2.ZERO, (Vector2.ZERO + asteroid_direction) * 20, Color.GREEN if !has_hit else Color.RED)
-	draw_line(Vector2.ZERO, look_left * 20, Color.GREEN if !has_hit else Color.RED)
-	draw_line(Vector2.ZERO, look_right * 20, Color.GREEN if !has_hit else Color.RED)
+#func _draw():
+#	var look_left = asteroid_direction.rotated(-0.75)
+#	var look_right = asteroid_direction.rotated(0.75)
+#	
+#	draw_line(Vector2.ZERO, (Vector2.ZERO + asteroid_direction) * 20, Color.GREEN if !has_hit else Color.RED)
+#	draw_line(Vector2.ZERO, look_left * 20, Color.GREEN if !has_hit else Color.RED)
+#	draw_line(Vector2.ZERO, look_right * 20, Color.GREEN if !has_hit else Color.RED)
 
 		
 
 func set_movement_vector():
 	x_movement = randf_range(1, 5)
-	y_movement = randf_range(-1, 1)
+	y_movement = randf_range(-0.005, 0.005)
 	
 	return Vector2(x_movement, y_movement).normalized()
 	
