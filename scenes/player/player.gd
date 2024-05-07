@@ -37,6 +37,10 @@ func _process(delta):
 		get_parent().add_child(blaster_bolt_instance)
 		blaster_bolt_instance.global_position = fire_position.global_position
 		blaster_bolt_instance.global_rotation = ship_cannon.global_rotation
+		ship_body.stop()
+		ship_body.play("player_fire")
+		
+		
 
 func get_movement_vector():
 		
@@ -53,6 +57,8 @@ func constrain_player():
 	if global_position.y < -320: global_position.y = -320
 
 func animate_player(direction: Vector2):
+	if ship_body.animation == "player_fire" and ship_body.is_playing(): return
+	
 	if (direction.x > 0):
 		if (direction.y == 0):
 			ship_body.play("player_move_h&v")

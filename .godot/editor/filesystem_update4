@@ -8,3 +8,5 @@ res://scenes/Managers/enemy_manager.tscn
 res://scenes/Managers/objective.tscn
 res://scenes/components/health_component.gd
 res://Enemy_manager.gd
+res://Mission_manager.gd
+res://scenes/player/player.gd

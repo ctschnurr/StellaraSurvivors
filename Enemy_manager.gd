@@ -32,7 +32,7 @@ func process_command(command: Spawn_command):
 					var asteroid_instance = small_asteroid.instantiate() as Node2D
 					add_child(asteroid_instance)
 					asteroid_instance.global_position = Vector2(randf_range(asteroid_spawn_xRange[0], asteroid_spawn_xRange[1]), randf_range(asteroid_spawn_yRange[0], asteroid_spawn_yRange[1]))
-					if command.repeat_state == Spawn_command.Repeat_state.TRACKED and command.associated_objective != null:
+					if command.associated_objective != null:
 						command.associated_objective.connect_signal(asteroid_instance.health_component.died)
 					
 	match command.repeat_state:

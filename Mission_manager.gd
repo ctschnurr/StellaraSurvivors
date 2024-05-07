@@ -10,7 +10,7 @@ func create_objective_destroy():
 	new_objective.objective_complete_signal.connect(complete_objective)
 	
 	var enemy_manager_command = Enemy_manager.Spawn_command.new()
-	enemy_manager_command.repeat_state = Enemy_manager.Spawn_command.Repeat_state.TRACKED
+	enemy_manager_command.repeat_state = Enemy_manager.Spawn_command.Repeat_state.INFINITE
 	enemy_manager_command.repeat_delay = 5
 	enemy_manager_command.type = Enemy_manager.Enemy_type.ASTEROID
 	enemy_manager_command.spawn_amount = 15
