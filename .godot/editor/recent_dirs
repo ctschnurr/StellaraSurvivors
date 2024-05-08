@@ -1,4 +1,6 @@
+res://assets
 res://scenes/Managers
+res://scenes/game_camera
 res://scenes/components
 res://scenes/asteroids
 res://scenes/blaster_bolt

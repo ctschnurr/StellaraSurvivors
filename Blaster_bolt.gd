@@ -1,9 +1,11 @@
 extends CharacterBody2D
+class_name Blaster_bolt
 
 const MAX_SPEED = 500
 const ACCELERATION_SMOOTHING = 25
 
 @onready var timer = $Timer
+@export var hit_box: Area2D
 
 var start_pos
 

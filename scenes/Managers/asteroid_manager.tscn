@@ -8,5 +8,5 @@ script = ExtResource("1_38ubf")
 small_asteroid = ExtResource("2_ws0e7")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.96
 autostart = true

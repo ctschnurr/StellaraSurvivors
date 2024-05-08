@@ -2,13 +2,16 @@ extends Area2D
 class_name HurtboxComponent
 
 @export var health_component: Node
-
+@export var hitbox: Node
 
 func _ready():
 	area_entered.connect(on_area_entered)
 
 
 func on_area_entered(other_area: Area2D):
+	if other_area == hitbox:
+		return
+		
 	if not other_area is HitboxComponent:
 		return
 		
