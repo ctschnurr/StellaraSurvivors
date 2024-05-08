@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://fybn4cxq6epe"]
+[gd_scene load_steps=8 format=3 uid="uid://fybn4cxq6epe"]
 
 [ext_resource type="Script" path="res://scenes/main/Game_manager.gd" id="1_bqipc"]
 [ext_resource type="TileSet" uid="uid://c8qvj247x6ny6" path="res://resources/space_tileset.tres" id="1_r1hyo"]
 [ext_resource type="PackedScene" uid="uid://b645103cbbe1x" path="res://scenes/game_camera/game_camera.tscn" id="2_p2ggj"]
 [ext_resource type="PackedScene" uid="uid://dirgwundhi3xq" path="res://scenes/player/player.tscn" id="2_sbarx"]
+[ext_resource type="Resource" uid="uid://cd5wp0cd1wnk6" path="res://resources/spawn_asteroid.tres" id="3_618ey"]
 [ext_resource type="PackedScene" uid="uid://55lv4btmtybt" path="res://scenes/Managers/enemy_manager.tscn" id="3_nhsx1"]
 [ext_resource type="PackedScene" uid="uid://b31ijaewr5d52" path="res://scenes/Managers/mission_manager.tscn" id="5_pr477"]
 
@@ -13,6 +14,7 @@ mission_manager = NodePath("Mission_manager")
 enemy_manager = NodePath("Enemy_manager")
 
 [node name="Mission_manager" parent="." instance=ExtResource("5_pr477")]
+possible_spawn_commands = Array[Resource("res://SpawnCommand.gd")]([ExtResource("3_618ey")])
 
 [node name="Enemy_manager" parent="." instance=ExtResource("3_nhsx1")]
 

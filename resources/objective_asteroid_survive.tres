@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Objective" load_steps=2 format=3 uid="uid://bunubipn1y75x"]
+
+[ext_resource type="Script" path="res://Objective.gd" id="1_2mdyv"]
+
+[resource]
+script = ExtResource("1_2mdyv")
+objective_type = 0
+objective_description = "Destroy 10 asteroids."
+objective_target = 10

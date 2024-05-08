@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Spawn_command" load_steps=4 format=3 uid="uid://cd5wp0cd1wnk6"]
+
+[ext_resource type="Script" path="res://SpawnCommand.gd" id="1_1fwfa"]
+[ext_resource type="PackedScene" uid="uid://batiubvruu51j" path="res://scenes/asteroids/asteroid.tscn" id="1_6bxxu"]
+[ext_resource type="Resource" uid="uid://bfrmqejmt2etf" path="res://resources/objective_asteroid.tres" id="1_gxo7v"]
+
+[resource]
+script = ExtResource("1_1fwfa")
+repeat_state = 3
+repeat_mode = 1
+repeat_delay = 3
+repeat_amount = 0
+ready = true
+enemy_type = Array[PackedScene]([ExtResource("1_6bxxu")])
+spawn_amount = 15
+spawn_orientation = 0
+associated_objective = ExtResource("1_gxo7v")
