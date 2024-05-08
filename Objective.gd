@@ -3,12 +3,13 @@ class_name Objective
 	
 signal objective_complete_signal(this_objective)
 
-enum Objective_type {DESTROY_ENEMIES}
+enum Objective_type {DESTROY_ENEMIES,SURVIVE,DEFEND}
 	
 var objective_complete: bool
 var objective_type: Objective_type
 var objective_description: String
-	
+var objective_timer: Timer
+
 func connect_signal(input: Signal):
 	input.connect(signal_response)
 	

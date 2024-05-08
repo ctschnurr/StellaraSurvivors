@@ -18,6 +18,9 @@ func _process(_delta):
 		for command in spawn_commands:
 			if command.ready: process_command(command)
 
+func create_command():
+	pass
+
 
 func add_command(command: Spawn_command):
 	spawn_commands.append(command)
@@ -58,12 +61,17 @@ func process_command(command: Spawn_command):
 				
 class Spawn_command:
 	
+	enum Spawn_orientation{SCATTER,SQUAD}
 	enum Repeat_state{ONCE,MULTIPLE,INFINITE,OBJECTIVE}
+	enum Repeat_mode{STEADY,RANDOM,ACCELERATING}
+	
 	var repeat_state: Repeat_state = Repeat_state.ONCE
-	var repeat_amount: int = 0
+	var repeat_mode: Repeat_mode = Repeat_mode.STEADY
 	var repeat_delay: int = 0
+	var repeat_amount: int = 0
 	var ready: bool = true
 	var enemy_type: Enemy_type
 	var spawn_amount: int
+	var spawn_orientation: Spawn_orientation
 	var associated_objective: Objective
 
