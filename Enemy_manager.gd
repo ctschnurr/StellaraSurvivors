@@ -7,8 +7,8 @@ var game_manager: Game_manager
 
 enum Enemy_type {ASTEROID}
 
-const asteroid_spawn_xRange = [-1500, -700]
-const asteroid_spawn_yRange = [-400, 400]
+const asteroid_spawn_xRange = [-1000, -100]
+const asteroid_spawn_yRange = [0, 720]
 
 var spawn_commands: Array
 				
@@ -26,7 +26,7 @@ func add_command(command: Spawn_command):
 func process_command(command: Spawn_command):
 	command.ready = false
 	
-	match command.type:
+	match command.enemy_type:
 		Enemy_type.ASTEROID:
 				for n in command.spawn_amount:
 					var asteroid_instance = small_asteroid.instantiate() as Node2D
@@ -40,13 +40,13 @@ func process_command(command: Spawn_command):
 			await get_tree().create_timer(command.repeat_delay).timeout
 			command.ready = true
 			return
-		Spawn_command.Repeat_state.FINITE:
+		Spawn_command.Repeat_state.MULTIPLE:
 			if command.repeat_amount > 0:
 				await get_tree().create_timer(command.repeat_delay).timeout
 				command.repeat_amount -= 1
 				command.ready = true
 				return
-		Spawn_command.Repeat_state.TRACKED:
+		Spawn_command.Repeat_state.OBJECTIVE:
 			if command.associated_objective != null:
 				await get_tree().create_timer(command.repeat_delay).timeout
 				command.ready = true
@@ -58,12 +58,12 @@ func process_command(command: Spawn_command):
 				
 class Spawn_command:
 	
-	enum Repeat_state{NO,FINITE,INFINITE,TRACKED}
-	var repeat_state: Repeat_state = Repeat_state.NO
+	enum Repeat_state{ONCE,MULTIPLE,INFINITE,OBJECTIVE}
+	var repeat_state: Repeat_state = Repeat_state.ONCE
 	var repeat_amount: int = 0
 	var repeat_delay: int = 0
 	var ready: bool = true
-	var type: Enemy_type
+	var enemy_type: Enemy_type
 	var spawn_amount: int
 	var associated_objective: Objective
 

@@ -51,10 +51,10 @@ func get_movement_vector():
 
 
 func constrain_player():
-	if global_position.x > 600: global_position.x = 600
-	if global_position.x < -600: global_position.x = -600
-	if global_position.y > 320: global_position.y = 320
-	if global_position.y < -320: global_position.y = -320
+	if global_position.x > 1250: global_position.x = 1250
+	if global_position.x < 30: global_position.x = 30
+	if global_position.y > 690: global_position.y = 690
+	if global_position.y < 30: global_position.y = 30
 
 func animate_player(direction: Vector2):
 	if ship_body.animation == "player_fire" and ship_body.is_playing(): return

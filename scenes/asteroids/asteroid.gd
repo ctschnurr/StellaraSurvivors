@@ -26,10 +26,8 @@ func _process(_delta):
 	velocity = asteroid_direction * asteroid_speed
 	move_and_slide()
 	
-	if global_position.x > 650 or (asteroid_direction.x < 0 and global_position.x < -650):
+	if global_position.x > 1300 or (asteroid_direction.x < 0 and global_position.x < -20):
 		queue_free()
-		
-	if asteroid_direction.x < 0 and global_position.x < -650: queue_free()
 		
 
 func _physics_process(_delta):
