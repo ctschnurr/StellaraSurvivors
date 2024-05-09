@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://55lv4btmtybt"]
+[gd_scene load_steps=2 format=3 uid="uid://55lv4btmtybt"]
 
-[ext_resource type="Script" path="res://Enemy_manager.gd" id="1_rttsp"]
-[ext_resource type="PackedScene" uid="uid://batiubvruu51j" path="res://scenes/asteroids/asteroid.tscn" id="2_70gll"]
+[ext_resource type="Script" path="res://scenes/Managers/Enemy_manager.gd" id="1_fg84m"]
 
 [node name="Enemy_manager" type="Node"]
-script = ExtResource("1_rttsp")
-small_asteroid = ExtResource("2_70gll")
+script = ExtResource("1_fg84m")

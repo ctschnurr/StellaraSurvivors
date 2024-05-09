@@ -1,7 +1,7 @@
 extends Resource
 class_name Objective
 
-signal objective_complete_signal(this_objective)
+signal objective_complete_signal(objective: Objective)
 
 enum Objective_type {DESTROY_ENEMIES,SURVIVE,DEFEND}
 
@@ -15,6 +15,7 @@ var objective_count: int
 var connected_input_signals:Array[Signal] = []
 
 func clear_objective():
+	print("Objective Cleared")
 	objective_count = 0
 	for connection_dictionary in objective_complete_signal.get_connections():
 		objective_complete_signal.disconnect(connection_dictionary["callable"])

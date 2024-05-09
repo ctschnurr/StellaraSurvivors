@@ -14,5 +14,6 @@ enum Repeat_mode{STEADY,RANDOM,ACCELERATING}
 @export var spawn_orientation: Spawn_orientation
 @export var associated_objective: Objective
 
-func clear_associated_objective():
+func clear_associated_objective(_objective: Objective):
+	print("Associated Objective Cleared")
 	associated_objective = null
