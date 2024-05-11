@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Objective" load_steps=2 format=3 uid="uid://bfrmqejmt2etf"]
 
-[ext_resource type="Script" path="res://Objective.gd" id="1_grfr1"]
+[ext_resource type="Script" path="res://scenes/Managers/Objective.gd" id="1_grfr1"]
+
 
 [resource]
 script = ExtResource("1_grfr1")

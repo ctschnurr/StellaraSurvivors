@@ -223,6 +223,7 @@ radius = 23.0
 radius = 25.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("fire_position", "ship_cannon", "ship_body", "hurt_box")]
+z_index = 1
 motion_mode = 1
 script = ExtResource("1_6xqvq")
 blaster_bolt_scene = ExtResource("2_l3qom")
@@ -237,6 +238,7 @@ libraries = {
 }
 
 [node name="Ship_Body" type="AnimatedSprite2D" parent="."]
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_ui5fv")
 animation = &"player_fire"
 autoplay = "player_idle"
@@ -251,6 +253,7 @@ lifetime = 0.5
 speed_scale = 5.0
 
 [node name="Ship_Cannon" type="Sprite2D" parent="."]
+z_index = 2
 texture = ExtResource("4_6y5io")
 
 [node name="fire_position" type="Node2D" parent="Ship_Cannon"]
@@ -263,6 +266,7 @@ visibility_layer = 2
 shape = SubResource("CircleShape2D_e3u53")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("7_arbtb")]
+unique_name_in_owner = true
 animation_player = NodePath("../AnimationPlayer")
 max_health = 3.0
 

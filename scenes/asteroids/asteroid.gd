@@ -52,10 +52,9 @@ func fire_raycast(direction: Vector2):
 		has_hit = true
 		var collision_normal: Vector2 = raycast_output.normal
 		var new_direction = collision_normal
-		
 		var new_speed = asteroid_speed * 0.5
 		
-		if raycast_output.collider is Asteroid:
+		if raycast_output.collider is Asteroid and !raycast_output.collider is Blaster_bolt:
 			new_speed = raycast_output.collider.asteroid_speed * 0.75
 			raycast_output.collider.asteroid_direction = direction.normalized()
 			if asteroid_speed > 25: raycast_output.collider.asteroid_speed = asteroid_speed * 0.75
@@ -69,10 +68,33 @@ func fire_raycast(direction: Vector2):
 
 func collision_cooldown():
 	set_physics_process(false)
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.5).timeout
 	set_physics_process(true)
 	has_hit = false
 	was_hit = false
+	
+	
+func respond_to_bolt_collision(bolt_direction):
+	var asteroid_angle = asteroid_direction.angle()
+	var diff_angle = asteroid_angle - bolt_direction.angle()
+			
+	#if the bolt hits an asteroid traveling toward it:
+	if diff_angle < -2.75 or diff_angle > 2.75: 
+		if asteroid_speed < 5:
+			asteroid_direction = bolt_direction.normalized()
+			asteroid_speed *= 1.5
+		else:
+			asteroid_speed *= 0.5
+					
+	#if the bolt hits an asteroid traveling away from it:
+	if diff_angle > -0.5 and diff_angle < 0.5: 
+			asteroid_speed *= 1.25
+			
+	#if the bolt hits an asteroid travelling at a diagonal from it:
+	if (diff_angle < 2.75 and diff_angle > 0.5) or (diff_angle > -2.75 and diff_angle <  -0.5): 
+			asteroid_direction = bolt_direction.normalized()
+			asteroid_speed *= 0.5
+	
 	
 	
 #func _draw():
@@ -90,10 +112,3 @@ func set_movement_vector():
 	y_movement = randf_range(-0.005, 0.005)
 	
 	return Vector2(x_movement, y_movement).normalized()
-	
-	
-func on_area_entered(other_area):
-	print("trigger")
-	if other_area is Blaster_bolt:
-		var push_direction = other_area.global_position.direction_to
-		asteroid_direction = push_direction

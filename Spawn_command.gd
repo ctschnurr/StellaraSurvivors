@@ -15,5 +15,4 @@ enum Repeat_mode{STEADY,RANDOM,ACCELERATING}
 @export var associated_objective: Objective
 
 func clear_associated_objective(_objective: Objective):
-	print("Associated Objective Cleared")
 	associated_objective = null

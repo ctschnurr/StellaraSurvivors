@@ -11,6 +11,7 @@ const asteroid_spawn_xRange = [-1000, -100]
 const asteroid_spawn_yRange = [0, 720]
 
 var spawn_commands: Array
+var enemies: Array
 				
 				
 func _process(_delta):
@@ -31,6 +32,7 @@ func process_command(command: Spawn_command):
 	for n in command.spawn_amount:
 		var enemy_instance = command.enemy_type.pick_random().instantiate() as Node2D
 		add_child(enemy_instance)
+		enemies.append(enemy_instance)
 		enemy_instance.global_position = Vector2(randf_range(asteroid_spawn_xRange[0], asteroid_spawn_xRange[1]), randf_range(asteroid_spawn_yRange[0], asteroid_spawn_yRange[1]))
 		
 		if command.associated_objective != null:
@@ -55,5 +57,13 @@ func process_command(command: Spawn_command):
 	
 	spawn_commands.erase(command)
 	pass
+	
+	
+func clear_enemies():
+	for enemy in enemies:
+		if enemy != null: enemy.queue_free()
+	enemies = []
+	spawn_commands = []
+	
 
 

@@ -2,6 +2,7 @@ extends Node
 class_name HealthComponent
 
 signal died
+signal hurt(current_health)
 
 @export var animation_player: AnimationPlayer
 
@@ -18,6 +19,7 @@ func damage(damage_amount: float):
 	if vulnerable:
 		vulnerable = false
 		current_health = max(current_health - damage_amount, 0)
+		hurt.emit(current_health)
 		Callable(check_death).call_deferred()
 		
 		

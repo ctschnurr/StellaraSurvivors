@@ -45,7 +45,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_026wd"]
-radius = 14.0
+radius = 13.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rvlpy"]
 radius = 13.0

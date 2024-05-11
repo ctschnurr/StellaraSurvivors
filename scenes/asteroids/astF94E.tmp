@@ -45,7 +45,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_026wd"]
-radius = 14.0
+radius = 13.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rvlpy"]
 radius = 13.0
@@ -68,7 +68,7 @@ shape = SubResource("CircleShape2D_026wd")
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("3_fb6pk")]
 unique_name_in_owner = true
 animation_player = NodePath("../AnimationPlayer")
-max_health = 5.0
+max_health = 50.0
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "hitbox") instance=ExtResource("4_8y7tw")]
 collision_layer = 2

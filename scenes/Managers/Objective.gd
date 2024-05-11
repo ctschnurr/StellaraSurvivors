@@ -2,23 +2,33 @@ extends Resource
 class_name Objective
 
 signal objective_complete_signal(objective: Objective)
+signal objective_updated_signal(objective: Objective, info: String)
 
 enum Objective_type {DESTROY_ENEMIES,SURVIVE,DEFEND}
 
-var objective_complete: bool
 @export var objective_type: Objective_type
 @export_multiline var objective_description: String
 var objective_timer: Timer
 var objective_count: int
 @export var objective_target: int
+var objective_info: String
 
 var connected_input_signals:Array[Signal] = []
 
+	
+
+func update_objective_info():
+	var name = "asteroid"
+	if objective_target - objective_count > 1: name = name + "s"
+	objective_info = "Destroy %s %s" %[objective_target - objective_count, name]
+	objective_updated_signal.emit(self, objective_info)
+
+
 func clear_objective():
-	print("Objective Cleared")
 	objective_count = 0
-	for connection_dictionary in objective_complete_signal.get_connections():
-		objective_complete_signal.disconnect(connection_dictionary["callable"])
+	
+	#for connection_dictionary in objective_complete_signal.get_connections():
+	#	objective_complete_signal.disconnect(connection_dictionary["callable"])
 		
 	for signals in connected_input_signals:
 		signals.disconnect(signal_response)
@@ -32,6 +42,7 @@ func signal_response():
 	match objective_type:
 		Objective_type.DESTROY_ENEMIES:
 			objective_count += 1
-			print(objective_count, "/", objective_target)
 			if objective_count == objective_target:
 				objective_complete_signal.emit(self)
+				
+	update_objective_info()
