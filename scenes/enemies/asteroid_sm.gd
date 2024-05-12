@@ -1,10 +1,6 @@
-extends Enemy
-class_name Asteroid
+class_name Asteroid_sm extends Enemy
 
-@export var asteroid_textures: Array[Texture]
-
-enum Asteroid_size{SMALL, MEDIUM, LARGE}
-@export var size: Asteroid_size = Asteroid_size.SMALL
+@export var small_textures: Array[Texture]
 
 var asteroid_rotation
 var asteroid_speed
@@ -20,20 +16,13 @@ var size_mult = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	enemy_sprite = %Asteroid_sprite
-	#health_component = %HealthComponent
+	health_component = %HealthComponent
 	
 	asteroid_rotation = randf_range(-0.025, 0.025)
 	asteroid_speed = randf_range(100, 150)
 	asteroid_direction = set_movement_vector()
 	
-	enemy_sprite.texture = asteroid_textures.pick_random()
-	
-	match size:
-		Asteroid_size.SMALL:
-			pass
-		Asteroid_size.MEDIUM:
-			size_mult = 2
-			pass
+	enemy_sprite.texture = small_textures.pick_random()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -59,7 +48,7 @@ func _physics_process(_delta):
 		
 func fire_raycast(direction: Vector2):
 	var space_state = get_world_2d().direct_space_state
-	var raycast = PhysicsRayQueryParameters2D.create(global_position, global_position + (direction * (15 * size_mult)))
+	var raycast = PhysicsRayQueryParameters2D.create(global_position, global_position + (direction * 15))
 	raycast.exclude = [self]
 	
 	var raycast_output = space_state.intersect_ray(raycast)
@@ -68,12 +57,12 @@ func fire_raycast(direction: Vector2):
 		has_hit = true
 		var collision_normal: Vector2 = raycast_output.normal
 		var new_direction = collision_normal
-		var new_speed = asteroid_speed * 0.75 / size_mult
+		var new_speed = asteroid_speed * 0.5
 		
-		if raycast_output.collider is Asteroid and !raycast_output.collider is Blaster_bolt:
+		if raycast_output.collider is Asteroid_sm and !raycast_output.collider is Blaster_bolt:
 			new_speed = raycast_output.collider.asteroid_speed * 0.75
 			raycast_output.collider.asteroid_direction = direction.normalized()
-			if asteroid_speed > 25: raycast_output.collider.asteroid_speed = asteroid_speed * 0.75 / size_mult
+			if asteroid_speed > 25: raycast_output.collider.asteroid_speed = asteroid_speed * 0.75
 			raycast_output.collider.collision_cooldown()
 			raycast_output.collider.was_hit = true
 		
