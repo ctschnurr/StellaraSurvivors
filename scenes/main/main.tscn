@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d27as0jcit56m"]
+[gd_scene load_steps=13 format=3 uid="uid://d27as0jcit56m"]
 
 [ext_resource type="Script" path="res://scenes/main/Game_manager.gd" id="1_bqipc"]
 [ext_resource type="Script" path="res://scenes/Managers/Mission_manager.gd" id="2_fmjb6"]
@@ -8,7 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://b645103cbbe1x" path="res://scenes/game_camera/game_camera.tscn" id="5_0iljf"]
 [ext_resource type="PackedScene" uid="uid://uf37o2pc5jnx" path="res://scenes/Managers/screen_manager.tscn" id="5_gvboc"]
 [ext_resource type="TileSet" uid="uid://c8qvj247x6ny6" path="res://resources/space_tileset.tres" id="6_dcqre"]
+[ext_resource type="PackedScene" uid="uid://si6pecgkgbey" path="res://scenes/asteroids/asteroid_sm.tscn" id="6_oesaj"]
 [ext_resource type="PackedScene" uid="uid://cdoot0gj5cabf" path="res://scenes/UI/player_health_ui.tscn" id="7_4xixc"]
+[ext_resource type="PackedScene" uid="uid://de6khcv1nexs0" path="res://scenes/asteroids/asteroid_med.tscn" id="7_fc1kg"]
+[ext_resource type="PackedScene" uid="uid://d0lsq5yi27jo1" path="res://scenes/asteroids/asteroid_lg.tscn" id="8_wawb8"]
 
 [node name="Main" type="Node" node_paths=PackedStringArray("mission_manager", "enemy_manager", "screen_manager")]
 script = ExtResource("1_bqipc")
@@ -22,6 +25,9 @@ player_scene = ExtResource("4_6bhca")
 possible_spawn_commands = Array[Resource("res://Spawn_command.gd")]([ExtResource("3_pv7xe")])
 
 [node name="Enemy_manager" parent="." instance=ExtResource("3_dmjmn")]
+asteroid_small = ExtResource("6_oesaj")
+asteroid_medium = ExtResource("7_fc1kg")
+asteroid_large = ExtResource("8_wawb8")
 
 [node name="Screen_manager" parent="." instance=ExtResource("5_gvboc")]
 player_health_info_scene = ExtResource("7_4xixc")

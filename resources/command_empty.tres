@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Spawn_command" load_steps=2 format=3 uid="uid://osc7c16keff4"]
+
+[ext_resource type="Script" path="res://Spawn_command.gd" id="1_bvn3k"]
+
+[resource]
+script = ExtResource("1_bvn3k")
+possible_enemies = Array[int]([])
+repeat_state = 0
+repeat_mode = 0
+repeat_delay = 0
+repeat_amount = 0
+ready = true
+enemy_type = Array[PackedScene]([])
+spawn_amount = 0
+spawn_positioning = 0
+spawn_location = Vector2(0, 0)

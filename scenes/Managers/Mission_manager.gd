@@ -33,7 +33,7 @@ func start_mission():
 	spawn_command.associated_objective.update_objective_info()
 	
 	
-func update_objective(objective, text):
+func update_objective(_objective, text):
 	game_manager.screen_manager.update_objective_node(text)
 	
 	

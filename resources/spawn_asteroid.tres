@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="Spawn_command" load_steps=6 format=3 uid="uid://cd5wp0cd1wnk6"]
+[gd_resource type="Resource" script_class="Spawn_command" load_steps=7 format=3 uid="uid://cd5wp0cd1wnk6"]
 
 [ext_resource type="Script" path="res://Spawn_command.gd" id="1_1fwfa"]
 [ext_resource type="Script" path="res://scenes/Managers/Objective.gd" id="1_pthrc"]
 [ext_resource type="PackedScene" uid="uid://si6pecgkgbey" path="res://scenes/asteroids/asteroid_sm.tscn" id="2_mljcv"]
 [ext_resource type="PackedScene" uid="uid://de6khcv1nexs0" path="res://scenes/asteroids/asteroid_med.tscn" id="3_a6gwl"]
+[ext_resource type="PackedScene" uid="uid://d0lsq5yi27jo1" path="res://scenes/asteroids/asteroid_lg.tscn" id="4_hte2b"]
 
 [sub_resource type="Resource" id="Resource_i35sq"]
 script = ExtResource("1_pthrc")
@@ -13,12 +14,14 @@ objective_target = 5
 
 [resource]
 script = ExtResource("1_1fwfa")
+possible_enemies = Array[int]([])
 repeat_state = 3
 repeat_mode = 1
 repeat_delay = 3
 repeat_amount = 0
 ready = true
-enemy_type = Array[PackedScene]([ExtResource("2_mljcv"), ExtResource("3_a6gwl")])
-spawn_amount = 10
-spawn_orientation = 0
+enemy_type = Array[PackedScene]([ExtResource("3_a6gwl"), ExtResource("4_hte2b"), ExtResource("2_mljcv")])
+spawn_amount = 5
+spawn_positioning = 0
 associated_objective = SubResource("Resource_i35sq")
+spawn_location = Vector2(0, 0)

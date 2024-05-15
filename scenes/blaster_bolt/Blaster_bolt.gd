@@ -35,19 +35,17 @@ func _physics_process(_delta):
 	#pass
 
 
-func fire_raycast(direction: Vector2):
+func fire_raycast(raycast_direction: Vector2):
 	var space_state = get_world_2d().direct_space_state
-	var raycast = PhysicsRayQueryParameters2D.create(global_position, global_position + (direction /30))
+	var raycast = PhysicsRayQueryParameters2D.create(global_position, global_position + (raycast_direction /30))
 	raycast.exclude = [self]
 	
 	var raycast_output = space_state.intersect_ray(raycast)
 	
 	if !raycast_output.is_empty():
-		var collision_normal: Vector2 = raycast_output.normal
-		var new_direction = collision_normal
 					
 		if raycast_output.collider is Asteroid:
-			raycast_output.collider.respond_to_bolt_collision(direction)
+			raycast_output.collider.respond_to_bolt_collision(raycast_direction, raycast_output.position)
 			
 		collision_cooldown()
 		
