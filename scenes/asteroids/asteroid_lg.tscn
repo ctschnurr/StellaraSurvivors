@@ -107,10 +107,11 @@ radius = 40.5
 [sub_resource type="CircleShape2D" id="CircleShape2D_rvlpy"]
 radius = 43.0
 
-[node name="Asteroid_lg" type="CharacterBody2D"]
+[node name="Asteroid_lg" type="CharacterBody2D" node_paths=PackedStringArray("asteroid_colliders")]
 script = ExtResource("1_hccpj")
 command_empty = ExtResource("2_mydqj")
 asteroid_textures = Array[Texture]([ExtResource("5_ibq82")])
+asteroid_colliders = [NodePath("CollisionShape2D"), NodePath("HurtboxComponent/CollisionShape2D"), NodePath("HitboxComponent/CollisionShape2D")]
 explosion_effect = ExtResource("3_7u5kt")
 impact_effect = ExtResource("3_kp1a4")
 size = 2
@@ -136,7 +137,6 @@ shape = SubResource("CircleShape2D_026wd")
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("5_jxj7f")]
 unique_name_in_owner = true
 animation_player = NodePath("../AnimationPlayer")
-max_health = 15.0
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "hitbox") instance=ExtResource("6_15n0q")]
 collision_layer = 2

@@ -10,7 +10,7 @@
 script = ExtResource("1_pthrc")
 objective_type = 0
 objective_description = "Destroy the Asteroids"
-objective_target = 5
+objective_target = 20
 
 [resource]
 script = ExtResource("1_1fwfa")

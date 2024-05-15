@@ -10,7 +10,6 @@ var game_manager: Game_manager
 enum Enemy_type{ASTEROID_SMALL, ASTEROID_MEDIUM, ASTEROID_LARGE}
 @onready var enemy_dictionary: Dictionary = {"ASTEROID_SMALL": asteroid_small, "ASTEROID_MEDIUM": asteroid_medium, "ASTEROID_LARGE": asteroid_large}
 
-
 const asteroid_spawn_xRange = [-1000, -100]
 const asteroid_spawn_yRange = [0, 720]
 
@@ -23,8 +22,7 @@ func _process(_delta):
 		for command in spawn_commands:
 			if command.ready: process_command(command)
 
-func create_command():
-	pass
+
 
 func add_command(command: Spawn_command):
 	spawn_commands.append(command)
@@ -77,18 +75,19 @@ func clear_enemies():
 	spawn_commands = []
 	
 	
-func spawn_asteroid_burst(command: Spawn_command):
+func spawn_asteroid_burst(command: Spawn_command):	
 	var amount = randf_range(2, 4)
 	var arrangement1: Array[Vector2] = [Vector2(1, 1), Vector2(-1, -1), Vector2(-1, 1), Vector2(1, -1)]
 	var arrangement2: Array[Vector2] = [Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0), Vector2(0, -1)]
 	var arrangements: Array[Array] = [arrangement1, arrangement2]
 	
-	var asteroids: Array[Asteroid]
+	var asteroids: Array[Asteroid] = []
 	for number in amount:
 		var new_asteroid_select = command.possible_enemies.pick_random()
 		var this_enum = Enemy_type.keys()[new_asteroid_select]
 		var new_asteroid = enemy_dictionary[this_enum].instantiate() as Asteroid
 		new_asteroid.enemy_manager = self
+		enemies.append(new_asteroid)
 		asteroids.append(new_asteroid)
 		
 	var arrange: Array[Vector2] = arrangements.pick_random().duplicate()
@@ -97,7 +96,7 @@ func spawn_asteroid_burst(command: Spawn_command):
 		var position = arrange.pick_random()
 		arrange.erase(position)
 		
-		asteroid.position = command.spawn_location + Vector2(position.x * (15 * asteroid.size_mult), position.y * (15 * asteroid.size_mult))
+		asteroid.position = command.spawn_location + Vector2(position.x * (15 * asteroid.size_multiplier), position.y * (15 * asteroid.size_multiplier))
 		asteroid.asteroid_direction = position
 		asteroid.asteroid_speed = 75
-		get_tree().root.add_child(asteroid)
+		add_child(asteroid)

@@ -6,18 +6,16 @@ class_name Asteroid
 
 @export var asteroid_textures: Array[Texture]
 @export var asteroid_colliders: Array[CollisionShape2D]
+
 @export var explosion_effect: PackedScene
 @export var impact_effect: PackedScene
 
 enum Asteroid_size{SMALL, MEDIUM, LARGE}
-@export var small_asteroid: PackedScene
 @export var size: Asteroid_size = Asteroid_size.SMALL
-@onready var explosion_sprite = %Explosion_sprite
-
 
 var asteroid_rotation
-@export var asteroid_speed: float = 0
-@export var asteroid_direction: = Vector2.ZERO
+var asteroid_speed: float = 0
+var asteroid_direction: = Vector2.ZERO
 
 var x_movement
 var y_movement
@@ -25,7 +23,7 @@ var y_movement
 var has_hit:bool = false
 var was_hit:bool = false
 
-var size_mult: float = 1
+var size_multiplier: float = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	enemy_sprite = %Asteroid_sprite
@@ -42,11 +40,11 @@ func _ready():
 		Asteroid_size.SMALL:
 			pass
 		Asteroid_size.MEDIUM:
-			size_mult = 2
+			size_multiplier = 2
 		Asteroid_size.LARGE:
-			size_mult = 3
+			size_multiplier = 3
 
-	if asteroid_speed == 0: asteroid_speed = 150 / (size_mult / 2) #randf_range(100, 150)
+	if asteroid_speed == 0: asteroid_speed = 150 / (size_multiplier / 2) #randf_range(100, 150)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -75,7 +73,7 @@ func _physics_process(_delta):
 		
 func fire_raycast(direction: Vector2):
 	var space_state = get_world_2d().direct_space_state
-	var raycast = PhysicsRayQueryParameters2D.create(global_position, global_position + (direction * (15 * size_mult)))
+	var raycast = PhysicsRayQueryParameters2D.create(global_position, global_position + (direction * (15 * size_multiplier)))
 	raycast.exclude = [self]
 	
 	var raycast_output = space_state.intersect_ray(raycast)
@@ -84,16 +82,16 @@ func fire_raycast(direction: Vector2):
 		has_hit = true
 		var collision_normal: Vector2 = raycast_output.normal
 		var new_direction = collision_normal
-		var new_speed = asteroid_speed * (0.3 * size_mult)
+		var new_speed = asteroid_speed * (0.3 * size_multiplier)
 		
 		asteroid_impact_effect(raycast_output.position)
 		
 		if raycast_output.collider is Asteroid and !raycast_output.collider is Blaster_bolt:
 			var new_rotation = raycast_output.collider.asteroid_rotation * 0.8
 			raycast_output.collider.asteroid_rotation = asteroid_rotation * 0.8
-			new_speed = raycast_output.collider.asteroid_speed * (0.3 * size_mult)
+			new_speed = raycast_output.collider.asteroid_speed * (0.3 * size_multiplier)
 			raycast_output.collider.asteroid_direction = direction.normalized()
-			if asteroid_speed > 25: raycast_output.collider.asteroid_speed = asteroid_speed * (0.3 * size_mult)
+			if asteroid_speed > 25: raycast_output.collider.asteroid_speed = asteroid_speed * (0.3 * size_multiplier)
 			raycast_output.collider.collision_cooldown()
 			raycast_output.collider.was_hit = true
 			
@@ -122,7 +120,7 @@ func respond_to_bolt_collision(bolt_direction, collision_point):
 			asteroid_direction = bolt_direction.normalized()
 			asteroid_speed *= 1.5
 		else:
-			asteroid_speed *= 0.3 * size_mult
+			asteroid_speed *= 0.3 * size_multiplier
 					
 	#if the bolt hits an asteroid traveling away from it:
 	if diff_angle > -0.5 and diff_angle < 0.5: 
@@ -149,7 +147,7 @@ func asteroid_explosion_effect():
 	var effect = explosion_effect.instantiate() as CPUParticles2D
 	add_child(effect)
 	effect.global_position = global_position
-	effect.scale_amount_max = size_mult + 1
+	effect.scale_amount_max = size_multiplier + 1
 	effect.restart()
 	await effect.finished
 	queue_free()
@@ -175,7 +173,7 @@ func set_movement_vector():
 func death_sequence():
 	for collider in asteroid_colliders:
 		collider.set_deferred("disabled", true)
-
+		
 	set_physics_process(false)
 	
 	var tween = get_tree().create_tween()
@@ -185,35 +183,7 @@ func death_sequence():
 	tween.parallel().tween_property(enemy_sprite, "modulate:a", 0, 0.25)
 	tween.parallel().tween_callback(asteroid_explosion_effect).set_delay(0.1)
 	tween.parallel().tween_callback(create_spawn_command).set_delay(0.11)
-	
-		
-func spawn_group():
-	if size == Asteroid_size.MEDIUM:
-		var new_asteroidA = small_asteroid.instantiate() as Asteroid
-		new_asteroidA.position = Vector2(global_position.x - 15, global_position.y - 15)
-		new_asteroidA.asteroid_direction = Vector2(-1, -1)
-		new_asteroidA.asteroid_speed = 75
-		get_tree().root.add_child(new_asteroidA)
-		
-		var new_asteroidB = small_asteroid.instantiate() as Asteroid
-		new_asteroidB.position = Vector2(global_position.x + 15, global_position.y - 15)
-		new_asteroidB.asteroid_direction = Vector2(1, -1)
-		new_asteroidB.asteroid_speed = 75
-		get_tree().root.add_child(new_asteroidB)
-		
-		var new_asteroidC = small_asteroid.instantiate() as Asteroid
-		new_asteroidC.position = Vector2(global_position.x - 15, global_position.y + 15)
-		new_asteroidC.asteroid_direction = Vector2(-1, 1)
-		new_asteroidC.asteroid_speed = 75
-		get_tree().root.add_child(new_asteroidC)
-		
-		var new_asteroidD = small_asteroid.instantiate() as Asteroid
-		new_asteroidD.position = Vector2(global_position.x + 15, global_position.y + 15)
-		new_asteroidD.asteroid_direction = Vector2(1, 1)
-		new_asteroidD.asteroid_speed = 75
-		get_tree().root.add_child(new_asteroidD)
-		pass
-	
+
 	
 func damage_sequence(_health):
 	var tween = get_tree().create_tween()
@@ -229,16 +199,15 @@ func damage_sequence(_health):
 func create_spawn_command():
 	if size == Asteroid_size.SMALL: return
 	
-	var order = command_empty.duplicate()
-	order.spawn_positioning = Spawn_command.Spawn_positioning.ASTEROID_BURST
-	order.spawn_location = global_position
+	var command = command_empty.duplicate() as Spawn_command
+	command.spawn_positioning = Spawn_command.Spawn_positioning.ASTEROID_BURST
+	command.spawn_location = global_position
 	var enemyType: Enemy_manager.Enemy_type = Enemy_manager.Enemy_type.ASTEROID_SMALL
-	print(enemyType)
 	match size:
 		Asteroid_size.MEDIUM:
-			order.possible_enemies.append(enemyType)
+			command.possible_enemies.append(enemyType)
 		Asteroid_size.LARGE:
-			order.possible_enemies.append(enemyType)
+			command.possible_enemies.append(enemyType)
 			enemyType = Enemy_manager.Enemy_type.ASTEROID_MEDIUM
-			order.possible_enemies.append(Enemy_manager.Enemy_type.ASTEROID_MEDIUM)
-	enemy_manager.add_command(order)
+			command.possible_enemies.append(Enemy_manager.Enemy_type.ASTEROID_MEDIUM)
+	enemy_manager.add_command(command)
