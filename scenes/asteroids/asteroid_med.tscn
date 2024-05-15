@@ -1,8 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://de6khcv1nexs0"]
+[gd_scene load_steps=17 format=3 uid="uid://de6khcv1nexs0"]
 
 [ext_resource type="Script" path="res://scenes/asteroids/asteroid.gd" id="1_pnlt3"]
+[ext_resource type="Resource" uid="uid://dp2ytit4cchch" path="res://resources/asteroid_cluster_command.tres" id="2_3it60"]
 [ext_resource type="Texture2D" uid="uid://cg8ae7n235w1i" path="res://scenes/asteroids/asteroid_med01.png" id="2_4kuuh"]
-[ext_resource type="Resource" uid="uid://osc7c16keff4" path="res://resources/command_empty.tres" id="2_s38oq"]
 [ext_resource type="Texture2D" uid="uid://d32dekmmcfmtx" path="res://scenes/asteroids/asteroid_med02.png" id="3_tvdu3"]
 [ext_resource type="Texture2D" uid="uid://dsb8ld8yybmto" path="res://scenes/asteroids/asteroid_med03.png" id="4_u82u7"]
 [ext_resource type="PackedScene" uid="uid://dqf2fq7p7ip" path="res://scenes/components/health_component.tscn" id="5_cde1r"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://5vpw8p5qkrgg" path="res://scenes/effects/asteroid_explosion.tscn" id="5_v6agb"]
 [ext_resource type="PackedScene" uid="uid://bcmna6wa42j0q" path="res://scenes/components/hurtbox_component.tscn" id="6_86qsn"]
 [ext_resource type="Animation" uid="uid://dqrpe5ntjyme0" path="res://Damage.res" id="6_lft4q"]
-[ext_resource type="PackedScene" uid="uid://si6pecgkgbey" path="res://scenes/asteroids/asteroid_sm.tscn" id="6_lk0py"]
 [ext_resource type="PackedScene" uid="uid://cxmypx8uu0kun" path="res://scenes/components/hitbox_component.tscn" id="7_fi6s8"]
 [ext_resource type="Texture2D" uid="uid://dntky5xyv71i7" path="res://assets/engine_beam.png" id="8_q1v3p"]
 
@@ -56,12 +55,11 @@ radius = 27.0
 
 [node name="Asteroid_med" type="CharacterBody2D" node_paths=PackedStringArray("asteroid_colliders")]
 script = ExtResource("1_pnlt3")
-command_empty = ExtResource("2_s38oq")
+asteroid_cluster_command = ExtResource("2_3it60")
 asteroid_textures = Array[Texture]([ExtResource("2_4kuuh"), ExtResource("3_tvdu3"), ExtResource("4_u82u7")])
 asteroid_colliders = [NodePath("CollisionShape2D"), NodePath("HurtboxComponent/CollisionShape2D"), NodePath("HitboxComponent/CollisionShape2D")]
 explosion_effect = ExtResource("5_v6agb")
 impact_effect = ExtResource("5_ihyd3")
-small_asteroid = ExtResource("6_lk0py")
 size = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://d0lsq5yi27jo1"]
 
 [ext_resource type="Script" path="res://scenes/asteroids/asteroid.gd" id="1_hccpj"]
-[ext_resource type="Resource" uid="uid://osc7c16keff4" path="res://resources/command_empty.tres" id="2_mydqj"]
+[ext_resource type="Resource" uid="uid://dp2ytit4cchch" path="res://resources/asteroid_cluster_command.tres" id="2_aeiqi"]
 [ext_resource type="PackedScene" uid="uid://5vpw8p5qkrgg" path="res://scenes/effects/asteroid_explosion.tscn" id="3_7u5kt"]
 [ext_resource type="PackedScene" uid="uid://bep8ffbpod8sj" path="res://scenes/effects/asteroid_impact.tscn" id="3_kp1a4"]
 [ext_resource type="Texture2D" uid="uid://dntky5xyv71i7" path="res://assets/engine_beam.png" id="4_rq1we"]
@@ -109,7 +109,7 @@ radius = 43.0
 
 [node name="Asteroid_lg" type="CharacterBody2D" node_paths=PackedStringArray("asteroid_colliders")]
 script = ExtResource("1_hccpj")
-command_empty = ExtResource("2_mydqj")
+asteroid_cluster_command = ExtResource("2_aeiqi")
 asteroid_textures = Array[Texture]([ExtResource("5_ibq82")])
 asteroid_colliders = [NodePath("CollisionShape2D"), NodePath("HurtboxComponent/CollisionShape2D"), NodePath("HitboxComponent/CollisionShape2D")]
 explosion_effect = ExtResource("3_7u5kt")

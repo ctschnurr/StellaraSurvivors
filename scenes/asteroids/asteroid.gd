@@ -2,7 +2,7 @@ extends Enemy
 class_name Asteroid
 
 @onready var enemy_manager: Enemy_manager
-@export var command_empty: Resource
+@export var asteroid_cluster_command: Resource
 
 @export var asteroid_textures: Array[Texture]
 @export var asteroid_colliders: Array[CollisionShape2D]
@@ -199,8 +199,7 @@ func damage_sequence(_health):
 func create_spawn_command():
 	if size == Asteroid_size.SMALL: return
 	
-	var command = command_empty.duplicate() as Spawn_command
-	command.spawn_positioning = Spawn_command.Spawn_positioning.ASTEROID_BURST
+	var command = asteroid_cluster_command.duplicate() as Spawn_command
 	command.spawn_location = global_position
 	var enemyType: Enemy_manager.Enemy_type = Enemy_manager.Enemy_type.ASTEROID_SMALL
 	match size:

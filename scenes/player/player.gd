@@ -13,6 +13,7 @@ var state: State = State.ACTIVE
 @export var ship_body: AnimatedSprite2D
 @export var hurt_box: CollisionShape2D
 @onready var health_component: HealthComponent = %HealthComponent
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 var mission_manager: Mission_manager
 
@@ -20,6 +21,8 @@ var gun_ready: bool = true
 @export var gun_cooldown = 0.5
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	health_component.hurt.connect(player_hurt)
+	health_component.died.connect(player_died)
 	pass # Replace with function body.
 
 
@@ -126,3 +129,15 @@ func toggle_status():
 	
 func get_health():
 	return health_component.current_health
+	
+	
+func player_hurt(_damage):
+	animation_player.play("Damage")
+	pass
+	
+	
+func player_died():
+	animation_player.play("Death")
+	await animation_player.animation_finished
+	queue_free()
+	pass

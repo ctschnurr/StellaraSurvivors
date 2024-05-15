@@ -233,6 +233,7 @@ ship_body = NodePath("Ship_Body")
 hurt_box = NodePath("HurtboxComponent/HurtBox")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_rxc7s")
 }
