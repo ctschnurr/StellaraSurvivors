@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Spawn_command.gd" id="1_1fwfa"]
 [ext_resource type="Script" path="res://scenes/Managers/Objective.gd" id="1_pthrc"]
-[ext_resource type="PackedScene" uid="uid://si6pecgkgbey" path="res://scenes/asteroids/asteroid_sm.tscn" id="2_mljcv"]
-[ext_resource type="PackedScene" uid="uid://de6khcv1nexs0" path="res://scenes/asteroids/asteroid_med.tscn" id="3_a6gwl"]
-[ext_resource type="PackedScene" uid="uid://d0lsq5yi27jo1" path="res://scenes/asteroids/asteroid_lg.tscn" id="4_hte2b"]
+[ext_resource type="PackedScene" uid="uid://si6pecgkgbey" path="res://scenes/game_objects/enemies/asteroids/asteroid_sm.tscn" id="2_mljcv"]
+[ext_resource type="PackedScene" uid="uid://de6khcv1nexs0" path="res://scenes/game_objects/enemies/asteroids/asteroid_med.tscn" id="3_a6gwl"]
+[ext_resource type="PackedScene" uid="uid://d0lsq5yi27jo1" path="res://scenes/game_objects/enemies/asteroids/asteroid_lg.tscn" id="4_hte2b"]
 
 [sub_resource type="Resource" id="Resource_i35sq"]
 script = ExtResource("1_pthrc")

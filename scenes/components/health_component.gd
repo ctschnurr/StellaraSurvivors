@@ -33,4 +33,5 @@ func check_death():
 		else:
 			#animation_player.play("Damage")
 			#await animation_player.animation_finished
+			await get_tree().create_timer(0.15).timeout
 			vulnerable = true

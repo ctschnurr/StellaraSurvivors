@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Player_upgrade" load_steps=2 format=3 uid="uid://bkmr7i33e4tkt"]
+
+[ext_resource type="Script" path="res://resources/upgrades/player_upgrade.gd" id="1_8f2ke"]
+
+[resource]
+script = ExtResource("1_8f2ke")
+id = "fire_rate"
+name = "Fire Rate"
+description = "Increases your blaster's fire rate."
+max_lvl = 8

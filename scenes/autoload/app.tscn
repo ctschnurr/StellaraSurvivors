@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu0f5mg2fhcq7"]
+
+[ext_resource type="Script" path="res://scenes/autoload/App.gd" id="1_vptnr"]
+[ext_resource type="PackedScene" uid="uid://dirgwundhi3xq" path="res://scenes/player/player.tscn" id="2_xidm3"]
+
+[node name="App" type="Node"]
+script = ExtResource("1_vptnr")
+player_scene = ExtResource("2_xidm3")

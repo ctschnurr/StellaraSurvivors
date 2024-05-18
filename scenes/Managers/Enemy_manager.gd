@@ -7,6 +7,8 @@ var game_manager: Game_manager
 @export var asteroid_medium: PackedScene
 @export var asteroid_large: PackedScene
 
+@export var blaster_bolt_scene: PackedScene
+
 enum Enemy_type{ASTEROID_SMALL, ASTEROID_MEDIUM, ASTEROID_LARGE}
 @onready var enemy_dictionary: Dictionary = {"ASTEROID_SMALL": asteroid_small, "ASTEROID_MEDIUM": asteroid_medium, "ASTEROID_LARGE": asteroid_large}
 
@@ -14,18 +16,29 @@ const asteroid_spawn_xRange = [-1000, -100]
 const asteroid_spawn_yRange = [0, 720]
 
 var spawn_commands: Array
+var current_command: Spawn_command
 var enemies: Array
-				
-				
+var bolts: Array
+
+
+func _ready():
+	App.enemy_manager = self
+	App.reset_game.connect(reset_enemy_manager)
+
+
+func reset_enemy_manager():
+	clear_enemies()
+
+
 func _process(_delta):
 	if !spawn_commands.is_empty():
 		for command in spawn_commands:
 			if command.ready: process_command(command)
 
 
-
 func add_command(command: Spawn_command):
 	spawn_commands.append(command)
+	if current_command == null: current_command = command
 	if command.associated_objective != null: 
 		command.associated_objective = command.associated_objective.duplicate()
 		command.associated_objective.objective_complete_signal.connect(command.clear_associated_objective,CONNECT_ONE_SHOT)
@@ -43,6 +56,7 @@ func process_command(command: Spawn_command):
 				
 				if command.associated_objective != null:
 					command.associated_objective.connect_signal(enemy_instance.health_component.died)
+					
 		Spawn_command.Spawn_positioning.ASTEROID_BURST:
 			spawn_asteroid_burst(command)
 			
@@ -73,6 +87,10 @@ func clear_enemies():
 		if enemy != null: enemy.queue_free()
 	enemies = []
 	spawn_commands = []
+	current_command = null
+	for bolt in bolts:
+		if bolt != null: bolt.queue_free()	
+	bolts = []
 	
 	
 func spawn_asteroid_burst(command: Spawn_command):	
@@ -100,3 +118,13 @@ func spawn_asteroid_burst(command: Spawn_command):
 		asteroid.asteroid_direction = position
 		asteroid.asteroid_speed = 75
 		add_child(asteroid)
+		if current_command.associated_objective != null:
+			current_command.associated_objective.connect_signal(asteroid.health_component.died)
+
+
+func spawn_blaster_bolt(location, rotation):
+	var blaster_bolt_instance = blaster_bolt_scene.instantiate() as Node2D
+	get_tree().root.add_child(blaster_bolt_instance)
+	bolts.append(blaster_bolt_instance)
+	blaster_bolt_instance.global_position = location
+	blaster_bolt_instance.global_rotation = rotation

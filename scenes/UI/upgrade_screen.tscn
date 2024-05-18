@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://by5rg1o3614mm"]
+
+[ext_resource type="Script" path="res://scenes/UI/upgrade_screen.gd" id="1_enubb"]
+[ext_resource type="PackedScene" uid="uid://cjpssyc1gqfku" path="res://scenes/UI/upgrade_card.tscn" id="2_fi3sc"]
+
+[node name="Upgrade_screen" type="CanvasLayer" node_paths=PackedStringArray("card_container")]
+process_mode = 3
+script = ExtResource("1_enubb")
+upgrade_card_scene = ExtResource("2_fi3sc")
+card_container = NodePath("MarginContainer/Card_container")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card_container" type="HBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4

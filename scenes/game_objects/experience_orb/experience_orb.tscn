@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c15pu2wob5hao"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/experience_orb/experience_orb.gd" id="1_g5nap"]
+[ext_resource type="Texture2D" uid="uid://cbl4psun7splw" path="res://assets/xp_orb.png" id="2_fugu1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r06yx"]
+radius = 15.0
+
+[node name="Experience_orb" type="CharacterBody2D"]
+script = ExtResource("1_g5nap")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_r06yx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.172549, 0.745098, 1, 1)
+texture_filter = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_fugu1")
