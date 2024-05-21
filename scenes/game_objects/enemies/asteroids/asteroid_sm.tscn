@@ -110,7 +110,7 @@ shape = SubResource("CircleShape2D_026wd")
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("8_gsxsf")]
 unique_name_in_owner = true
 animation_player = NodePath("../AnimationPlayer")
-max_health = 3.0
+max_health = 5.0
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("9_bcxy1")]
 collision_layer = 0

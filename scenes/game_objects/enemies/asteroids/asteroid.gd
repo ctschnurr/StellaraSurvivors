@@ -32,7 +32,10 @@ func _ready():
 	health_component.hurt.connect(damage_sequence)
 	
 	asteroid_rotation = randf_range(-0.01, 0.01) #randf_range(-0.025, 0.025)
-	if asteroid_direction == Vector2.ZERO: asteroid_direction = set_movement_vector()
+	if asteroid_direction == Vector2.ZERO: 
+		if randf_range(1, 5) > 3:
+			if App.player != null: asteroid_direction = asteroid_direction.direction_to(App.player.global_position)
+		else: asteroid_direction = set_movement_vector()
 	
 	enemy_sprite.texture = asteroid_textures.pick_random()
 	
@@ -44,7 +47,7 @@ func _ready():
 		Asteroid_size.LARGE:
 			size_multiplier = 3
 
-	if asteroid_speed == 0: asteroid_speed = 150 / (size_multiplier / 2) #randf_range(100, 150)
+	if asteroid_speed == 0: asteroid_speed = randf_range(100, 150)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -52,7 +55,7 @@ func _process(_delta):
 	velocity = asteroid_direction * asteroid_speed
 	move_and_slide()
 	
-	if global_position.x > 1300 or (asteroid_direction.x < 0 and global_position.x < -20):
+	if global_position.y > 800 or (asteroid_direction.y < 0 and global_position.y < -30):
 		queue_free()
 		
 
@@ -110,26 +113,28 @@ func collision_cooldown():
 	was_hit = false
 	
 	
-func respond_to_bolt_collision(bolt_direction, collision_point):	
+func respond_to_bolt_collision(bolt_direction, collision_point, damage_factor):	
 	var asteroid_angle = asteroid_direction.angle()
 	var diff_angle = asteroid_angle - bolt_direction.angle()
+	var speed_variable = size_multiplier - damage_factor
 			
 	#if the bolt hits an asteroid traveling toward it:
 	if diff_angle < -2.75 or diff_angle > 2.75: 
 		if asteroid_speed < 5:
 			asteroid_direction = bolt_direction.normalized()
-			asteroid_speed *= 1.5
+			asteroid_speed *= 1 * (size_multiplier * .1)
 		else:
-			asteroid_speed *= 0.3 * size_multiplier
+			asteroid_speed *= 1 - (.1 * (damage_factor / size_multiplier))
+
 					
 	#if the bolt hits an asteroid traveling away from it:
 	if diff_angle > -0.5 and diff_angle < 0.5: 
-			asteroid_speed *= 1.25
+			asteroid_speed *= 1 + (.1 * (damage_factor / size_multiplier))
 			
 	#if the bolt hits an asteroid travelling at a diagonal from it:
 	if (diff_angle < 2.75 and diff_angle > 0.5) or (diff_angle > -2.75 and diff_angle <  -0.5): 
-			asteroid_direction = bolt_direction.normalized()
-			asteroid_speed *= 0.5
+			asteroid_direction = asteroid_direction.rotated(-diff_angle / 2)
+			asteroid_speed *= 0.95
 			
 	asteroid_impact_effect(collision_point)
 	
@@ -149,8 +154,6 @@ func asteroid_explosion_effect():
 	effect.global_position = global_position
 	effect.scale_amount_max = size_multiplier + 1
 	effect.restart()
-	await effect.finished
-	queue_free()
 	
 	
 #func _draw():
@@ -164,8 +167,8 @@ func asteroid_explosion_effect():
 		
 
 func set_movement_vector():
-	x_movement = randf_range(1, 5)
-	y_movement = randf_range(-0.005, 0.005)
+	x_movement = randf_range(-0.005, 0.005)
+	y_movement = randf_range(1, 5)
 	
 	return Vector2(x_movement, y_movement).normalized()
 	
@@ -184,7 +187,9 @@ func death_sequence():
 	tween.parallel().tween_callback(asteroid_explosion_effect).set_delay(0.1)
 	tween.tween_callback(create_spawn_command).set_delay(0.11)
 	App.experience_manager.spawn_xp_orb(global_position, size_multiplier)
-
+	await tween.finished
+	queue_free()
+	
 	
 func damage_sequence(_health):
 	var tween = get_tree().create_tween()

@@ -3,8 +3,6 @@ class_name Experience_manager extends Node
 signal update_experience(player_experience: float, target_experience: float)
 signal level_up(new_level: int)
 
-const TARGET_XP_GROWTH = 1
-
 @export var xp_orb_scene: PackedScene
 @export var xp_bar_scene: PackedScene
 
@@ -13,7 +11,7 @@ var player_level: int = 1
 var xp_bar
 var xp_orbs: Array
 
-@onready var target_experience = App.starter_target_experience
+@onready var target_experience = App.START_TARGET_XP
 
 func _ready():
 	App.experience_manager = self
@@ -30,7 +28,7 @@ func xp_collected(xp: float):
 	update_experience.emit(player_experience, target_experience)
 	if player_experience == target_experience:
 		player_level += 1
-		target_experience += TARGET_XP_GROWTH
+		target_experience += App.TARGET_XP_GROWTH
 		player_experience = 0
 		update_experience.emit(player_experience, target_experience)
 		level_up.emit(player_level)
@@ -52,7 +50,7 @@ func reset():
 
 	player_experience = 0
 	player_level = 1
-	target_experience = App.starter_target_experience
+	target_experience = App.START_TARGET_XP
 	
 	for orb in xp_orbs:
 		if orb != null: orb.queue_free()

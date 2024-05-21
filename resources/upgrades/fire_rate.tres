@@ -6,5 +6,5 @@
 script = ExtResource("1_8f2ke")
 id = "fire_rate"
 name = "Fire Rate"
-description = "Increases your blaster's fire rate."
-max_lvl = 8
+description = "Increases blaster fire rate"
+max_lvl = 5

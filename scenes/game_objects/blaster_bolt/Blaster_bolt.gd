@@ -15,6 +15,8 @@ var default_damage = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hitbox.damage = default_damage + App.player.damage_level
+	var scale_factor = default_damage + (hitbox.damage * .2)
+	scale = Vector2(scale_factor, scale_factor)
 	pass
 	
 	
@@ -49,7 +51,7 @@ func fire_raycast(raycast_direction: Vector2):
 	if !raycast_output.is_empty():
 					
 		if raycast_output.collider is Asteroid:
-			raycast_output.collider.respond_to_bolt_collision(raycast_direction, raycast_output.position)
+			raycast_output.collider.respond_to_bolt_collision(raycast_direction, raycast_output.position, hitbox.damage)
 			
 		collision_cooldown()
 		

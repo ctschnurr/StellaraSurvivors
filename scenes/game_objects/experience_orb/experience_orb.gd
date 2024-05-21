@@ -16,6 +16,7 @@ func on_area_entered(_area_entered):
 	
 	
 func _process(delta):
+	if player == null: return
 	var distance_to_player: float = global_position.distance_to(player.global_position)
 	var direction_to_player: Vector2 = global_position.direction_to(player.global_position)
 	

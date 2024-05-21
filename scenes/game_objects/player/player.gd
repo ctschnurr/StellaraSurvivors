@@ -49,7 +49,7 @@ func _process(delta):
 			ship_cannon.rotation += rotate_adjust
 			
 			if Input.is_action_just_pressed("escape"):
-				mission_manager.game_manager.screen_manager.show_pause()
+				App.screen_manager.show_pause()
 			
 			if Input.is_action_pressed("input_fire"):
 				if gun_ready:
@@ -57,7 +57,7 @@ func _process(delta):
 					App.enemy_manager.spawn_blaster_bolt(fire_position.global_position, ship_cannon.global_rotation)
 					ship_body.stop()
 					ship_body.play("player_fire")
-					await get_tree().create_timer(1 - gun_cooldown).timeout
+					await get_tree().create_timer(0.8 - gun_cooldown).timeout
 					gun_ready = true
 		
 		

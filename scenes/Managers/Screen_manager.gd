@@ -54,14 +54,11 @@ func show_win_screen():
 	
 	var win_screen_instance = win_screen.instantiate()
 	add_child(win_screen_instance)
-	win_screen_instance.screen_manager = self
 	
 	
 func show_lose_screen():
-	
 	var lose_screen_instance = lose_screen.instantiate()
 	add_child(lose_screen_instance)
-	lose_screen_instance.screen_manager = self
 		
 		
 func show_pause():

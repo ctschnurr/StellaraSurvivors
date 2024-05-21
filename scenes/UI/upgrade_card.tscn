@@ -10,10 +10,13 @@ offset_right = 200.0
 offset_bottom = 300.0
 theme = ExtResource("1_graix")
 theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
 script = ExtResource("1_82vuh")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(200, 300)
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("1_graix")
@@ -24,7 +27,6 @@ layout_mode = 2
 [node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_bottom = 10
 
 [node name="Name_label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer2"]
 unique_name_in_owner = true
@@ -32,7 +34,20 @@ texture_filter = 1
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 theme = ExtResource("1_graix")
-text = "test"
+text = "name"
+horizontal_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="Level_label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer3"]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme = ExtResource("1_graix")
+text = "level"
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
@@ -47,6 +62,6 @@ texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_graix")
 theme_override_font_sizes/font_size = 15
-text = "test"
+text = "description"
 horizontal_alignment = 1
 autowrap_mode = 2

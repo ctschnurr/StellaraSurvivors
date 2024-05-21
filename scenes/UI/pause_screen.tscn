@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c35bwb1gim3p8"]
+[gd_scene load_steps=3 format=3 uid="uid://c35bwb1gim3p8"]
 
 [ext_resource type="Script" path="res://scenes/UI/pause_screen.gd" id="1_8mgbq"]
+[ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_ve1ah"]
 
 [node name="Pause_screen" type="CanvasLayer"]
 process_mode = 3
@@ -24,6 +25,8 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_ve1ah")
+theme_override_constants/outline_size = 15
 theme_override_font_sizes/font_size = 100
 text = "Pause"
 
@@ -40,6 +43,7 @@ size_flags_vertical = 4
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 75)
 layout_mode = 2
+theme = ExtResource("2_ve1ah")
 theme_override_font_sizes/font_size = 30
 text = "RESUME"
 
@@ -47,6 +51,7 @@ text = "RESUME"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 75)
 layout_mode = 2
+theme = ExtResource("2_ve1ah")
 theme_override_font_sizes/font_size = 30
 text = "RESTART"
 
@@ -54,5 +59,6 @@ text = "RESTART"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 75)
 layout_mode = 2
+theme = ExtResource("2_ve1ah")
 theme_override_font_sizes/font_size = 30
 text = "QUIT"

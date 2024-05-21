@@ -12,14 +12,16 @@ var game_manager: Game_manager
 enum Enemy_type{ASTEROID_SMALL, ASTEROID_MEDIUM, ASTEROID_LARGE}
 @onready var enemy_dictionary: Dictionary = {"ASTEROID_SMALL": asteroid_small, "ASTEROID_MEDIUM": asteroid_medium, "ASTEROID_LARGE": asteroid_large}
 
-const asteroid_spawn_xRange = [-1000, -100]
-const asteroid_spawn_yRange = [0, 720]
+const asteroid_spawn_xRange = [30, 1250]
+const asteroid_spawn_yRange = [-300, 0]
 
 var spawn_commands: Array
 var current_command: Spawn_command
 var enemies: Array
 var bolts: Array
+var time_tracker: int = 0
 
+var command_timer: Timer
 
 func _ready():
 	App.enemy_manager = self
@@ -42,23 +44,36 @@ func add_command(command: Spawn_command):
 	if command.associated_objective != null: 
 		command.associated_objective = command.associated_objective.duplicate()
 		command.associated_objective.objective_complete_signal.connect(command.clear_associated_objective,CONNECT_ONE_SHOT)
+		
+	if command.repeat_mode == Spawn_command.Repeat_mode.ACCELERATING:
+		command_timer = Timer.new()
+		add_child(command_timer)
+		command_timer.start(command.repeat_timer)
+		var times_to_spawn = ((command.repeat_timer / 60) * 15)
+		command.repeat_delay = command.repeat_timer / times_to_spawn
+		print(command.repeat_delay)
+
 
 func process_command(command: Spawn_command):
 	command.ready = false
 	match command.spawn_positioning:
 		Spawn_command.Spawn_positioning.SCATTER:	
-			for n in command.spawn_amount:
-				var enemy_instance = command.enemy_type.pick_random().instantiate() as Node2D
-				add_child(enemy_instance)
-				enemies.append(enemy_instance)
-				enemy_instance.enemy_manager = self
-				enemy_instance.global_position = Vector2(randf_range(asteroid_spawn_xRange[0], asteroid_spawn_xRange[1]), randf_range(asteroid_spawn_yRange[0], asteroid_spawn_yRange[1]))
-				
-				if command.associated_objective != null:
-					command.associated_objective.connect_signal(enemy_instance.health_component.died)
+			spawn_scatter(command)
 					
 		Spawn_command.Spawn_positioning.ASTEROID_BURST:
 			spawn_asteroid_burst(command)
+			
+	match command.repeat_mode:
+		Spawn_command.Repeat_mode.STEADY:
+			pass
+			
+		Spawn_command.Repeat_mode.ACCELERATING:
+			var minutes = (command_timer.wait_time - command_timer.time_left) / 60
+			if int(minutes) > time_tracker:
+				time_tracker = int(minutes)
+				command.spawn_amount += 1
+			print("Spawn amount: ", command.spawn_amount, " Time: ", minutes, " Tracker: ", time_tracker)
+			pass
 			
 			
 	match command.repeat_state:
@@ -77,6 +92,10 @@ func process_command(command: Spawn_command):
 				await get_tree().create_timer(command.repeat_delay).timeout
 				command.ready = true
 				return
+		Spawn_command.Repeat_state.TIMER:
+				await get_tree().create_timer(command.repeat_delay).timeout
+				command.ready = true
+				return
 	
 	spawn_commands.erase(command)
 	pass
@@ -91,6 +110,19 @@ func clear_enemies():
 	for bolt in bolts:
 		if bolt != null: bolt.queue_free()	
 	bolts = []
+	time_tracker = 0
+	
+
+func spawn_scatter(command: Spawn_command):
+	for n in command.spawn_amount:
+		var enemy_instance = command.enemy_type.pick_random().instantiate() as Node2D
+		add_child(enemy_instance)
+		enemies.append(enemy_instance)
+		enemy_instance.enemy_manager = self
+		enemy_instance.global_position = Vector2(randf_range(asteroid_spawn_xRange[0], asteroid_spawn_xRange[1]), randf_range(asteroid_spawn_yRange[0], asteroid_spawn_yRange[1]))
+		
+		if command.associated_objective != null:
+			command.associated_objective.connect_signal(enemy_instance.health_component.died)
 	
 	
 func spawn_asteroid_burst(command: Spawn_command):	

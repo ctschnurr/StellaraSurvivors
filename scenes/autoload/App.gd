@@ -1,5 +1,11 @@
 extends Node
 
+#const START_TARGET_XP = 5
+#const TARGET_XP_GROWTH = 5
+
+const START_TARGET_XP = 5
+const TARGET_XP_GROWTH = 5
+
 signal player_hurt(current_health)
 signal player_dead
 signal start_game
@@ -12,9 +18,9 @@ var experience_manager: Experience_manager
 var enemy_manager: Enemy_manager
 var screen_manager: Screen_Manager
 var mission_manager: Mission_manager
+var upgrade_manager: Upgrade_manager
 
 var orb_attract_distance: float = 200
-var starter_target_experience = 1
 
 
 func instantiate_player():

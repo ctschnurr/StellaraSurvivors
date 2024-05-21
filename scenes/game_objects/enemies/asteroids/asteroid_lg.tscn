@@ -116,6 +116,11 @@ explosion_effect = ExtResource("3_7u5kt")
 impact_effect = ExtResource("3_kp1a4")
 size = 2
 
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("5_jxj7f")]
+unique_name_in_owner = true
+animation_player = NodePath("../AnimationPlayer")
+max_health = 25.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_lbpxx")
@@ -134,10 +139,6 @@ texture = ExtResource("4_rq1we")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_026wd")
-
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("5_jxj7f")]
-unique_name_in_owner = true
-animation_player = NodePath("../AnimationPlayer")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_15n0q")]
 collision_layer = 0

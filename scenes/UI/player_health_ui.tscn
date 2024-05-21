@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdoot0gj5cabf"]
+[gd_scene load_steps=3 format=3 uid="uid://cdoot0gj5cabf"]
 
 [ext_resource type="Script" path="res://scenes/UI/Player_health_ui.gd" id="1_472b7"]
+[ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_1lhf5"]
 
 [node name="Player_health_ui" type="CanvasLayer"]
 script = ExtResource("1_472b7")
@@ -20,4 +21,5 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+theme = ExtResource("2_1lhf5")
 text = "3"

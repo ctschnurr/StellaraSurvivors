@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://csj7srfalk7r8"]
+[gd_scene load_steps=3 format=3 uid="uid://csj7srfalk7r8"]
 
 [ext_resource type="Script" path="res://scenes/UI/Objective_info_ui.gd" id="1_qked6"]
+[ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_bo8to"]
 
 [node name="Objective_info_ui" type="CanvasLayer"]
 script = ExtResource("1_qked6")
@@ -17,13 +18,17 @@ theme_override_constants/margin_bottom = 10
 
 [node name="Objective_text" type="Label" parent="MarginContainer"]
 unique_name_in_owner = true
+texture_filter = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+theme = ExtResource("2_bo8to")
 
 [node name="Controls" type="Label" parent="MarginContainer"]
 unique_name_in_owner = true
+texture_filter = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+theme = ExtResource("2_bo8to")
 text = "Use WASD to move, mouse to aim and mouse1 to fire"

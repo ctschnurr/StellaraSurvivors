@@ -13,7 +13,10 @@ func set_player_upgrades(upgrades: Array[Player_upgrade], current_upgrades: Dict
 	for upgrade in upgrades:
 		var new_card = upgrade_card_scene.instantiate() as Upgrade_card
 		card_container.add_child(new_card)
-		new_card.setup_card(upgrade)
+		var has_upgrade = current_upgrades.has(upgrade.id)
+		var upgrade_level = 1
+		if has_upgrade: upgrade_level = current_upgrades[upgrade.id]["quantity"] + 1
+		new_card.setup_card(upgrade, upgrade_level)
 		new_card.selected.connect(upgrade_clicked.bind(upgrade))
 		
 		

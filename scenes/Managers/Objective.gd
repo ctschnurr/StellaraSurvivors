@@ -8,20 +8,28 @@ enum Objective_type {DESTROY_ENEMIES,SURVIVE,DEFEND}
 
 @export var objective_type: Objective_type
 @export_multiline var objective_description: String
-var objective_timer: Timer
+@export var survive_timer_minutes: int
 var objective_count: int
 @export var objective_target: int
 var objective_info: String
 
-var connected_input_signals:Array[Signal] = []
-
-	
+var connected_input_signals:Array[Signal] = []	
 
 func update_objective_info():
 	var name = "asteroid"
 	if objective_target - objective_count > 1: name = name + "s"
 	objective_info = "Destroy %s %s" %[objective_target - objective_count, name]
 	objective_updated_signal.emit(self, objective_info)
+	
+	
+func update_survival_objective(time_left: int):
+	if time_left > 0:
+		var seconds = time_left%60
+		var minutes = (time_left/60)%60
+		objective_info = "Survive for %01d:%02d" %[minutes, seconds]
+		objective_updated_signal.emit(self, objective_info)
+	else:
+		objective_complete_signal.emit(self)
 
 
 func clear_objective():
@@ -37,6 +45,7 @@ func clear_objective():
 
 func connect_signal(input: Signal):
 	input.connect(signal_response)
+
 
 func signal_response():
 	match objective_type:

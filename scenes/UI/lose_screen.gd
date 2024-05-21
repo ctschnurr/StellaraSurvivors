@@ -3,7 +3,6 @@ extends CanvasLayer
 @onready var replay_button = %ReplayButton
 @onready var quit_button = %QuitButton
 
-@onready var screen_manager: Node
 
 func _ready():
 	replay_button.pressed.connect(play_game)
@@ -11,12 +10,11 @@ func _ready():
 	
 	
 func play_game():
-	screen_manager.play_game()
+	App.screen_manager.play_game()
 	queue_free()
 	pass
 	
 	
 func quit_game():
-	print("Quit Pressed")
-	screen_manager.quit_game()
+	App.screen_manager.quit_game()
 	pass

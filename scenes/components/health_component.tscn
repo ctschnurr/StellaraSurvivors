@@ -1,6 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqf2fq7p7ip"]
+[gd_scene load_steps=4 format=3 uid="uid://dqf2fq7p7ip"]
 
 [ext_resource type="Script" path="res://scenes/components/health_component.gd" id="1_tjmei"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a24bw"]
+bg_color = Color(0, 0, 0, 0.588235)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5v7g7"]
+bg_color = Color(0.863432, 0.0553816, 0.0318653, 1)
+
 [node name="HealthComponent" type="Node"]
 script = ExtResource("1_tjmei")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 5
+custom_minimum_size = Vector2(50, 2)
+offset_left = -25.0
+offset_top = 25.0
+offset_right = 25.0
+offset_bottom = 29.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_a24bw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5v7g7")
+max_value = 1.0
+value = 1.0
+show_percentage = false

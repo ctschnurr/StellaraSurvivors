@@ -17,17 +17,17 @@
 [node name="Main" type="Node"]
 script = ExtResource("1_bqipc")
 
+[node name="Mission_manager" type="Node" parent="."]
+script = ExtResource("2_fmjb6")
+player_scene = ExtResource("4_6bhca")
+possible_spawn_commands = Array[Resource("res://Spawn_command.gd")]([ExtResource("8_wcefd")])
+
 [node name="Experience_manager" parent="." instance=ExtResource("2_sc8ta")]
 xp_orb_scene = ExtResource("3_4dooy")
 xp_bar_scene = ExtResource("4_op1r5")
 
 [node name="Upgrade_manager" parent="." node_paths=PackedStringArray("experience_manager") instance=ExtResource("5_xmfqf")]
 experience_manager = NodePath("../Experience_manager")
-
-[node name="Mission_manager" type="Node" parent="."]
-script = ExtResource("2_fmjb6")
-player_scene = ExtResource("4_6bhca")
-possible_spawn_commands = Array[Resource("res://Spawn_command.gd")]([ExtResource("8_wcefd")])
 
 [node name="Enemy_manager" parent="." instance=ExtResource("9_pjcio")]
 

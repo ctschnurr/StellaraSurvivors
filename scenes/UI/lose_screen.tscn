@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://brctvkgpivpue"]
+[gd_scene load_steps=3 format=3 uid="uid://brctvkgpivpue"]
 
 [ext_resource type="Script" path="res://scenes/UI/lose_screen.gd" id="1_tae55"]
+[ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_2alls"]
 
 [node name="Lose_screen" type="CanvasLayer"]
 script = ExtResource("1_tae55")
@@ -23,8 +24,10 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_2alls")
+theme_override_constants/outline_size = 15
 theme_override_font_sizes/font_size = 100
-text = "You Lose!"
+text = "Defeat!"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -39,6 +42,7 @@ size_flags_vertical = 4
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 75)
 layout_mode = 2
+theme = ExtResource("2_2alls")
 theme_override_font_sizes/font_size = 30
 text = "TRY AGAIN"
 
@@ -46,5 +50,6 @@ text = "TRY AGAIN"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 75)
 layout_mode = 2
+theme = ExtResource("2_2alls")
 theme_override_font_sizes/font_size = 30
 text = "QUIT"

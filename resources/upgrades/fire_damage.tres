@@ -7,4 +7,4 @@ script = ExtResource("1_cho1b")
 id = "fire_damage"
 name = "Blaster Damage"
 description = "Increases blaster damage"
-max_lvl = 5
+max_lvl = 4

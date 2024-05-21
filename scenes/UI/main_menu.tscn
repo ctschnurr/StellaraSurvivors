@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://0682oimusjop"]
 
-[ext_resource type="Texture2D" uid="uid://cxf3m6lfptkha" path="res://assets/title.png" id="1_isd3a"]
 [ext_resource type="Script" path="res://scenes/UI/main_menu.gd" id="1_jq6jl"]
+[ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="3_kxuvk"]
 
 [node name="Main_menu" type="CanvasLayer"]
 process_mode = 3
@@ -22,12 +22,20 @@ theme_override_constants/margin_bottom = 200
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(600, 200)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_isd3a")
-stretch_mode = 4
+size_flags_vertical = 4
+theme = ExtResource("3_kxuvk")
+theme_override_constants/line_separation = -20
+theme_override_constants/outline_size = 10
+bbcode_enabled = true
+text = "[center]
+[pulse freq=0.5.0 color=#ffffff80 ease=-2.0]
+[font_size=90]Stellara[/font_size]
+[font_size=75]Survivors[/font_size]
+[/pulse]"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -42,6 +50,7 @@ size_flags_vertical = 4
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 75)
 layout_mode = 2
+theme = ExtResource("3_kxuvk")
 theme_override_font_sizes/font_size = 30
 text = "PLAY"
 
@@ -49,5 +58,6 @@ text = "PLAY"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 75)
 layout_mode = 2
+theme = ExtResource("3_kxuvk")
 theme_override_font_sizes/font_size = 30
 text = "QUIT"
