@@ -85,8 +85,8 @@ func controller_movement():
 
 
 func get_controller_look():
-	var x_look = Input.get_axis("look_left", "look_right")
-	var y_look = Input.get_axis("look_up", "look_down")
+	var x_look = -Input.get_action_strength("look_left") + Input.get_action_strength("look_right")
+	var y_look = +Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
 	return Vector2(x_look, y_look)
 
 
