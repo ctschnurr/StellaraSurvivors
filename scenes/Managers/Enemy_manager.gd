@@ -51,7 +51,6 @@ func add_command(command: Spawn_command):
 		command_timer.start(command.repeat_timer)
 		var times_to_spawn = ((command.repeat_timer / 60) * 15)
 		command.repeat_delay = command.repeat_timer / times_to_spawn
-		print(command.repeat_delay)
 
 
 func process_command(command: Spawn_command):
@@ -72,8 +71,6 @@ func process_command(command: Spawn_command):
 			if int(minutes) > time_tracker:
 				time_tracker = int(minutes)
 				command.spawn_amount += 1
-			print("Spawn amount: ", command.spawn_amount, " Time: ", minutes, " Tracker: ", time_tracker)
-			pass
 			
 			
 	match command.repeat_state:

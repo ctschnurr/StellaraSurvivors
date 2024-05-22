@@ -6,6 +6,7 @@ extends CanvasLayer
 func _ready():
 	replay_button.pressed.connect(play_game)
 	quit_button.pressed.connect(quit_game)
+	replay_button.grab_focus()
 	
 	
 func play_game():

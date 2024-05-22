@@ -134,7 +134,7 @@ func respond_to_bolt_collision(bolt_direction, collision_point, damage_factor):
 	#if the bolt hits an asteroid travelling at a diagonal from it:
 	if (diff_angle < 2.75 and diff_angle > 0.5) or (diff_angle > -2.75 and diff_angle <  -0.5): 
 			asteroid_direction = asteroid_direction.rotated(-diff_angle / 2)
-			asteroid_speed *= 0.95
+			asteroid_speed *= 0.60
 			
 	asteroid_impact_effect(collision_point)
 	

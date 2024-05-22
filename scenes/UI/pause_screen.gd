@@ -10,7 +10,7 @@ func _ready():
 	resume_button.pressed.connect(resume_game)
 	restart_button.pressed.connect(play_game)
 	quit_button.pressed.connect(quit_game)
-	
+	resume_button.grab_focus()
 	
 func _process(_delta):
 	if Input.is_action_just_pressed("escape"):

@@ -15,7 +15,8 @@ theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 script = ExtResource("1_82vuh")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="Button" parent="."]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 300)
 layout_mode = 2
 mouse_filter = 2
@@ -23,6 +24,10 @@ theme = ExtResource("1_graix")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 245.0
+offset_bottom = 295.0
 
 [node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2

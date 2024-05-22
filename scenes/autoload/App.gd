@@ -3,6 +3,8 @@ extends Node
 #const START_TARGET_XP = 5
 #const TARGET_XP_GROWTH = 5
 
+enum input_device{KEYBOARD, CONTROLLER}
+
 const START_TARGET_XP = 5
 const TARGET_XP_GROWTH = 5
 
@@ -22,6 +24,7 @@ var upgrade_manager: Upgrade_manager
 
 var orb_attract_distance: float = 200
 
+var active_input: input_device = input_device.KEYBOARD
 
 func instantiate_player():
 	if player != null: 

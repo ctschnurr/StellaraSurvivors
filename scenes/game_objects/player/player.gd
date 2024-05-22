@@ -32,7 +32,29 @@ func _ready():
 func _process(delta):
 	match state:
 		State.ACTIVE:
-			var movement_vector = get_movement_vector()
+			var movement_vector = Vector2.ZERO
+			if App.active_input == App.input_device.KEYBOARD:
+				var look_direction = get_global_mouse_position()	
+				ship_cannon.look_at(look_direction)
+				
+				var rotate_adjust = deg_to_rad(90)
+				ship_cannon.rotation += rotate_adjust
+				
+				movement_vector = get_movement_vector()
+				
+			if App.active_input == App.input_device.CONTROLLER:
+				var look_direction = get_controller_look()
+				if look_direction != Vector2.ZERO:
+					ship_cannon.look_at(global_position + look_direction)
+					
+					var rotate_adjust = deg_to_rad(90)
+					ship_cannon.rotation += rotate_adjust
+					
+					fire_blaster()
+					
+				movement_vector = controller_movement()
+					
+					
 			animate_player(movement_vector)	
 			var direction = movement_vector.normalized()
 			var target_velocity = direction * MAX_SPEED
@@ -42,32 +64,40 @@ func _process(delta):
 			
 			constrain_player()
 
-			var look_direction = get_global_mouse_position()	
-			ship_cannon.look_at(look_direction)
-			
-			var rotate_adjust = deg_to_rad(90)
-			ship_cannon.rotation += rotate_adjust
-			
 			if Input.is_action_just_pressed("escape"):
 				App.screen_manager.show_pause()
 			
 			if Input.is_action_pressed("input_fire"):
-				if gun_ready:
-					gun_ready = false
-					App.enemy_manager.spawn_blaster_bolt(fire_position.global_position, ship_cannon.global_rotation)
-					ship_body.stop()
-					ship_body.play("player_fire")
-					await get_tree().create_timer(0.8 - gun_cooldown).timeout
-					gun_ready = true
-		
-		
+				fire_blaster()
+				
 
 func get_movement_vector():
-		
 	var x_movement = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var y_movement = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	
 	return Vector2(x_movement, y_movement)
+
+
+func controller_movement():
+	var x_move = Input.get_axis("move_left", "move_right")
+	var y_move = Input.get_axis("move_up", "move_down")
+	return Vector2(x_move, y_move)
+
+
+func get_controller_look():
+	var x_look = Input.get_axis("look_left", "look_right")
+	var y_look = Input.get_axis("look_up", "look_down")
+	return Vector2(x_look, y_look)
+
+
+func fire_blaster():
+	if gun_ready:
+		gun_ready = false
+		App.enemy_manager.spawn_blaster_bolt(fire_position.global_position, ship_cannon.global_rotation)
+		ship_body.stop()
+		ship_body.play("player_fire")
+		await get_tree().create_timer(0.8 - gun_cooldown).timeout
+		gun_ready = true
 
 
 func constrain_player():

@@ -8,7 +8,7 @@ extends CanvasLayer
 func _ready():
 	play_button.pressed.connect(play_game)
 	quit_button.pressed.connect(quit_game)
-	
+	play_button.grab_focus()
 	
 func play_game():
 	screen_manager.play_game()

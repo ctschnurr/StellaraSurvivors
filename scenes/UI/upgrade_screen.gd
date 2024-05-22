@@ -10,6 +10,7 @@ func _ready():
 
 
 func set_player_upgrades(upgrades: Array[Player_upgrade], current_upgrades: Dictionary):
+	var new_cards: Array
 	for upgrade in upgrades:
 		var new_card = upgrade_card_scene.instantiate() as Upgrade_card
 		card_container.add_child(new_card)
@@ -19,6 +20,9 @@ func set_player_upgrades(upgrades: Array[Player_upgrade], current_upgrades: Dict
 		new_card.setup_card(upgrade, upgrade_level)
 		new_card.selected.connect(upgrade_clicked.bind(upgrade))
 		
+		new_cards.append(new_card)
+		
+	new_cards[0].panel.grab_focus()
 		
 func upgrade_clicked(upgrade: Player_upgrade):
 	upgrade_selected.emit(upgrade)

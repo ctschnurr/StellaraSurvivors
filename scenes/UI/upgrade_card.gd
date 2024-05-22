@@ -5,9 +5,10 @@ signal selected
 @onready var name_label: Label = %Name_label
 @onready var level_label: Label = %Level_label
 @onready var description_label: Label = %Description_label
+@onready var panel = %PanelContainer
 
 func _ready():
-	gui_input.connect(on_input)
+	panel.pressed.connect(on_input)
 	
 
 func setup_card(upgrade: Player_upgrade, level: int):
@@ -16,7 +17,6 @@ func setup_card(upgrade: Player_upgrade, level: int):
 	description_label.text = upgrade.description
 	
 	
-func on_input(event: InputEvent):
-	if event.is_action_pressed("input_fire"):
-		selected.emit()
+func on_input():
+	selected.emit()
 
