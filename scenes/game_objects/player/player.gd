@@ -34,7 +34,7 @@ func _process(delta):
 		State.ACTIVE:
 			var movement_vector = Vector2.ZERO
 			if App.active_input == App.input_device.KEYBOARD:
-				var look_direction = get_global_mouse_position()	
+				var look_direction = get_global_mouse_position()
 				ship_cannon.look_at(look_direction)
 				
 				var rotate_adjust = deg_to_rad(90)

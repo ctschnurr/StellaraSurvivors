@@ -13,6 +13,7 @@ signal player_dead
 signal start_game
 signal reset_game
 
+var camera:Camera2D
 var player: Player
 @export var player_scene: PackedScene
 

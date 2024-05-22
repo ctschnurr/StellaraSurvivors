@@ -9,7 +9,7 @@ class_name Asteroid
 
 @export var explosion_effect: PackedScene
 @export var impact_effect: PackedScene
-
+@export var screen_shake_amount:float = 0.5
 enum Asteroid_size{SMALL, MEDIUM, LARGE}
 @export var size: Asteroid_size = Asteroid_size.SMALL
 

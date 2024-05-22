@@ -9,7 +9,10 @@ signal selected
 
 func _ready():
 	panel.pressed.connect(on_input)
-	
+	panel.mouse_entered.connect(on_mouse_enter)
+
+func on_mouse_enter():
+	panel.grab_focus()
 
 func setup_card(upgrade: Player_upgrade, level: int):
 	name_label.text = upgrade.name
