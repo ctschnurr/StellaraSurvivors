@@ -16,7 +16,7 @@ var xp_orbs: Array
 
 func _ready():
 	App.experience_manager = self
-	App.reset_game.connect(reset)
+	App.player_dead.connect(reset)
 	
 
 func xp_collected(xp: float):

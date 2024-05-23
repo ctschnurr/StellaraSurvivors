@@ -1,7 +1,7 @@
 class_name Player extends CharacterBody2D
 
 const ACCELERATION_SMOOTHING = 5
-const BASE_SPEED = 150
+const BASE_SPEED = 100
 var speed = BASE_SPEED
 
 enum State{ACTIVE, INACTIVE}
@@ -182,7 +182,7 @@ func player_hurt(_damage):
 	tween.parallel().tween_property(ship_cannon, "modulate", Color(1, 1, 1, 1), 0.1)
 	
 	
-func player_died():
+func player_died(_max_health):
 	state = State.INACTIVE
 	engine_particles.queue_free()
 	var tween = get_tree().create_tween()
@@ -217,6 +217,6 @@ func update_abilities(upgrade: Player_upgrade, current_abilities: Dictionary):
 			damage_level = current_abilities["fire_damage"]["quantity"]
 		"speed_upgrade":
 			speed_level = current_abilities["speed_upgrade"]["quantity"]
-			speed = BASE_SPEED + (speed_level * 10)
+			speed = BASE_SPEED + (speed_level * 20)
 		_:
 			return

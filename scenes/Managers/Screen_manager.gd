@@ -58,6 +58,7 @@ func show_win_screen():
 	
 	
 func show_lose_screen():
+	await get_tree().create_timer(1.5).timeout
 	var lose_screen_instance = lose_screen.instantiate()
 	add_child(lose_screen_instance)
 		
@@ -91,4 +92,3 @@ func back_button(back_scene_name: String):
 		show_main_menu()
 	if back_scene_name == "Pause_screen":
 		show_pause()
-

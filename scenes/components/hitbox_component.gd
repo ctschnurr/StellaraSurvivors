@@ -13,5 +13,5 @@ func _ready():
 func on_area_entered(_other_area: Area2D):
 	if hurtbox == null:
 		hit.emit()
-		App.camera.add_trauma(0.1 + (damage * .01))
+		App.camera.add_trauma(0.05 + (damage * .01))
 		owner.queue_free()

@@ -131,7 +131,7 @@ func spawn_scatter(command: Spawn_command):
 		enemy_instance.global_position = spawn_location
 		if App.player != null: enemy_instance.asteroid_direction = spawn_location.direction_to(App.player.global_position)
 		
-		
+		enemy_instance.health_component.died.connect(add_score)
 		if command.associated_objective != null:
 			command.associated_objective.connect_signal(enemy_instance.health_component.died)
 	
@@ -161,6 +161,7 @@ func spawn_asteroid_burst(command: Spawn_command):
 		asteroid.asteroid_direction = position
 		asteroid.asteroid_speed = 75
 		add_child(asteroid)
+		asteroid.health_component.died.connect(add_score)
 		if current_command.associated_objective != null:
 			current_command.associated_objective.connect_signal(asteroid.health_component.died)
 
@@ -182,3 +183,9 @@ func pick_location():
 		3: location = Vector2(randi_range(App.play_area_x_min - 400, App.play_area_x_min), randi_range(App.play_area_y_min, App.play_area_y_max))
 		4: location = Vector2(randi_range(App.play_area_x_max, App.play_area_x_max + 400), randi_range(App.play_area_y_min, App.play_area_y_max))
 	return location
+
+
+func add_score(health_amt: int):
+	App.update_score(health_amt)
+	pass
+	

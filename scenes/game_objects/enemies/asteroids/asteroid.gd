@@ -33,7 +33,7 @@ func _ready():
 	health_component.died.connect(death_sequence)
 	health_component.hurt.connect(damage_sequence)
 	
-	asteroid_rotation = randf_range(-0.01, 0.01) #randf_range(-0.025, 0.025)
+	asteroid_rotation = randf_range(-0.025, 0.025) #randf_range(-0.025, 0.025)
 	if asteroid_direction == Vector2.ZERO: 
 		if randf_range(1, 5) > 3:
 			if App.player != null: asteroid_direction = asteroid_direction.direction_to(App.player.global_position)
@@ -51,8 +51,9 @@ func _ready():
 
 	if asteroid_speed == 0: asteroid_speed = randf_range(100, 150)
 	
-	await get_tree().create_timer(30).timeout
-	if !has_entered_play_area: queue_free()
+	await get_tree().create_timer(15).timeout
+	if !has_entered_play_area: 
+		queue_free()
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -61,10 +62,11 @@ func _process(_delta):
 	velocity = asteroid_direction * asteroid_speed
 	move_and_slide()
 	
+	if global_position.x > App.play_area_x_min and global_position.x < App.play_area_x_max and global_position.y > App.play_area_y_min and global_position.y < App.play_area_y_max: 
+		has_entered_play_area = true
+	
 	if !has_entered_play_area:
 		if App.player != null: asteroid_direction = global_position.direction_to(App.player.global_position)
-		if global_position.x > App.play_area_x_min and global_position.x < App.play_area_x_max and global_position.y > App.play_area_y_min and global_position.y < App.play_area_y_max: 
-			has_entered_play_area = true
 	else:
 		if global_position.x < App.play_area_x_min or global_position.x > App.play_area_x_max or global_position.y < App.play_area_y_min and global_position.y > App.play_area_y_max: 
 			queue_free()
@@ -95,7 +97,8 @@ func fire_raycast(direction: Vector2):
 	
 	if !raycast_output.is_empty():
 		has_hit = true
-		SoundManager.play_sound(App.asteroid_collision_sound)
+		if has_entered_play_area: 
+			SoundManager.play_sound(App.asteroid_collision_sound)
 		var collision_normal: Vector2 = raycast_output.normal
 		var new_direction = collision_normal
 		var new_speed = asteroid_speed * 0.8 #(0.3 * size_multiplier)
@@ -160,7 +163,7 @@ func asteroid_impact_effect(location):
 	
 	
 func asteroid_explosion_effect():
-	App.camera.add_trauma(0.1 + (size_multiplier * .05))
+	App.camera.add_trauma(0.05 + (size_multiplier * .05))
 	SoundManager.play_sound(App.asteroid_burst_sound)
 	var effect = explosion_effect.instantiate() as CPUParticles2D
 	add_child(effect)
@@ -188,7 +191,7 @@ func set_movement_vector():
 	return Vector2(x_movement, y_movement).normalized()
 	
 	
-func death_sequence():
+func death_sequence(_dead_health):
 	for collider in asteroid_colliders:
 		collider.set_deferred("disabled", true)
 		

@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://d27as0jcit56m"]
+[gd_scene load_steps=12 format=3 uid="uid://d27as0jcit56m"]
 
 [ext_resource type="Script" path="res://scenes/main/Game_manager.gd" id="1_bqipc"]
 [ext_resource type="Script" path="res://scenes/Managers/Mission_manager.gd" id="2_fmjb6"]
 [ext_resource type="PackedScene" uid="uid://bs5kt5nfyvh5x" path="res://scenes/Managers/experience_manager.tscn" id="2_sc8ta"]
 [ext_resource type="PackedScene" uid="uid://davbxt12ss23f" path="res://scenes/Managers/upgrade_manager.tscn" id="5_xmfqf"]
 [ext_resource type="Resource" uid="uid://cd5wp0cd1wnk6" path="res://resources/spawn_asteroid.tres" id="8_wcefd"]
+[ext_resource type="PackedScene" uid="uid://cs36w4xgew7pk" path="res://scenes/UI/win_screen.tscn" id="9_4gj86"]
 [ext_resource type="PackedScene" uid="uid://55lv4btmtybt" path="res://scenes/Managers/enemy_manager.tscn" id="9_pjcio"]
 [ext_resource type="PackedScene" uid="uid://uf37o2pc5jnx" path="res://scenes/Managers/screen_manager.tscn" id="10_bdcnj"]
 [ext_resource type="PackedScene" uid="uid://cdoot0gj5cabf" path="res://scenes/UI/player_health_ui.tscn" id="11_1b7ny"]
@@ -27,6 +28,7 @@ experience_manager = NodePath("../Experience_manager")
 
 [node name="Screen_manager" parent="." instance=ExtResource("10_bdcnj")]
 player_health_info_scene = ExtResource("11_1b7ny")
+win_screen = ExtResource("9_4gj86")
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -1

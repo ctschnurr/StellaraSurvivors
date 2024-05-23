@@ -1,7 +1,7 @@
 extends Node
 class_name HealthComponent
 
-signal died
+signal died(max_health)
 signal hurt(current_health)
 
 @onready var progress_bar = %ProgressBar
@@ -33,7 +33,7 @@ func check_death():
 			if progress_bar.visible: progress_bar.visible = false
 			#animation_player.play("Death")
 			#await animation_player.animation_finished
-			died.emit()
+			died.emit(max_health)
 			#owner.queue_free()
 			
 		else:

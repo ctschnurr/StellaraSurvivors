@@ -9,10 +9,10 @@ const START_TARGET_XP = 3
 const TARGET_XP_GROWTH = 5
 const UPGRADES_PER_LEVEL = 2
 
-const play_area_x_min = -30
-const play_area_x_max = 1310
-const play_area_y_min = -30
-const play_area_y_max = 750
+const play_area_x_min = -75
+const play_area_x_max = 1355
+const play_area_y_min = -75
+const play_area_y_max = 795
 
 var main_music: AudioStream = load("res://resources/audio/Cosmic Journey.mp3")
 var asteroid_collision_sound: AudioStream = load("res://resources/audio/asteroid_collision.wav")
@@ -21,10 +21,15 @@ var upgrade_selected_sound: AudioStream = load("res://resources/audio/upgrade.wa
 var level_up_sound: AudioStream = load("res://resources/audio/level_up.wav")
 var player_hurt_sound: AudioStream = load("res://resources/audio/player_hurt.wav")
 
+var player_score = 0
+var high_score = 0
+var high_score_saver: Save_resource
+
 signal player_hurt(current_health)
 signal player_dead
 signal start_game
 signal reset_game
+signal score_updated(player_score, high_score)
 
 var camera:Camera2D
 var player: Player
@@ -62,7 +67,8 @@ func emit_player_hurt(player_health: float):
 	player_hurt.emit(player_health)
 
 
-func emit_player_dead():
+func emit_player_dead(_max_health):
+	check_save()
 	player_dead.emit()
 	
 	
@@ -71,6 +77,9 @@ func request_reset_game():
 	
 	
 func emit_reset_game():
+	player_score = 0
+	score_updated.emit(player_score, high_score)
+	check_save()
 	reset_game.emit()
 	
 	
@@ -79,5 +88,29 @@ func request_start_game():
 	
 	
 func emit_start_game():
+	check_save()
 	start_game.emit()
+	score_updated.emit(player_score, high_score)
+	
+	
+func update_score(score: int):
+	player_score += score
+	if player_score >= high_score:
+		high_score = player_score
+		
+	score_updated.emit(player_score, high_score)
 
+
+func check_save():
+	if ResourceLoader.exists("user://stellara_hs.res"):
+		high_score_saver = ResourceLoader.load("user://stellara_hs.res")
+		if high_score_saver is Save_resource: # Check that the data is valid
+			if high_score_saver.high_score > high_score: 
+				high_score = high_score_saver.high_score
+			else:
+				high_score_saver.high_score = high_score
+	else:
+		high_score_saver = Save_resource.new()
+		
+	var save = ResourceSaver.save(high_score_saver, "user://stellara_hs.res")
+	assert(save == OK)

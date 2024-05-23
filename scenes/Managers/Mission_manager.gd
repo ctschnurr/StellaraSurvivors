@@ -45,7 +45,7 @@ func start_mission():
 		current_objective.update_survival_objective(current_objective.survive_timer_minutes * 60)
 		survive_timer = Timer.new()
 		add_child(survive_timer)
-		await get_tree().create_timer(5).timeout
+		await get_tree().create_timer(1.5).timeout
 		survive_timer.start(current_objective.survive_timer_minutes * 60)
 	
 	
@@ -66,3 +66,4 @@ func complete_objective(objective: Objective):
 	objective.clear_objective()
 	
 	App.screen_manager.show_win_screen()
+	App.check_save()

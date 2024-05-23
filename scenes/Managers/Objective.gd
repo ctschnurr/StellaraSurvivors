@@ -47,7 +47,7 @@ func connect_signal(input: Signal):
 	input.connect(signal_response)
 
 
-func signal_response():
+func signal_response(_dead_health):
 	match objective_type:
 		Objective_type.DESTROY_ENEMIES:
 			objective_count += 1

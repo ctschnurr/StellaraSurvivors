@@ -6,6 +6,8 @@ var input_set: bool = false
 func _ready():
 	SoundManager.set_default_music_bus("Music")
 	SoundManager.set_default_sound_bus("Sound")
+	SoundManager.set_sound_volume(0.5)
+	SoundManager.set_music_volume(0.5)
 	SoundManager.play_music(App.main_music, 2.5)
 	App.screen_manager.show_main_menu()
 
