@@ -7,6 +7,7 @@
 radius = 15.0
 
 [node name="Experience_orb" type="CharacterBody2D"]
+texture_filter = 2
 script = ExtResource("1_g5nap")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -17,7 +18,6 @@ collision_mask = 16
 shape = SubResource("CircleShape2D_r06yx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.172549, 0.745098, 1, 1)
 texture_filter = 2
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_fugu1")

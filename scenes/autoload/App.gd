@@ -5,8 +5,14 @@ extends Node
 
 enum input_device{KEYBOARD, CONTROLLER}
 
-const START_TARGET_XP = 5
+const START_TARGET_XP = 3
 const TARGET_XP_GROWTH = 5
+var main_music: AudioStream = load("res://resources/audio/Cosmic Journey.mp3")
+var asteroid_collision_sound: AudioStream = load("res://resources/audio/asteroid_collision.wav")
+var asteroid_burst_sound: AudioStream = load("res://resources/audio/asteroid_burst.wav")
+var upgrade_selected_sound: AudioStream = load("res://resources/audio/upgrade.wav")
+var level_up_sound: AudioStream = load("res://resources/audio/level_up.wav")
+var player_hurt_sound: AudioStream = load("res://resources/audio/player_hurt.wav")
 
 signal player_hurt(current_health)
 signal player_dead

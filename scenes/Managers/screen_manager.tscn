@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://uf37o2pc5jnx"]
+[gd_scene load_steps=8 format=3 uid="uid://uf37o2pc5jnx"]
 
 [ext_resource type="Script" path="res://scenes/Managers/Screen_manager.gd" id="1_32xl2"]
 [ext_resource type="PackedScene" uid="uid://csj7srfalk7r8" path="res://scenes/UI/objective_info_ui.tscn" id="2_vae1e"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ntl4s2i8knd7" path="res://scenes/UI/win_screen.tscn" id="4_nxv50"]
 [ext_resource type="PackedScene" uid="uid://brctvkgpivpue" path="res://scenes/UI/lose_screen.tscn" id="5_lk2sr"]
 [ext_resource type="PackedScene" uid="uid://c35bwb1gim3p8" path="res://scenes/UI/pause_screen.tscn" id="6_5wk51"]
+[ext_resource type="PackedScene" uid="uid://cvxnss0p22wde" path="res://scenes/UI/options_screen.tscn" id="7_uym6u"]
 
 [node name="Screen_manager" type="Node"]
 script = ExtResource("1_32xl2")
@@ -14,3 +15,4 @@ main_menu = ExtResource("2_y5006")
 win_screen = ExtResource("4_nxv50")
 lose_screen = ExtResource("5_lk2sr")
 pause_screen = ExtResource("6_5wk51")
+options_screen = ExtResource("7_uym6u")

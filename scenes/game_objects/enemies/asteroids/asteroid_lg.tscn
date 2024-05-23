@@ -114,7 +114,6 @@ asteroid_textures = Array[Texture]([ExtResource("5_ibq82")])
 asteroid_colliders = [NodePath("CollisionShape2D"), NodePath("HurtboxComponent/CollisionShape2D"), NodePath("HitboxComponent/CollisionShape2D")]
 explosion_effect = ExtResource("3_7u5kt")
 impact_effect = ExtResource("3_kp1a4")
-screen_shake_amount = 1.5
 size = 2
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("5_jxj7f")]

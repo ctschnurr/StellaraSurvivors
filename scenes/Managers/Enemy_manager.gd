@@ -15,6 +15,13 @@ enum Enemy_type{ASTEROID_SMALL, ASTEROID_MEDIUM, ASTEROID_LARGE}
 const asteroid_spawn_xRange = [30, 1250]
 const asteroid_spawn_yRange = [-300, 0]
 
+	#if global_position.x > 1250: global_position.x = 1250
+	#if global_position.x < 30: global_position.x = 30
+	#if global_position.y > 690: global_position.y = 690
+	#if global_position.y < 30: global_position.y = 30
+
+var locations: Array[Array] = [[30,1250,-300,0],[30,1250,720,1020]]
+
 var spawn_commands: Array
 var current_command: Spawn_command
 var enemies: Array

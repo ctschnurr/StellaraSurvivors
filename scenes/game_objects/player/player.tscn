@@ -1,6 +1,7 @@
-[gd_scene load_steps=35 format=3 uid="uid://dirgwundhi3xq"]
+[gd_scene load_steps=31 format=3 uid="uid://dirgwundhi3xq"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_6xqvq"]
+[ext_resource type="PackedScene" uid="uid://5vpw8p5qkrgg" path="res://scenes/effects/asteroid_explosion.tscn" id="2_tpohu"]
 [ext_resource type="Texture2D" uid="uid://8kyqxajd61rw" path="res://scenes/game_objects/player/player_fire.png" id="3_8n86h"]
 [ext_resource type="Texture2D" uid="uid://dc763s87fheu4" path="res://scenes/game_objects/player/player_idle.png" id="3_bs7db"]
 [ext_resource type="Texture2D" uid="uid://yxcaoxiptd5d" path="res://scenes/game_objects/player/player_movement.png" id="4_0ftfx"]
@@ -193,31 +194,6 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="Curve" id="Curve_tx7bn"]
-_data = [Vector2(0, 0.296703), 0.0, -0.296703, 0, 1, Vector2(1, 0), -0.296703, 0.0, 1, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_doqou"]
-curve = SubResource("Curve_tx7bn")
-
-[sub_resource type="Gradient" id="Gradient_te1nc"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0.282353, 0.498039, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7eot2"]
-gradient = SubResource("Gradient_te1nc")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uk5xo"]
-particle_flag_disable_z = true
-gravity = Vector3(0, 0, 0)
-damping_min = 5.0
-damping_max = 5.0
-scale_min = 1.1
-scale_max = 1.1
-color_ramp = SubResource("GradientTexture1D_7eot2")
-alpha_curve = SubResource("CurveTexture_doqou")
-hue_variation_min = 1.0
-hue_variation_max = 1.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_e3u53"]
 radius = 23.0
 
@@ -232,6 +208,7 @@ fire_position = NodePath("Ship_Cannon/fire_position")
 ship_cannon = NodePath("Ship_Cannon")
 ship_body = NodePath("Ship_Body")
 hurt_box = NodePath("HurtboxComponent/HurtBox")
+explosion_effect = ExtResource("2_tpohu")
 
 [node name="PickupGrabber" type="Area2D" parent="."]
 collision_layer = 16
@@ -252,14 +229,17 @@ sprite_frames = SubResource("SpriteFrames_ui5fv")
 animation = &"player_fire"
 autoplay = "player_idle"
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Ship_Body"]
+[node name="EngineParticles" type="CPUParticles2D" parent="Ship_Body"]
+unique_name_in_owner = true
 z_index = -1
+texture_filter = 2
 rotation = -3.14159
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_uk5xo")
-texture = ExtResource("5_udybl")
+amount = 5
 lifetime = 0.5
 speed_scale = 5.0
+texture = ExtResource("5_udybl")
+gravity = Vector2(0, 0)
+color = Color(0.428922, 0.573476, 0.998156, 1)
 
 [node name="Ship_Cannon" type="Sprite2D" parent="."]
 z_index = 2

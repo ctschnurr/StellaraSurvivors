@@ -83,6 +83,7 @@ func fire_raycast(direction: Vector2):
 	
 	if !raycast_output.is_empty():
 		has_hit = true
+		SoundManager.play_sound(App.asteroid_collision_sound)
 		var collision_normal: Vector2 = raycast_output.normal
 		var new_direction = collision_normal
 		var new_speed = asteroid_speed * (0.3 * size_multiplier)
@@ -144,16 +145,18 @@ func asteroid_impact_effect(location):
 	add_child(effect)
 	effect.global_position = location
 	effect.restart()
-	await effect.finished
-	effect.queue_free()
 	
 	
 func asteroid_explosion_effect():
+	App.camera.add_trauma(0.1 + (size_multiplier * .05))
+	SoundManager.play_sound(App.asteroid_burst_sound)
 	var effect = explosion_effect.instantiate() as CPUParticles2D
 	add_child(effect)
 	effect.global_position = global_position
 	effect.scale_amount_max = size_multiplier + 1
 	effect.restart()
+	await effect.finished
+	queue_free()
 	
 	
 #func _draw():
@@ -187,8 +190,6 @@ func death_sequence():
 	tween.parallel().tween_callback(asteroid_explosion_effect).set_delay(0.1)
 	tween.tween_callback(create_spawn_command).set_delay(0.11)
 	App.experience_manager.spawn_xp_orb(global_position, size_multiplier)
-	await tween.finished
-	queue_free()
 	
 	
 func damage_sequence(_health):

@@ -10,7 +10,7 @@
 script = ExtResource("1_pthrc")
 objective_type = 1
 objective_description = "Destroy the Asteroids"
-survive_timer_minutes = 10
+survive_timer_minutes = 5
 objective_target = 0
 
 [resource]

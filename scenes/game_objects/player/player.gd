@@ -10,9 +10,13 @@ var state: State = State.ACTIVE
 @export var fire_position: Node2D
 @export var ship_cannon: Sprite2D
 @export var ship_body: AnimatedSprite2D
+var sprites: Array = [ship_cannon, ship_body]
 @export var hurt_box: CollisionShape2D
 @onready var health_component: HealthComponent = %HealthComponent
-@onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var engine_particles: CPUParticles2D = %EngineParticles
+
+@onready var blaster_sound: AudioStream = load("res://resources/audio/blaster.wav")
+@export var explosion_effect: PackedScene
 
 var mission_manager: Mission_manager
 
@@ -93,6 +97,7 @@ func get_controller_look():
 func fire_blaster():
 	if gun_ready:
 		gun_ready = false
+		SoundManager.play_sound(blaster_sound)
 		App.enemy_manager.spawn_blaster_bolt(fire_position.global_position, ship_cannon.global_rotation)
 		ship_body.stop()
 		ship_body.play("player_fire")
@@ -161,16 +166,45 @@ func get_health():
 	
 	
 func player_hurt(_damage):
-	animation_player.play("Damage")
-	pass
+	SoundManager.play_sound(App.player_hurt_sound)
+	var tween = get_tree().create_tween()
+	
+	tween.tween_property(ship_body, "scale", Vector2(1.25, 1.25), 0.1)
+	tween.parallel().tween_property(ship_cannon, "scale", Vector2(1.25, 1.25), 0.1)
+	tween.parallel().tween_property(ship_body, "modulate", Color(100, 100, 100, 100), 0.1)
+	tween.parallel().tween_property(ship_cannon, "modulate", Color(100, 100, 100, 100), 0.1)
+	
+	tween.tween_property(ship_body, "scale", Vector2(1, 1), 0.1)
+	tween.parallel().tween_property(ship_cannon, "scale", Vector2(1, 1), 0.1)
+	tween.parallel().tween_property(ship_body, "modulate", Color(1, 1, 1, 1), 0.1)
+	tween.parallel().tween_property(ship_cannon, "modulate", Color(1, 1, 1, 1), 0.1)
 	
 	
 func player_died():
 	state = State.INACTIVE
-	animation_player.play("Death")
-	await animation_player.animation_finished
+	engine_particles.queue_free()
+	var tween = get_tree().create_tween()
+	tween.parallel().tween_property(ship_body, "modulate", Color(100, 100, 100, 100), 0.25)
+	tween.parallel().tween_property(ship_cannon, "modulate", Color(100, 100, 100, 100), 0.25)
+	tween.parallel().tween_property(ship_body, "scale", Vector2(1.25, 1.25), 0.25)
+	tween.tween_property(ship_cannon, "scale", Vector2(1.25, 1.25), 0.25)
+	tween.parallel().tween_property(ship_body, "scale", Vector2(0, 0), 0.25)
+	tween.parallel().tween_property(ship_cannon, "scale", Vector2(0, 0), 0.25)
+	tween.parallel().tween_property(ship_body, "modulate:a", 0, 0.25)
+	tween.parallel().tween_property(ship_cannon, "modulate:a", 0, 0.25)
+	tween.parallel().tween_callback(play_explosion_effect).set_delay(0.1)
+	
+	
+func play_explosion_effect():
+	App.camera.add_trauma(0.5)
+	SoundManager.play_sound(App.asteroid_burst_sound)
+	var effect = explosion_effect.instantiate() as CPUParticles2D
+	add_child(effect)
+	effect.global_position = global_position
+	effect.scale_amount_max = 3
+	effect.restart()
+	await effect.finished
 	queue_free()
-	pass
 	
 	
 func update_abilities(upgrade: Player_upgrade, current_abilities: Dictionary):

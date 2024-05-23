@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bs5kt5nfyvh5x"]
+[gd_scene load_steps=4 format=3 uid="uid://bs5kt5nfyvh5x"]
 
 [ext_resource type="Script" path="res://scenes/Managers/experience_manager.gd" id="1_sab7d"]
+[ext_resource type="PackedScene" uid="uid://c15pu2wob5hao" path="res://scenes/game_objects/experience_orb/experience_orb.tscn" id="2_3v15i"]
+[ext_resource type="PackedScene" uid="uid://wulgocmo17gm" path="res://scenes/UI/experience_bar.tscn" id="3_slaqm"]
 
 [node name="Experience_manager" type="Node"]
 script = ExtResource("1_sab7d")
+xp_orb_scene = ExtResource("2_3v15i")
+xp_bar_scene = ExtResource("3_slaqm")

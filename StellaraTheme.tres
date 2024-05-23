@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://xdse31n3ef74"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://xdse31n3ef74"]
 
 [ext_resource type="FontFile" uid="uid://bo854bxmfqaun" path="res://assets/PixelEmulator-xq08.ttf" id="1_7aekx"]
+[ext_resource type="Texture2D" uid="uid://bd7c37w1m8a2q" path="res://scenes/game_objects/enemies/asteroids/asteroid_sm01.png" id="2_qqie8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k8uqc"]
 bg_color = Color(0.239216, 0.623529, 1, 1)
@@ -50,6 +51,50 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ud04y"]
+bg_color = Color(0.239216, 0.623529, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7m4g2"]
+bg_color = Color(0.449, 0.744, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 2.0
+expand_margin_top = 6.0
+expand_margin_right = 2.0
+expand_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_21crf"]
+bg_color = Color(0.2, 0.2, 0.2, 0.686275)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hguf8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kribi"]
@@ -70,6 +115,11 @@ Button/styles/focus = SubResource("StyleBoxFlat_k8uqc")
 Button/styles/hover = SubResource("StyleBoxFlat_q624v")
 Button/styles/normal = SubResource("StyleBoxFlat_7aw6p")
 Button/styles/pressed = SubResource("StyleBoxFlat_dqs3x")
+HSlider/icons/grabber = ExtResource("2_qqie8")
+HSlider/icons/grabber_highlight = ExtResource("2_qqie8")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_ud04y")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_7m4g2")
+HSlider/styles/slider = SubResource("StyleBoxFlat_21crf")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 0)

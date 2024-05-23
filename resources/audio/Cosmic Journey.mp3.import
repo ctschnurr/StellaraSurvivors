@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://byghkqm26wwig"
+path="res://.godot/imported/Cosmic Journey.mp3-b053ac0f6358f08e9e4531e6e59c1864.mp3str"
+
+[deps]
+
+source_file="res://resources/audio/Cosmic Journey.mp3"
+dest_files=["res://.godot/imported/Cosmic Journey.mp3-b053ac0f6358f08e9e4531e6e59c1864.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

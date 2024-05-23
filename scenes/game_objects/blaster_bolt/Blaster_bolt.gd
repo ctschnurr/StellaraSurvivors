@@ -12,12 +12,19 @@ var default_damage = 1
 
 @onready var hitbox = %HitboxComponent as HitboxComponent
 
+@onready var blaster_collision_sound: AudioStream = load("res://resources/audio/blaster_impact.wav")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hitbox.damage = default_damage + App.player.damage_level
+	hitbox.hit.connect(blaster_hit)
 	var scale_factor = default_damage + (hitbox.damage * .2)
 	scale = Vector2(scale_factor, scale_factor)
 	pass
+	
+	
+func blaster_hit():
+	SoundManager.play_sound(blaster_collision_sound)
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
