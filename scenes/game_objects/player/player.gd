@@ -1,7 +1,8 @@
 class_name Player extends CharacterBody2D
 
-const MAX_SPEED = 200
 const ACCELERATION_SMOOTHING = 5
+const BASE_SPEED = 150
+var speed = BASE_SPEED
 
 enum State{ACTIVE, INACTIVE}
 
@@ -24,6 +25,7 @@ var gun_ready: bool = true
 var fire_rate_base = 0
 var gun_cooldown: float = fire_rate_base
 var damage_level = 0
+var speed_level = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -61,7 +63,7 @@ func _process(delta):
 					
 			animate_player(movement_vector)	
 			var direction = movement_vector.normalized()
-			var target_velocity = direction * MAX_SPEED
+			var target_velocity = direction * speed
 			
 			velocity = velocity.lerp(target_velocity, 1 - exp(-delta * ACCELERATION_SMOOTHING))
 			move_and_slide()
@@ -213,5 +215,8 @@ func update_abilities(upgrade: Player_upgrade, current_abilities: Dictionary):
 			gun_cooldown = (current_abilities["fire_rate"]["quantity"] * .1)
 		"fire_damage":
 			damage_level = current_abilities["fire_damage"]["quantity"]
+		"speed_upgrade":
+			speed_level = current_abilities["speed_upgrade"]["quantity"]
+			speed = BASE_SPEED + (speed_level * 10)
 		_:
 			return

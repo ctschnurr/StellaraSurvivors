@@ -7,6 +7,7 @@ enum input_device{KEYBOARD, CONTROLLER}
 
 const START_TARGET_XP = 3
 const TARGET_XP_GROWTH = 5
+const UPGRADES_PER_LEVEL = 2
 
 const play_area_x_min = -30
 const play_area_x_max = 1310

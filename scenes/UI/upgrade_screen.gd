@@ -11,7 +11,11 @@ func _ready():
 
 func set_player_upgrades(upgrades: Array[Player_upgrade], current_upgrades: Dictionary):
 	var new_cards: Array
-	for upgrade in upgrades:
+	var choices = upgrades.duplicate()
+	while choices.size() > App.UPGRADES_PER_LEVEL:
+		choices.erase(choices.pick_random())
+	choices.shuffle()
+	for upgrade in choices:
 		var new_card = upgrade_card_scene.instantiate() as Upgrade_card
 		card_container.add_child(new_card)
 		var has_upgrade = current_upgrades.has(upgrade.id)
