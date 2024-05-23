@@ -24,6 +24,8 @@ var has_hit:bool = false
 var was_hit:bool = false
 
 var size_multiplier: float = 1
+
+var has_entered_play_area: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	enemy_sprite = %Asteroid_sprite
@@ -48,6 +50,10 @@ func _ready():
 			size_multiplier = 3
 
 	if asteroid_speed == 0: asteroid_speed = randf_range(100, 150)
+	
+	await get_tree().create_timer(30).timeout
+	if !has_entered_play_area: queue_free()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -55,8 +61,14 @@ func _process(_delta):
 	velocity = asteroid_direction * asteroid_speed
 	move_and_slide()
 	
-	if global_position.y > 800 or (asteroid_direction.y < 0 and global_position.y < -30):
-		queue_free()
+	if !has_entered_play_area:
+		if App.player != null: asteroid_direction = global_position.direction_to(App.player.global_position)
+		if global_position.x > App.play_area_x_min and global_position.x < App.play_area_x_max and global_position.y > App.play_area_y_min and global_position.y < App.play_area_y_max: 
+			has_entered_play_area = true
+	else:
+		if global_position.x < App.play_area_x_min or global_position.x > App.play_area_x_max or global_position.y < App.play_area_y_min and global_position.y > App.play_area_y_max: 
+			queue_free()
+
 		
 
 func _physics_process(_delta):
@@ -86,16 +98,16 @@ func fire_raycast(direction: Vector2):
 		SoundManager.play_sound(App.asteroid_collision_sound)
 		var collision_normal: Vector2 = raycast_output.normal
 		var new_direction = collision_normal
-		var new_speed = asteroid_speed * (0.3 * size_multiplier)
+		var new_speed = asteroid_speed * 0.8 #(0.3 * size_multiplier)
 		
 		asteroid_impact_effect(raycast_output.position)
 		
 		if raycast_output.collider is Asteroid and !raycast_output.collider is Blaster_bolt:
 			var new_rotation = raycast_output.collider.asteroid_rotation * 0.8
 			raycast_output.collider.asteroid_rotation = asteroid_rotation * 0.8
-			new_speed = raycast_output.collider.asteroid_speed * (0.3 * size_multiplier)
+			new_speed = raycast_output.collider.asteroid_speed * 0.8 #(0.3 * size_multiplier)
 			raycast_output.collider.asteroid_direction = direction.normalized()
-			if asteroid_speed > 25: raycast_output.collider.asteroid_speed = asteroid_speed * (0.3 * size_multiplier)
+			if asteroid_speed > 25: raycast_output.collider.asteroid_speed = asteroid_speed * 0.8 #(0.3 * size_multiplier)
 			raycast_output.collider.collision_cooldown()
 			raycast_output.collider.was_hit = true
 			

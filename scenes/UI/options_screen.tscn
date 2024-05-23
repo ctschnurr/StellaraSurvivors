@@ -100,3 +100,19 @@ focus_neighbor_bottom = NodePath("../../MarginContainer/VBoxContainer/VBoxContai
 theme = ExtResource("2_wlk5c")
 theme_override_font_sizes/font_size = 30
 text = "BACK"
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="Controls" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer3"]
+unique_name_in_owner = true
+texture_filter = 2
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = ExtResource("2_wlk5c")
+text = "use WASD / left stick to move
+Use Mouse / right stick to aim + shoot
+"
+horizontal_alignment = 1

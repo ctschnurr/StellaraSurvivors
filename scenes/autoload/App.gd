@@ -7,6 +7,12 @@ enum input_device{KEYBOARD, CONTROLLER}
 
 const START_TARGET_XP = 3
 const TARGET_XP_GROWTH = 5
+
+const play_area_x_min = -30
+const play_area_x_max = 1310
+const play_area_y_min = -30
+const play_area_y_max = 750
+
 var main_music: AudioStream = load("res://resources/audio/Cosmic Journey.mp3")
 var asteroid_collision_sound: AudioStream = load("res://resources/audio/asteroid_collision.wav")
 var asteroid_burst_sound: AudioStream = load("res://resources/audio/asteroid_burst.wav")

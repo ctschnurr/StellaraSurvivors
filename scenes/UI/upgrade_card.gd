@@ -11,6 +11,7 @@ func _ready():
 	panel.pressed.connect(on_input)
 	panel.mouse_entered.connect(on_mouse_enter)
 	panel.focus_entered.connect(on_focus_enter)
+	
 
 func on_mouse_enter():
 	SoundManager.play_sound(App.asteroid_collision_sound)

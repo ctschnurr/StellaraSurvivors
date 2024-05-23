@@ -23,12 +23,3 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource("2_bo8to")
-
-[node name="Controls" type="Label" parent="MarginContainer"]
-unique_name_in_owner = true
-texture_filter = 2
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme = ExtResource("2_bo8to")
-text = "Use WASD to move, mouse to aim and mouse1 to fire"

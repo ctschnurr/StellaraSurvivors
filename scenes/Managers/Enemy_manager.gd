@@ -20,7 +20,7 @@ const asteroid_spawn_yRange = [-300, 0]
 	#if global_position.y > 690: global_position.y = 690
 	#if global_position.y < 30: global_position.y = 30
 
-var locations: Array[Array] = [[30,1250,-300,0],[30,1250,720,1020]]
+var location_mod_amount = 300
 
 var spawn_commands: Array
 var current_command: Spawn_command
@@ -118,12 +118,19 @@ func clear_enemies():
 	
 
 func spawn_scatter(command: Spawn_command):
+	var spawn_location: Vector2 = pick_location()
 	for n in command.spawn_amount:
-		var enemy_instance = command.enemy_type.pick_random().instantiate() as Node2D
+		var new_asteroid_select = command.possible_enemies.pick_random()
+		var this_enum = Enemy_type.keys()[new_asteroid_select]
+		var enemy_instance = enemy_dictionary[this_enum].instantiate() as Asteroid
+		
 		add_child(enemy_instance)
 		enemies.append(enemy_instance)
 		enemy_instance.enemy_manager = self
-		enemy_instance.global_position = Vector2(randf_range(asteroid_spawn_xRange[0], asteroid_spawn_xRange[1]), randf_range(asteroid_spawn_yRange[0], asteroid_spawn_yRange[1]))
+		
+		enemy_instance.global_position = spawn_location
+		if App.player != null: enemy_instance.asteroid_direction = spawn_location.direction_to(App.player.global_position)
+		
 		
 		if command.associated_objective != null:
 			command.associated_objective.connect_signal(enemy_instance.health_component.died)
@@ -164,3 +171,14 @@ func spawn_blaster_bolt(location, rotation):
 	bolts.append(blaster_bolt_instance)
 	blaster_bolt_instance.global_position = location
 	blaster_bolt_instance.global_rotation = rotation
+
+
+func pick_location():
+	var rand = randi_range(1, 4)
+	var location = Vector2.ZERO
+	match rand:
+		1: location = Vector2(randi_range(App.play_area_x_min, App.play_area_x_max), randi_range(App.play_area_y_min - 400, App.play_area_y_min))
+		2: location = Vector2(randi_range(App.play_area_x_min, App.play_area_x_max), randi_range(App.play_area_y_max, App.play_area_y_max + 400))
+		3: location = Vector2(randi_range(App.play_area_x_min - 400, App.play_area_x_min), randi_range(App.play_area_y_min, App.play_area_y_max))
+		4: location = Vector2(randi_range(App.play_area_x_max, App.play_area_x_max + 400), randi_range(App.play_area_y_min, App.play_area_y_max))
+	return location

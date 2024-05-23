@@ -15,7 +15,7 @@ objective_target = 0
 
 [resource]
 script = ExtResource("1_1fwfa")
-possible_enemies = Array[int]([])
+possible_enemies = Array[int]([0, 0, 1, 2])
 repeat_state = 4
 repeat_mode = 2
 repeat_timer = 1800.0

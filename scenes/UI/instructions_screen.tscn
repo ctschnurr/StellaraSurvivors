@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c35bwb1gim3p8"]
+[gd_scene load_steps=3 format=3 uid="uid://cs36w4xgew7pk"]
 
-[ext_resource type="Script" path="res://scenes/UI/pause_screen.gd" id="1_8mgbq"]
-[ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_ve1ah"]
+[ext_resource type="Script" path="res://scenes/UI/win_screen.gd" id="1_jrux6"]
+[ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_7gs6f"]
 
-[node name="Pause_screen" type="CanvasLayer"]
+[node name="Win_screen" type="CanvasLayer"]
 process_mode = 3
-script = ExtResource("1_8mgbq")
+script = ExtResource("1_jrux6")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -25,10 +25,10 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_ve1ah")
+theme = ExtResource("2_7gs6f")
 theme_override_constants/outline_size = 15
 theme_override_font_sizes/font_size = 100
-text = "Pause"
+text = "Victory!"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -39,34 +39,18 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="ResumeButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="ReplayButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 75)
 layout_mode = 2
-theme = ExtResource("2_ve1ah")
+theme = ExtResource("2_7gs6f")
 theme_override_font_sizes/font_size = 30
-text = "RESUME"
-
-[node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 75)
-layout_mode = 2
-theme = ExtResource("2_ve1ah")
-theme_override_font_sizes/font_size = 30
-text = "options"
-
-[node name="RestartButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 75)
-layout_mode = 2
-theme = ExtResource("2_ve1ah")
-theme_override_font_sizes/font_size = 30
-text = "RESTART"
+text = "PLAY AGAIN"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 75)
 layout_mode = 2
-theme = ExtResource("2_ve1ah")
+theme = ExtResource("2_7gs6f")
 theme_override_font_sizes/font_size = 30
 text = "QUIT"
