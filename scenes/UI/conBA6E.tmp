@@ -1,0 +1,206 @@
+[gd_scene load_steps=13 format=3 uid="uid://ntl4s2i8knd7"]
+
+[ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="1_1md7s"]
+[ext_resource type="Script" path="res://scenes/UI/controls_screen.gd" id="1_bw75k"]
+[ext_resource type="Texture2D" uid="uid://ui5usceep7gr" path="res://assets/controls_joypad_left_stick.png" id="3_7brw4"]
+[ext_resource type="Texture2D" uid="uid://br6mfwi1bdqb1" path="res://assets/controls_wasd.png" id="3_8hvt6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yf1os"]
+atlas = ExtResource("3_7brw4")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eocws"]
+atlas = ExtResource("3_7brw4")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k32nd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yf1os")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eocws")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b77u0"]
+atlas = ExtResource("3_8hvt6")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3h5k"]
+atlas = ExtResource("3_8hvt6")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1edt7"]
+atlas = ExtResource("3_8hvt6")
+region = Rect2(0, 64, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0sfdk"]
+atlas = ExtResource("3_8hvt6")
+region = Rect2(96, 64, 96, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uv5ry"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b77u0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3h5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1edt7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0sfdk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="Controls_screen" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_bw75k")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1280, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_1md7s")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Container" type="VSplitContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/Container"]
+layout_mode = 2
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/Container/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="left_stick" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/Container/MarginContainer2/HSplitContainer"]
+position = Vector2(300, 40)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_k32nd")
+autoplay = "default"
+frame_progress = 0.225686
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/Container/MarginContainer2/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme = ExtResource("1_1md7s")
+text = "Use WASD 
+or Left stick 
+to move"
+horizontal_alignment = 1
+
+[node name="wasd" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/Container/MarginContainer2/HSplitContainer"]
+texture_filter = 1
+position = Vector2(-100, 40)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_uv5ry")
+autoplay = "default"
+frame_progress = 0.0544332
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/Container"]
+layout_mode = 2
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/Container/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="left_stick" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/Container/MarginContainer/HSplitContainer2"]
+position = Vector2(300, 40)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_k32nd")
+autoplay = "default"
+frame_progress = 0.879442
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/Container/MarginContainer/HSplitContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme = ExtResource("1_1md7s")
+text = "Use mouse
+or right stick 
+to aim & fire"
+horizontal_alignment = 1
+
+[node name="wasd" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/Container/MarginContainer/HSplitContainer2"]
+texture_filter = 1
+position = Vector2(-100, 40)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_uv5ry")
+autoplay = "default"
+frame_progress = 0.708182
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 50
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 25
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 75)
+layout_mode = 2
+theme = ExtResource("1_1md7s")
+theme_override_font_sizes/font_size = 30
+text = "Back"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 25
+
+[node name="NextButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(150, 75)
+layout_mode = 2
+theme = ExtResource("1_1md7s")
+theme_override_font_sizes/font_size = 30
+text = "Next"

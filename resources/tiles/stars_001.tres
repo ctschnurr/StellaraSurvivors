@@ -1,0 +1,15 @@
+[gd_resource type="AnimatedTexture" load_steps=4 format=3 uid="uid://ccgfks8ccsgy0"]
+
+[ext_resource type="Texture2D" uid="uid://bs08t3mc5mb2o" path="res://assets/tiles/star_tile_001a.png" id="1_b88hg"]
+[ext_resource type="Texture2D" uid="uid://bs0mgwc10l4iu" path="res://assets/tiles/star_tile_001b.png" id="2_2ttao"]
+[ext_resource type="Texture2D" uid="uid://bllm4rykoa2ek" path="res://assets/tiles/star_tile_001c.png" id="3_7esnh"]
+
+[resource]
+frames = 4
+frame_0/texture = ExtResource("1_b88hg")
+frame_1/texture = ExtResource("2_2ttao")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("3_7esnh")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("2_2ttao")
+frame_3/duration = 1.0

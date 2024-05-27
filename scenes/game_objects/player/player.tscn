@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dirgwundhi3xq"]
+[gd_scene load_steps=28 format=3 uid="uid://dirgwundhi3xq"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_6xqvq"]
 [ext_resource type="PackedScene" uid="uid://5vpw8p5qkrgg" path="res://scenes/effects/asteroid_explosion.tscn" id="2_tpohu"]
@@ -9,69 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://dntky5xyv71i7" path="res://assets/engine_beam.png" id="5_udybl"]
 [ext_resource type="PackedScene" uid="uid://dqf2fq7p7ip" path="res://scenes/components/health_component.tscn" id="7_arbtb"]
 [ext_resource type="PackedScene" uid="uid://bcmna6wa42j0q" path="res://scenes/components/hurtbox_component.tscn" id="8_nnxdr"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_gwuc5"]
-radius = 23.0
-
-[sub_resource type="Animation" id="Animation_tpkcl"]
-resource_name = "Damage"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Ship_Body:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1e-05, 1e-05, 1e-05, 1e-05, 1e-05),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Ship_Cannon:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1e-05, 1e-05, 1e-05, 1e-05, 1e-05),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_o1bsu"]
-resource_name = "Death"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Ship_Body:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1e-05, 0.702397, 1e-05),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(100, 100, 100, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Ship_Cannon:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1e-05, 0.702397, 1e-05),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(100, 100, 100, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rxc7s"]
-_data = {
-"Damage": SubResource("Animation_tpkcl"),
-"Death": SubResource("Animation_o1bsu")
-}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0eyio"]
 atlas = ExtResource("3_8n86h")
@@ -195,10 +132,13 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e3u53"]
-radius = 23.0
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gwuc5"]
+radius = 35.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_80xxi"]
-radius = 25.0
+radius = 22.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("fire_position", "ship_cannon", "ship_body", "hurt_box")]
 z_index = 1
@@ -210,23 +150,10 @@ ship_body = NodePath("Ship_Body")
 hurt_box = NodePath("HurtboxComponent/HurtBox")
 explosion_effect = ExtResource("2_tpohu")
 
-[node name="PickupGrabber" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupGrabber"]
-shape = SubResource("CircleShape2D_gwuc5")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
-libraries = {
-"": SubResource("AnimationLibrary_rxc7s")
-}
-
 [node name="Ship_Body" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_ui5fv")
-animation = &"player_fire"
+animation = &"player_idle"
 autoplay = "player_idle"
 
 [node name="EngineParticles" type="CPUParticles2D" parent="Ship_Body"]
@@ -252,14 +179,20 @@ rotation = 0.00410047
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_e3u53")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("7_arbtb")]
-unique_name_in_owner = true
-animation_player = NodePath("../AnimationPlayer")
-max_health = 3.0
+[node name="PickupGrabber" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupGrabber"]
+shape = SubResource("CircleShape2D_gwuc5")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_nnxdr")]
-collision_layer = 0
+collision_mask = 5
 health_component = NodePath("../HealthComponent")
 
 [node name="HurtBox" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("CircleShape2D_80xxi")
+
+[node name="HealthComponent" parent="." instance=ExtResource("7_arbtb")]
+unique_name_in_owner = true
+max_health = 3.0

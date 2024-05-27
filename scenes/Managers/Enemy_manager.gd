@@ -9,11 +9,10 @@ var game_manager: Game_manager
 
 @export var blaster_bolt_scene: PackedScene
 
+@export var dictionary: Dictionary
+
 enum Enemy_type{ASTEROID_SMALL, ASTEROID_MEDIUM, ASTEROID_LARGE}
 @onready var enemy_dictionary: Dictionary = {"ASTEROID_SMALL": asteroid_small, "ASTEROID_MEDIUM": asteroid_medium, "ASTEROID_LARGE": asteroid_large}
-
-const asteroid_spawn_xRange = [30, 1250]
-const asteroid_spawn_yRange = [-300, 0]
 
 	#if global_position.x > 1250: global_position.x = 1250
 	#if global_position.x < 30: global_position.x = 30
@@ -26,6 +25,7 @@ var spawn_commands: Array
 var current_command: Spawn_command
 var enemies: Array
 var bolts: Array
+var pickups: Array
 var time_tracker: int = 0
 
 var command_timer: Timer
@@ -115,6 +115,9 @@ func clear_enemies():
 		if bolt != null: bolt.queue_free()	
 	bolts = []
 	time_tracker = 0
+	for pickup in pickups:
+		if pickup != null: pickup.queue_free()	
+	pickups = []
 	
 
 func spawn_scatter(command: Spawn_command):
@@ -128,7 +131,7 @@ func spawn_scatter(command: Spawn_command):
 		enemies.append(enemy_instance)
 		enemy_instance.enemy_manager = self
 		
-		enemy_instance.global_position = spawn_location
+		enemy_instance.global_position = pick_location()
 		if App.player != null: enemy_instance.asteroid_direction = spawn_location.direction_to(App.player.global_position)
 		
 		enemy_instance.health_component.died.connect(add_score)
@@ -178,14 +181,25 @@ func pick_location():
 	var rand = randi_range(1, 4)
 	var location = Vector2.ZERO
 	match rand:
-		1: location = Vector2(randi_range(App.play_area_x_min, App.play_area_x_max), randi_range(App.play_area_y_min - 400, App.play_area_y_min))
-		2: location = Vector2(randi_range(App.play_area_x_min, App.play_area_x_max), randi_range(App.play_area_y_max, App.play_area_y_max + 400))
-		3: location = Vector2(randi_range(App.play_area_x_min - 400, App.play_area_x_min), randi_range(App.play_area_y_min, App.play_area_y_max))
-		4: location = Vector2(randi_range(App.play_area_x_max, App.play_area_x_max + 400), randi_range(App.play_area_y_min, App.play_area_y_max))
+		1: location = Vector2(randf_range(App.play_area_x_min, App.play_area_x_max), randf_range(App.play_area_y_min - 400, App.play_area_y_min - 50))
+		2: location = Vector2(randf_range(App.play_area_x_min, App.play_area_x_max), randf_range(App.play_area_y_max + 50, App.play_area_y_max + 400))
+		3: location = Vector2(randf_range(App.play_area_x_min - 400, App.play_area_x_min - 50), randf_range(App.play_area_y_min, App.play_area_y_max))
+		4: location = Vector2(randf_range(App.play_area_x_max + 50, App.play_area_x_max + 400), randf_range(App.play_area_y_min, App.play_area_y_max))
 	return location
 
 
 func add_score(health_amt: int):
 	App.update_score(health_amt)
-	pass
+	pass	
 	
+	
+func spawn_drops(location: Vector2, loot_dictionary: Array):
+	var loot_roll = randi_range(1, 100)
+	for loot: Loot_module in loot_dictionary:			
+		if loot_roll <= loot.loot_drop_probability:
+			var new_drop = loot.loot_scene.instantiate() as Pickup
+			pickups.append(new_drop)
+			if new_drop is Experience_orb:
+				App.experience_manager.connect_orb_signal(new_drop.collected)
+			new_drop.global_position = location
+			get_tree().root.add_child(new_drop)

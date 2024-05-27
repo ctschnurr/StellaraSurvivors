@@ -9,10 +9,10 @@ const START_TARGET_XP = 3
 const TARGET_XP_GROWTH = 5
 const UPGRADES_PER_LEVEL = 2
 
-const play_area_x_min = -75
-const play_area_x_max = 1355
-const play_area_y_min = -75
-const play_area_y_max = 795
+const play_area_x_min = 0
+const play_area_x_max = 1280
+const play_area_y_min = 0
+const play_area_y_max = 720
 
 var main_music: AudioStream = load("res://resources/audio/Cosmic Journey.mp3")
 var asteroid_collision_sound: AudioStream = load("res://resources/audio/asteroid_collision.wav")

@@ -5,6 +5,7 @@ signal died(max_health)
 signal hurt(current_health)
 
 @onready var progress_bar = %ProgressBar
+@onready var stat_change_particles = load("res://scenes/effects/stat_change_particles.tscn")
 
 @export var animation_player: AnimationPlayer
 
@@ -26,6 +27,13 @@ func damage(damage_amount: float):
 		current_health = max(current_health - damage_amount, 0)
 		hurt.emit(current_health)
 		Callable(check_death).call_deferred()
+		var stat_effect = stat_change_particles.instantiate() as Stat_particles
+		add_child(stat_effect)
+		stat_effect.set_label(str(damage_amount), Color.RED)
+		stat_effect.position = owner.position
+		stat_effect.restart()
+		await stat_effect.finished
+		stat_effect.queue_free()
 		
 		
 func check_death():
@@ -39,8 +47,18 @@ func check_death():
 		else:
 			#animation_player.play("Damage")
 			#await animation_player.animation_finished
-			if !progress_bar.visible: progress_bar.visible = true
-			var percent = current_health / max_health
-			progress_bar.value = percent
-			await get_tree().create_timer(0.15).timeout
-			vulnerable = true
+			update_health_bar()
+			
+			
+func update_health_bar():
+	if !progress_bar.visible && current_health < max_health: progress_bar.visible = true
+	elif progress_bar.visible && current_health == max_health: progress_bar.visible = false
+	var percent = current_health / max_health
+	progress_bar.value = percent
+	await get_tree().create_timer(0.15).timeout
+	vulnerable = true
+	
+	
+func heal():
+	current_health = max_health
+	update_health_bar()

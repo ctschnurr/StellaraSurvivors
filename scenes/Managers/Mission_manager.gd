@@ -29,10 +29,13 @@ func _process(_delta):
 		
 func start_mission():
 	App.instantiate_player()
-	App.screen_manager.show_player_health()
 	App.player.mission_manager = self
-	App.player.global_position = Vector2(640,360)
+	App.player.global_position = Vector2(App.play_area_x_max / 2, App.play_area_y_max / 2)
 	
+	
+	
+	
+	# old system:
 	var spawn_command: Spawn_command = possible_spawn_commands.pick_random().duplicate()
 	App.enemy_manager.add_command(spawn_command)
 	

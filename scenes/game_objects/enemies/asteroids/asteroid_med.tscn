@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://de6khcv1nexs0"]
+[gd_scene load_steps=18 format=3 uid="uid://de6khcv1nexs0"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/enemies/asteroids/asteroid.gd" id="1_pnlt3"]
 [ext_resource type="Resource" uid="uid://dp2ytit4cchch" path="res://resources/asteroid_cluster_command.tres" id="2_3it60"]
@@ -9,43 +9,20 @@
 [ext_resource type="PackedScene" uid="uid://bep8ffbpod8sj" path="res://scenes/effects/asteroid_impact.tscn" id="5_ihyd3"]
 [ext_resource type="PackedScene" uid="uid://5vpw8p5qkrgg" path="res://scenes/effects/asteroid_explosion.tscn" id="5_v6agb"]
 [ext_resource type="PackedScene" uid="uid://bcmna6wa42j0q" path="res://scenes/components/hurtbox_component.tscn" id="6_86qsn"]
-[ext_resource type="Animation" uid="uid://dqrpe5ntjyme0" path="res://Damage.res" id="6_lft4q"]
 [ext_resource type="PackedScene" uid="uid://cxmypx8uu0kun" path="res://scenes/components/hitbox_component.tscn" id="7_fi6s8"]
-[ext_resource type="Texture2D" uid="uid://dntky5xyv71i7" path="res://assets/engine_beam.png" id="8_q1v3p"]
+[ext_resource type="PackedScene" uid="uid://cj8vlhs1s27in" path="res://scenes/game_objects/experience_orb/experience_orb_yellow.tscn" id="8_g5v3p"]
+[ext_resource type="Script" path="res://resources/loot_modules/loot_module.gd" id="9_10cdy"]
+[ext_resource type="PackedScene" uid="uid://cnmjaqosxxcng" path="res://scenes/game_objects/experience_orb/experience_orb_blue.tscn" id="10_kcxt6"]
 
-[sub_resource type="Animation" id="Animation_ptf8c"]
-resource_name = "Death"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Asteroid_sprite:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.5, 1.5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Asteroid_sprite:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(100, 100, 100, 0)]
-}
+[sub_resource type="Resource" id="Resource_266ty"]
+script = ExtResource("9_10cdy")
+loot_scene = ExtResource("8_g5v3p")
+loot_drop_probability = 100
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbpxx"]
-_data = {
-"Damage": ExtResource("6_lft4q"),
-"Death": SubResource("Animation_ptf8c")
-}
+[sub_resource type="Resource" id="Resource_7usup"]
+script = ExtResource("9_10cdy")
+loot_scene = ExtResource("10_kcxt6")
+loot_drop_probability = 50
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_026wd"]
 radius = 25.0
@@ -61,30 +38,15 @@ asteroid_colliders = [NodePath("CollisionShape2D"), NodePath("HurtboxComponent/C
 explosion_effect = ExtResource("5_v6agb")
 impact_effect = ExtResource("5_ihyd3")
 size = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_lbpxx")
-}
+loot_dictionary = Array[ExtResource("9_10cdy")]([SubResource("Resource_266ty"), SubResource("Resource_7usup")])
 
 [node name="Asteroid_sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 z_index = 1
 texture = ExtResource("2_4kuuh")
 
-[node name="Explosion_sprite" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-z_index = 2
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("8_q1v3p")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_026wd")
-
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("5_cde1r")]
-unique_name_in_owner = true
-animation_player = NodePath("../AnimationPlayer")
-max_health = 15.0
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_86qsn")]
 collision_layer = 0
@@ -100,3 +62,7 @@ damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_rvlpy")
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_cde1r")]
+unique_name_in_owner = true
+max_health = 15.0

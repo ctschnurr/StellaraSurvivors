@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://527dim6fxon6"]
+
+[ext_resource type="Script" path="res://scenes/main/home_scene.gd" id="1_avwoa"]
+[ext_resource type="PackedScene" uid="uid://ntl4s2i8knd7" path="res://scenes/UI/controls_screen.tscn" id="2_rh20t"]
+[ext_resource type="PackedScene" uid="uid://ey1xlu75nirs" path="res://scenes/main/tile_map_a.tscn" id="2_vel0d"]
+[ext_resource type="PackedScene" uid="uid://6hkjcb2mgrk2" path="res://scenes/main/tile_map_b.tscn" id="3_5kxxi"]
+[ext_resource type="PackedScene" uid="uid://b645103cbbe1x" path="res://scenes/game_objects/game_camera/game_camera.tscn" id="3_a3uu8"]
+
+[node name="Home_scene" type="Node2D"]
+script = ExtResource("1_avwoa")
+tile_maps = Array[PackedScene]([ExtResource("2_vel0d"), ExtResource("3_5kxxi")])
+
+[node name="Game_camera" parent="." instance=ExtResource("3_a3uu8")]
+position = Vector2(641, 360)
+
+[node name="Controls_screen" parent="." instance=ExtResource("2_rh20t")]

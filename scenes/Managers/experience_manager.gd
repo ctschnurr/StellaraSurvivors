@@ -16,7 +16,7 @@ var xp_orbs: Array
 
 func _ready():
 	App.experience_manager = self
-	App.player_dead.connect(reset)
+	App.start_game.connect(reset)
 	
 
 func xp_collected(xp: float):
@@ -34,16 +34,10 @@ func xp_collected(xp: float):
 		update_experience.emit(player_experience, target_experience)
 		SoundManager.play_sound(App.level_up_sound)
 		level_up.emit(player_level)
-		
-
-func spawn_xp_orb(spawn_position: Vector2, size_multiplier: int):
-	var orb = xp_orb_scene.instantiate() as Experience_orb
-	xp_orbs.append(orb)
-	orb.collected.connect(xp_collected)
-	orb.global_position = spawn_position
-	orb.xp_amount *= size_multiplier
-	orb.scale *= (1 + size_multiplier * 0.3)
-	get_tree().root.add_child(orb)
+	
+	
+func connect_orb_signal(orb_signal: Signal):
+	orb_signal.connect(xp_collected)
 	
 	
 func reset():

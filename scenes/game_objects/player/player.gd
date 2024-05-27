@@ -108,10 +108,10 @@ func fire_blaster():
 
 
 func constrain_player():
-	if global_position.x > 1250: global_position.x = 1250
-	if global_position.x < 30: global_position.x = 30
-	if global_position.y > 690: global_position.y = 690
-	if global_position.y < 30: global_position.y = 30
+	if global_position.x < App.play_area_x_min + 30: global_position.x = App.play_area_x_min + 30
+	if global_position.x > App.play_area_x_max - 30: global_position.x = App.play_area_x_max - 30
+	if global_position.y < App.play_area_y_min + 30: global_position.y = App.play_area_y_min + 30
+	if global_position.y > App.play_area_y_max - 30: global_position.y = App.play_area_y_max - 30
 
 
 func animate_player(direction: Vector2):
@@ -164,7 +164,7 @@ func toggle_status():
 	
 	
 func get_health():
-	return health_component.current_health
+	return health_component.current_health/health_component.max_health
 	
 	
 func player_hurt(_damage):

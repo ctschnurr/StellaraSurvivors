@@ -1,11 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdoot0gj5cabf"]
+[gd_scene load_steps=3 format=3 uid="uid://cxewgwvba1bne"]
 
-[ext_resource type="Script" path="res://scenes/UI/Player_health_ui.gd" id="1_472b7"]
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_1lhf5"]
+
+[sub_resource type="GDScript" id="GDScript_7oja4"]
+script/source = "extends CanvasLayer
+
+@onready var player_health_text: Label = %Player_health_text
+
+func update_player_health_text(health: int):
+	player_health_text.text = \"Player Health: %s\" %[health]
+"
 
 [node name="Player_health_ui" type="CanvasLayer"]
 visible = false
-script = ExtResource("1_472b7")
+script = SubResource("GDScript_7oja4")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 visible = false

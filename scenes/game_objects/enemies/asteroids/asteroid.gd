@@ -49,7 +49,7 @@ func _ready():
 		Asteroid_size.LARGE:
 			size_multiplier = 3
 
-	if asteroid_speed == 0: asteroid_speed = randf_range(100, 150)
+	if asteroid_speed == 0: asteroid_speed = randf_range(75, 100)
 	
 	await get_tree().create_timer(15).timeout
 	if !has_entered_play_area: 
@@ -92,6 +92,7 @@ func fire_raycast(direction: Vector2):
 	var space_state = get_world_2d().direct_space_state
 	var raycast = PhysicsRayQueryParameters2D.create(global_position, global_position + (direction * (15 * size_multiplier)))
 	raycast.exclude = [self]
+	raycast.collision_mask = 1
 	
 	var raycast_output = space_state.intersect_ray(raycast)
 	
@@ -132,7 +133,6 @@ func collision_cooldown():
 func respond_to_bolt_collision(bolt_direction, collision_point, damage_factor):	
 	var asteroid_angle = asteroid_direction.angle()
 	var diff_angle = asteroid_angle - bolt_direction.angle()
-	var speed_variable = size_multiplier - damage_factor
 			
 	#if the bolt hits an asteroid traveling toward it:
 	if diff_angle < -2.75 or diff_angle > 2.75: 
@@ -204,7 +204,7 @@ func death_sequence(_dead_health):
 	tween.parallel().tween_property(enemy_sprite, "modulate:a", 0, 0.25)
 	tween.parallel().tween_callback(asteroid_explosion_effect).set_delay(0.1)
 	tween.tween_callback(create_spawn_command).set_delay(0.11)
-	App.experience_manager.spawn_xp_orb(global_position, size_multiplier)
+	App.enemy_manager.spawn_drops(global_position, loot_dictionary)
 	
 	
 func damage_sequence(_health):

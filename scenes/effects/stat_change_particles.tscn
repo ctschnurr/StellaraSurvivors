@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcbccup1drycl"]
+
+[ext_resource type="Texture2D" uid="uid://c2av5fn7wnt06" path="res://resources/new_viewport_texture.tres" id="1_1rp4p"]
+[ext_resource type="Script" path="res://scenes/effects/stat_change_particles.gd" id="2_4vvpy"]
+[ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_5c5sc"]
+
+[sub_resource type="Gradient" id="Gradient_yc56u"]
+offsets = PackedFloat32Array(0, 0.337209, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="stat_change_particles" type="CPUParticles2D"]
+z_index = 5
+emitting = false
+amount = 1
+lifetime = 0.75
+one_shot = true
+texture = ExtResource("1_1rp4p")
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 500)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = -30.0
+angular_velocity_max = 30.0
+color_ramp = SubResource("Gradient_yc56u")
+script = ExtResource("2_4vvpy")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(32, 32)
+size_2d_override_stretch = true
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport"]
+offset_right = 25.0
+offset_bottom = 25.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="Label" type="Label" parent="SubViewport/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_5c5sc")
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
