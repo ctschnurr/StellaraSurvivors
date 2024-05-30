@@ -8,22 +8,30 @@ enum input_device{KEYBOARD, CONTROLLER}
 const START_TARGET_XP = 3
 const TARGET_XP_GROWTH = 5
 const UPGRADES_PER_LEVEL = 2
+const BASE_PICKUP_ATTRACT: float = 150
 
 const play_area_x_min = 0
 const play_area_x_max = 1280
 const play_area_y_min = 0
 const play_area_y_max = 720
 
+const CRATE_EVENT_TARGET: float = 10.0
+
 var main_music: AudioStream = load("res://resources/audio/Cosmic Journey.mp3")
 var asteroid_collision_sound: AudioStream = load("res://resources/audio/asteroid_collision.wav")
 var asteroid_burst_sound: AudioStream = load("res://resources/audio/asteroid_burst.wav")
 var upgrade_selected_sound: AudioStream = load("res://resources/audio/upgrade.wav")
 var level_up_sound: AudioStream = load("res://resources/audio/level_up.wav")
+var pickup_sound: AudioStream = load("res://resources/audio/pickup_xp.wav")
 var player_hurt_sound: AudioStream = load("res://resources/audio/player_hurt.wav")
+
+var stat_change_particles = load("res://scenes/effects/stat_change_particles.tscn")
 
 var player_score = 0
 var high_score = 0
 var high_score_saver: Save_resource
+var difficulty_factor = 0
+var pickup_attract_distance = BASE_PICKUP_ATTRACT
 
 signal player_hurt(current_health)
 signal player_dead
@@ -35,13 +43,13 @@ var camera:Camera2D
 var player: Player
 @export var player_scene: PackedScene
 
+var mission_manager: Mission_manager
 var experience_manager: Experience_manager
 var enemy_manager: Enemy_manager
 var screen_manager: Screen_Manager
-var mission_manager: Mission_manager
 var upgrade_manager: Upgrade_manager
-
-var orb_attract_distance: float = 200
+var event_manager: Event_manager
+var spawn_manager: Spawn_manager
 
 var active_input: input_device = input_device.KEYBOARD
 

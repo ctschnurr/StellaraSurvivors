@@ -2,7 +2,6 @@ extends Node
 class_name Mission_manager
 
 var game_manager: Game_manager
-@export var player_scene: PackedScene
 var player: Player
 
 @export var possible_spawn_commands:Array[Spawn_command] = []
@@ -14,7 +13,7 @@ var survive_timer: Timer
 var current_objective: Objective
 
 func _ready():
-	App.mission_manager = self
+	#App.mission_manager = self
 	App.start_game.connect(start_mission)
 	App.player_dead.connect(end_mission)
 	#App.reset_game.connect()

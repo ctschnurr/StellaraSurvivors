@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/game_objects/experience_orb/experience_orb.gd" id="1_g5nap"]
 [ext_resource type="Texture2D" uid="uid://dssi6qrja5wm7" path="res://assets/xp_orb_blue.png" id="2_ivv56"]
-[ext_resource type="Shape2D" uid="uid://35lmvwy8udv0" path="res://resources/new_circle_shape_2d.tres" id="3_hldot"]
+[ext_resource type="Shape2D" uid="uid://35lmvwy8udv0" path="res://scenes/game_objects/health_pack/pickup_ray_sphere.tres" id="3_hldot"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r06yx"]
 radius = 15.0

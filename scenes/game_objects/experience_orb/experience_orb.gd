@@ -1,6 +1,5 @@
 class_name Experience_orb extends Pickup
 @export var xp_amount: float = 1
-@onready var pickup_sound: AudioStream = load("res://resources/audio/pickup_xp.wav")
 
 signal collected(xp: float)
 
@@ -9,8 +8,9 @@ func _ready():
 	$Area2D.area_entered.connect(on_area_entered)
 	
 	
-func on_area_entered(_area_entered):
-	SoundManager.play_sound_with_pitch(pickup_sound)
+func on_area_entered(area_entered):
 	collected.emit(xp_amount)
+	SoundManager.play_ambient_sound(App.pickup_sound)
+	App.spawn_manager.spawn_status_effect_particles(xp_amount, Color(0, 0.561, 0.984), area_entered.global_position)
 	queue_free()
 		

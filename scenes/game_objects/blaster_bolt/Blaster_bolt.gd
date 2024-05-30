@@ -24,7 +24,7 @@ func _ready():
 	
 	
 func blaster_hit():
-	SoundManager.play_sound(blaster_collision_sound)
+	SoundManager.play_ambient_sound(blaster_collision_sound)
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -57,7 +57,7 @@ func fire_raycast(raycast_direction: Vector2):
 	
 	if !raycast_output.is_empty():
 					
-		if raycast_output.collider is Asteroid:
+		if raycast_output.collider is Destructable_object:
 			raycast_output.collider.respond_to_bolt_collision(raycast_direction, raycast_output.position, hitbox.damage)
 			
 		collision_cooldown()

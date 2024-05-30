@@ -1,56 +1,56 @@
 [gd_scene load_steps=11 format=3 uid="uid://m00jmf08qiyi"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/health_pack/health_pack.gd" id="1_0lyej"]
-[ext_resource type="Texture2D" uid="uid://pfpdp6ntlvfn" path="res://assets/health_pickup.png" id="1_fmfhv"]
-[ext_resource type="Shape2D" uid="uid://35lmvwy8udv0" path="res://resources/new_circle_shape_2d.tres" id="2_exu77"]
+[ext_resource type="Shape2D" uid="uid://35lmvwy8udv0" path="res://scenes/game_objects/health_pack/pickup_ray_sphere.tres" id="2_exu77"]
+[ext_resource type="Texture2D" uid="uid://bnw2o2qswq7qf" path="res://scenes/game_objects/health_pack/health_pack.png" id="3_4bduf"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nqt6y"]
-atlas = ExtResource("1_fmfhv")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7f6u"]
+atlas = ExtResource("3_4bduf")
+region = Rect2(0, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_runpf"]
-atlas = ExtResource("1_fmfhv")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_s63ir"]
+atlas = ExtResource("3_4bduf")
+region = Rect2(48, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ddlc2"]
-atlas = ExtResource("1_fmfhv")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0j08"]
+atlas = ExtResource("3_4bduf")
+region = Rect2(96, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4wduc"]
-atlas = ExtResource("1_fmfhv")
-region = Rect2(96, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_7yyd3"]
+atlas = ExtResource("3_4bduf")
+region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3gqpy"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nqt6y")
+"texture": SubResource("AtlasTexture_x7f6u")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_runpf")
+"texture": SubResource("AtlasTexture_s63ir")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ddlc2")
+"texture": SubResource("AtlasTexture_j0j08")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4wduc")
+"texture": SubResource("AtlasTexture_7yyd3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ddlc2")
+"texture": SubResource("AtlasTexture_j0j08")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_runpf")
+"texture": SubResource("AtlasTexture_s63ir")
 }],
 "loop": true,
 "name": &"default",
-"speed": 12.0
+"speed": 6.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_splsq"]
-radius = 20.0
+radius = 25.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hia7a"]
-radius = 20.0
+radius = 25.0
 
 [node name="Health_pack" type="CharacterBody2D"]
 collision_layer = 16
@@ -62,7 +62,7 @@ raycast_shape = ExtResource("2_exu77")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_3gqpy")
 autoplay = "default"
-frame_progress = 0.482557
+frame_progress = 0.664768
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://wulgocmo17gm"]
+[gd_scene load_steps=3 format=3 uid="uid://wulgocmo17gm"]
 
 [ext_resource type="Script" path="res://scenes/UI/experience_bar.gd" id="1_65n54"]
+[ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_pke83"]
 
 [node name="Experience_bar" type="CanvasLayer"]
 script = ExtResource("1_65n54")
@@ -15,9 +16,10 @@ mouse_filter = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="MarginContainer"]
 modulate = Color(0.768627, 0.878431, 1, 1)
-custom_minimum_size = Vector2(0, 15)
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 2
+theme = ExtResource("2_pke83")
 max_value = 1.0
 value = 0.5
 show_percentage = false

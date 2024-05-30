@@ -1,15 +1,39 @@
-[gd_scene load_steps=11 format=3 uid="uid://d27as0jcit56m"]
+[gd_scene load_steps=15 format=3 uid="uid://d27as0jcit56m"]
 
 [ext_resource type="Script" path="res://scenes/main/Game_manager.gd" id="1_bqipc"]
 [ext_resource type="Script" path="res://scenes/Managers/Mission_manager.gd" id="2_fmjb6"]
 [ext_resource type="PackedScene" uid="uid://bs5kt5nfyvh5x" path="res://scenes/Managers/experience_manager.tscn" id="2_sc8ta"]
+[ext_resource type="PackedScene" uid="uid://cehm72ns3ht5l" path="res://scenes/Managers/event_manager.tscn" id="4_38ncw"]
 [ext_resource type="PackedScene" uid="uid://davbxt12ss23f" path="res://scenes/Managers/upgrade_manager.tscn" id="5_xmfqf"]
+[ext_resource type="PackedScene" uid="uid://cqgyrofudt8mb" path="res://scenes/Managers/spawn_manager.tscn" id="7_h826u"]
+[ext_resource type="Script" path="res://resources/spawn_data/spawn_data.gd" id="8_e2su8"]
 [ext_resource type="Resource" uid="uid://cd5wp0cd1wnk6" path="res://resources/spawn_asteroid.tres" id="8_wcefd"]
 [ext_resource type="PackedScene" uid="uid://cs36w4xgew7pk" path="res://scenes/UI/win_screen.tscn" id="9_4gj86"]
 [ext_resource type="PackedScene" uid="uid://55lv4btmtybt" path="res://scenes/Managers/enemy_manager.tscn" id="9_pjcio"]
 [ext_resource type="PackedScene" uid="uid://uf37o2pc5jnx" path="res://scenes/Managers/screen_manager.tscn" id="10_bdcnj"]
 [ext_resource type="TileSet" uid="uid://c8qvj247x6ny6" path="res://resources/space_tileset.tres" id="12_1o13u"]
 [ext_resource type="PackedScene" uid="uid://b645103cbbe1x" path="res://scenes/game_objects/game_camera/game_camera.tscn" id="13_f7ttr"]
+
+[sub_resource type="Resource" id="Resource_4sk6v"]
+script = ExtResource("8_e2su8")
+who_to_spawn = Array[Resource("res://resources/spawn_modules/spawn_module.gd")]([null])
+how_to_spawn = 0
+where_to_spawn = 0
+defined_spawn_position = Vector2(0, 0)
+spawn_per_wave = 1
+amount_behavior = 0
+change_by = 1
+change_interval = 1
+change_amount = 1
+repeat_until = 0
+number_of_waves = 1
+total_time_in_minutes = 0.0
+wave_behavior = 0
+behavior_variation = 0
+seconds_between_waves = 0.0
+kill_target = 0
+behavior_variation_start = 0.0
+behavior_variation_amount = 0.0
 
 [node name="Main" type="Node"]
 script = ExtResource("1_bqipc")
@@ -24,6 +48,11 @@ possible_spawn_commands = Array[Resource("res://Spawn_command.gd")]([ExtResource
 experience_manager = NodePath("../Experience_manager")
 
 [node name="Enemy_manager" parent="." instance=ExtResource("9_pjcio")]
+
+[node name="Spawn_manager" parent="." instance=ExtResource("7_h826u")]
+possible_spawn_commands = Array[ExtResource("8_e2su8")]([SubResource("Resource_4sk6v")])
+
+[node name="Event_manager" parent="." instance=ExtResource("4_38ncw")]
 
 [node name="Screen_manager" parent="." instance=ExtResource("10_bdcnj")]
 win_screen = ExtResource("9_4gj86")

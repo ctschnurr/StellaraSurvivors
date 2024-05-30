@@ -4,7 +4,7 @@ enum Spawn_positioning{SCATTER,SQUAD,ASTEROID_BURST}
 enum Repeat_state{ONCE,MULTIPLE,INFINITE,OBJECTIVE,TIMER}
 enum Repeat_mode{STEADY,RANDOM,ACCELERATING}
 
-@export var possible_enemies: Array[Enemy_manager.Enemy_type] = []
+@export var possible_enemies: Array[Spawn_module] = []
 @export var repeat_state: Repeat_state = Repeat_state.ONCE
 @export var repeat_mode: Repeat_mode = Repeat_mode.STEADY
 @export var repeat_timer: float = 0

@@ -1,10 +1,15 @@
-[gd_resource type="Resource" script_class="Spawn_command" load_steps=7 format=3 uid="uid://cd5wp0cd1wnk6"]
+[gd_resource type="Resource" script_class="Spawn_command" load_steps=22 format=3 uid="uid://cd5wp0cd1wnk6"]
 
 [ext_resource type="Script" path="res://Spawn_command.gd" id="1_1fwfa"]
 [ext_resource type="Script" path="res://scenes/Managers/Objective.gd" id="1_pthrc"]
+[ext_resource type="PackedScene" uid="uid://cnmjaqosxxcng" path="res://scenes/game_objects/experience_orb/experience_orb_blue.tscn" id="2_4d6gt"]
 [ext_resource type="PackedScene" uid="uid://si6pecgkgbey" path="res://scenes/game_objects/enemies/asteroids/asteroid_sm.tscn" id="2_mljcv"]
 [ext_resource type="PackedScene" uid="uid://de6khcv1nexs0" path="res://scenes/game_objects/enemies/asteroids/asteroid_med.tscn" id="3_a6gwl"]
+[ext_resource type="Script" path="res://resources/loot_modules/loot_module.gd" id="3_srbpu"]
 [ext_resource type="PackedScene" uid="uid://d0lsq5yi27jo1" path="res://scenes/game_objects/enemies/asteroids/asteroid_lg.tscn" id="4_hte2b"]
+[ext_resource type="Script" path="res://resources/spawn_modules/spawn_module.gd" id="5_minkt"]
+[ext_resource type="PackedScene" uid="uid://cj8vlhs1s27in" path="res://scenes/game_objects/experience_orb/experience_orb_yellow.tscn" id="6_cc45a"]
+[ext_resource type="PackedScene" uid="uid://nw0xpvmoj4ol" path="res://scenes/game_objects/experience_orb/experience_orb_red.tscn" id="8_lv0bt"]
 
 [sub_resource type="Resource" id="Resource_i35sq"]
 script = ExtResource("1_pthrc")
@@ -13,16 +18,69 @@ objective_description = "Destroy the Asteroids"
 survive_timer_minutes = 5
 objective_target = 0
 
+[sub_resource type="Resource" id="Resource_m76uu"]
+script = ExtResource("3_srbpu")
+loot_scene = ExtResource("2_4d6gt")
+loot_drop_probability = 100
+
+[sub_resource type="Resource" id="Resource_j40t5"]
+script = ExtResource("3_srbpu")
+loot_scene = ExtResource("2_4d6gt")
+loot_drop_probability = 10
+
+[sub_resource type="Resource" id="Resource_cythb"]
+script = ExtResource("5_minkt")
+scene_to_spawn = ExtResource("2_mljcv")
+spawn_probability = 100
+loot_module_array = Array[ExtResource("3_srbpu")]([SubResource("Resource_m76uu"), SubResource("Resource_j40t5")])
+
+[sub_resource type="Resource" id="Resource_im8ic"]
+script = ExtResource("3_srbpu")
+loot_scene = ExtResource("6_cc45a")
+loot_drop_probability = 100
+
+[sub_resource type="Resource" id="Resource_rgj2e"]
+script = ExtResource("3_srbpu")
+loot_scene = ExtResource("2_4d6gt")
+loot_drop_probability = 10
+
+[sub_resource type="Resource" id="Resource_bvh6k"]
+script = ExtResource("5_minkt")
+scene_to_spawn = ExtResource("3_a6gwl")
+spawn_probability = 40
+loot_module_array = Array[ExtResource("3_srbpu")]([SubResource("Resource_im8ic"), SubResource("Resource_rgj2e")])
+
+[sub_resource type="Resource" id="Resource_2m2s2"]
+script = ExtResource("3_srbpu")
+loot_scene = ExtResource("8_lv0bt")
+loot_drop_probability = 100
+
+[sub_resource type="Resource" id="Resource_a2blu"]
+script = ExtResource("3_srbpu")
+loot_scene = ExtResource("2_4d6gt")
+loot_drop_probability = 20
+
+[sub_resource type="Resource" id="Resource_pvop1"]
+script = ExtResource("3_srbpu")
+loot_scene = ExtResource("6_cc45a")
+loot_drop_probability = 10
+
+[sub_resource type="Resource" id="Resource_0jjq7"]
+script = ExtResource("5_minkt")
+scene_to_spawn = ExtResource("4_hte2b")
+spawn_probability = 10
+loot_module_array = Array[ExtResource("3_srbpu")]([SubResource("Resource_2m2s2"), SubResource("Resource_a2blu"), SubResource("Resource_pvop1")])
+
 [resource]
 script = ExtResource("1_1fwfa")
-possible_enemies = Array[int]([0, 0, 1, 2])
-repeat_state = 4
+possible_enemies = Array[ExtResource("5_minkt")]([SubResource("Resource_cythb"), SubResource("Resource_bvh6k"), SubResource("Resource_0jjq7")])
+repeat_state = 2
 repeat_mode = 2
 repeat_timer = 1800.0
 repeat_delay = 3.0
 repeat_amount = 0
 ready = true
-enemy_type = Array[PackedScene]([ExtResource("3_a6gwl"), ExtResource("4_hte2b"), ExtResource("2_mljcv")])
+enemy_type = Array[PackedScene]([])
 spawn_amount = 5
 spawn_positioning = 0
 associated_objective = SubResource("Resource_i35sq")

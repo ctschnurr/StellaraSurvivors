@@ -11,13 +11,11 @@ var game_manager: Game_manager
 
 @export var dictionary: Dictionary
 
-enum Enemy_type{ASTEROID_SMALL, ASTEROID_MEDIUM, ASTEROID_LARGE}
-@onready var enemy_dictionary: Dictionary = {"ASTEROID_SMALL": asteroid_small, "ASTEROID_MEDIUM": asteroid_medium, "ASTEROID_LARGE": asteroid_large}
+signal object_destroyed_signal(kill_count)
+var kill_count = 0
 
-	#if global_position.x > 1250: global_position.x = 1250
-	#if global_position.x < 30: global_position.x = 30
-	#if global_position.y > 690: global_position.y = 690
-	#if global_position.y < 30: global_position.y = 30
+#enum Enemy_type{ASTEROID_SMALL, ASTEROID_MEDIUM, ASTEROID_LARGE}
+#@onready var enemy_dictionary: Dictionary = {"ASTEROID_SMALL": asteroid_small, #"ASTEROID_MEDIUM": asteroid_medium, "ASTEROID_LARGE": asteroid_large}
 
 var location_mod_amount = 300
 
@@ -30,6 +28,7 @@ var time_tracker: int = 0
 
 var command_timer: Timer
 
+
 func _ready():
 	App.enemy_manager = self
 	App.reset_game.connect(reset_enemy_manager)
@@ -37,6 +36,7 @@ func _ready():
 
 func reset_enemy_manager():
 	clear_enemies()
+	kill_count = 0
 
 
 func _process(_delta):
@@ -63,7 +63,7 @@ func add_command(command: Spawn_command):
 func process_command(command: Spawn_command):
 	command.ready = false
 	match command.spawn_positioning:
-		Spawn_command.Spawn_positioning.SCATTER:	
+		Spawn_command.Spawn_positioning.SCATTER:
 			spawn_scatter(command)
 					
 		Spawn_command.Spawn_positioning.ASTEROID_BURST:
@@ -121,22 +121,28 @@ func clear_enemies():
 	
 
 func spawn_scatter(command: Spawn_command):
-	var spawn_location: Vector2 = pick_location()
 	for n in command.spawn_amount:
-		var new_asteroid_select = command.possible_enemies.pick_random()
-		var this_enum = Enemy_type.keys()[new_asteroid_select]
-		var enemy_instance = enemy_dictionary[this_enum].instantiate() as Asteroid
+		var spawn_roll = randi_range(1, 100)
+		#var new_spawn_select = command.possible_enemies.pick_random()
 		
-		add_child(enemy_instance)
-		enemies.append(enemy_instance)
-		enemy_instance.enemy_manager = self
+		var lowest: Spawn_module
+		for module: Spawn_module in command.possible_enemies:			
+			if spawn_roll <= module.spawn_probability + App.difficulty_factor:
+				if lowest == null: lowest = module
+				elif module.spawn_probability < lowest.spawn_probability: lowest = module
+				
+		var new_spawn = lowest.scene_to_spawn.instantiate()
+		new_spawn.loot_module_array = lowest.loot_module_array
+		add_child(new_spawn)
+		enemies.append(new_spawn)
+		new_spawn.enemy_manager = self as Enemy_manager
 		
-		enemy_instance.global_position = pick_location()
-		if App.player != null: enemy_instance.asteroid_direction = spawn_location.direction_to(App.player.global_position)
+		new_spawn.global_position = pick_location()
+		if App.player != null: new_spawn.object_direction = new_spawn.global_position.direction_to(App.player.global_position)
 		
-		enemy_instance.health_component.died.connect(add_score)
-		if command.associated_objective != null:
-			command.associated_objective.connect_signal(enemy_instance.health_component.died)
+		
+		new_spawn.health_component.died.connect(object_destroyed)
+		if command.associated_objective != null: command.associated_objective.connect_signal(new_spawn.health_component.died)
 	
 	
 func spawn_asteroid_burst(command: Spawn_command):	
@@ -144,15 +150,24 @@ func spawn_asteroid_burst(command: Spawn_command):
 	var arrangement1: Array[Vector2] = [Vector2(1, 1), Vector2(-1, -1), Vector2(-1, 1), Vector2(1, -1)]
 	var arrangement2: Array[Vector2] = [Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0), Vector2(0, -1)]
 	var arrangements: Array[Array] = [arrangement1, arrangement2]
-	
+
 	var asteroids: Array[Asteroid] = []
 	for number in amount:
-		var new_asteroid_select = command.possible_enemies.pick_random()
-		var this_enum = Enemy_type.keys()[new_asteroid_select]
-		var new_asteroid = enemy_dictionary[this_enum].instantiate() as Asteroid
-		new_asteroid.enemy_manager = self
-		enemies.append(new_asteroid)
-		asteroids.append(new_asteroid)
+		
+		var spawn_roll = randi_range(1, 100)
+		#var new_spawn_select = command.possible_enemies.pick_random()
+		
+		var lowest: Spawn_module
+		for module: Spawn_module in command.possible_enemies:			
+			if spawn_roll <= module.spawn_probability:
+				if lowest == null: lowest = module
+				elif module.spawn_probability < lowest.spawn_probability: lowest = module
+				
+		var new_spawn = lowest.scene_to_spawn.instantiate()
+		add_child(new_spawn)
+		enemies.append(new_spawn)
+		asteroids.append(new_spawn)
+		new_spawn.enemy_manager = self
 		
 	var arrange: Array[Vector2] = arrangements.pick_random().duplicate()
 	
@@ -161,10 +176,10 @@ func spawn_asteroid_burst(command: Spawn_command):
 		arrange.erase(position)
 		
 		asteroid.position = command.spawn_location + Vector2(position.x * (15 * asteroid.size_multiplier), position.y * (15 * asteroid.size_multiplier))
-		asteroid.asteroid_direction = position
-		asteroid.asteroid_speed = 75
-		add_child(asteroid)
-		asteroid.health_component.died.connect(add_score)
+		asteroid.object_direction = position
+		asteroid.object_speed = 75
+		
+		asteroid.health_component.died.connect(object_destroyed)
 		if current_command.associated_objective != null:
 			current_command.associated_objective.connect_signal(asteroid.health_component.died)
 
@@ -188,9 +203,14 @@ func pick_location():
 	return location
 
 
+func object_destroyed(health_amt: int):
+	kill_count += 1
+	object_destroyed_signal.emit(kill_count)
+	add_score(health_amt)
+	
+
 func add_score(health_amt: int):
 	App.update_score(health_amt)
-	pass	
 	
 	
 func spawn_drops(location: Vector2, loot_dictionary: Array):

@@ -1,27 +1,19 @@
-[gd_scene load_steps=17 format=3 uid="uid://si6pecgkgbey"]
+[gd_scene load_steps=13 format=3 uid="uid://si6pecgkgbey"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/enemies/asteroids/asteroid.gd" id="1_krje1"]
-[ext_resource type="Resource" uid="uid://dp2ytit4cchch" path="res://resources/asteroid_cluster_command.tres" id="2_5nxaq"]
 [ext_resource type="Texture2D" uid="uid://bd7c37w1m8a2q" path="res://scenes/game_objects/enemies/asteroids/asteroid_sm01.png" id="2_cjr21"]
 [ext_resource type="Texture2D" uid="uid://duko5xybmteb4" path="res://scenes/game_objects/enemies/asteroids/asteroid_sm02.png" id="3_41dsg"]
 [ext_resource type="Texture2D" uid="uid://d158mw4vfcy58" path="res://scenes/game_objects/enemies/asteroids/asteroid_sm03.png" id="4_2letc"]
-[ext_resource type="PackedScene" uid="uid://bep8ffbpod8sj" path="res://scenes/effects/asteroid_impact.tscn" id="5_2pjbo"]
-[ext_resource type="PackedScene" uid="uid://5vpw8p5qkrgg" path="res://scenes/effects/asteroid_explosion.tscn" id="5_by1y5"]
 [ext_resource type="PackedScene" uid="uid://cnmjaqosxxcng" path="res://scenes/game_objects/experience_orb/experience_orb_blue.tscn" id="8_38mgv"]
 [ext_resource type="PackedScene" uid="uid://dqf2fq7p7ip" path="res://scenes/components/health_component.tscn" id="8_gsxsf"]
 [ext_resource type="PackedScene" uid="uid://bcmna6wa42j0q" path="res://scenes/components/hurtbox_component.tscn" id="9_bcxy1"]
 [ext_resource type="Script" path="res://resources/loot_modules/loot_module.gd" id="9_jbm6f"]
 [ext_resource type="PackedScene" uid="uid://cxmypx8uu0kun" path="res://scenes/components/hitbox_component.tscn" id="10_5f8oe"]
 
-[sub_resource type="Resource" id="Resource_ldlu7"]
+[sub_resource type="Resource" id="Resource_vu8mk"]
 script = ExtResource("9_jbm6f")
 loot_scene = ExtResource("8_38mgv")
 loot_drop_probability = 100
-
-[sub_resource type="Resource" id="Resource_hjngt"]
-script = ExtResource("9_jbm6f")
-loot_scene = ExtResource("8_38mgv")
-loot_drop_probability = 25
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_026wd"]
 radius = 14.0
@@ -29,14 +21,11 @@ radius = 14.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_rvlpy"]
 radius = 13.0
 
-[node name="Asteroid_sm" type="CharacterBody2D" node_paths=PackedStringArray("asteroid_colliders")]
+[node name="Asteroid_sm" type="CharacterBody2D" node_paths=PackedStringArray("object_colliders")]
 script = ExtResource("1_krje1")
-asteroid_cluster_command = ExtResource("2_5nxaq")
 asteroid_textures = Array[Texture]([ExtResource("2_cjr21"), ExtResource("3_41dsg"), ExtResource("4_2letc")])
-asteroid_colliders = [NodePath("CollisionShape2D"), NodePath("HurtboxComponent/CollisionShape2D"), NodePath("HitboxComponent/CollisionShape2D")]
-explosion_effect = ExtResource("5_by1y5")
-impact_effect = ExtResource("5_2pjbo")
-loot_dictionary = Array[ExtResource("9_jbm6f")]([SubResource("Resource_ldlu7"), SubResource("Resource_hjngt")])
+loot_module_array = Array[ExtResource("9_jbm6f")]([SubResource("Resource_vu8mk")])
+object_colliders = [NodePath("CollisionShape2D"), NodePath("HurtboxComponent/CollisionShape2D"), NodePath("HitboxComponent/CollisionShape2D")]
 
 [node name="Asteroid_sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true

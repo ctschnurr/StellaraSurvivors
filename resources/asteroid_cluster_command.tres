@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_olxhp")
-possible_enemies = Array[int]([])
+possible_enemies = Array[Resource("res://resources/spawn_modules/spawn_module.gd")]([])
 repeat_state = 0
 repeat_mode = 0
 repeat_timer = 0.0

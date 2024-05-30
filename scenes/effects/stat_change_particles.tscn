@@ -28,19 +28,29 @@ script = ExtResource("2_4vvpy")
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true
 transparent_bg = true
-size = Vector2i(32, 32)
+size = Vector2i(64, 64)
 size_2d_override_stretch = true
 
 [node name="MarginContainer" type="MarginContainer" parent="SubViewport"]
-offset_right = 25.0
-offset_bottom = 25.0
-size_flags_horizontal = 6
-size_flags_vertical = 6
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.5
+offset_top = -18.0
+offset_right = 12.5
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="SubViewport/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_5c5sc")
+theme_override_font_sizes/font_size = 30
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1

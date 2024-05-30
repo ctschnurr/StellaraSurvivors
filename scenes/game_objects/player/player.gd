@@ -165,6 +165,10 @@ func toggle_status():
 	
 func get_health():
 	return health_component.current_health/health_component.max_health
+
+
+func heal(heal_amt):
+	health_component.heal(heal_amt)
 	
 	
 func player_hurt(_damage):

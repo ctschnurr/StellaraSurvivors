@@ -1,19 +1,20 @@
 class_name Health_pack extends Pickup
-@onready var pickup_sound: AudioStream = load("res://resources/audio/pickup_xp.wav")
 
 signal collected()
+
+var health_amount = 0
 
 func _ready():
 	super._ready()
 	$Area2D.area_entered.connect(on_area_entered)
 	#self as Pickup
-
-
-func _process(delta):
-	super._process(delta)
 	
 	
-func on_area_entered(_area_entered):
-	SoundManager.play_sound_with_pitch(pickup_sound, 0.25)
-	print("Health Pack Collected")
+func on_area_entered(area_entered):
+	var collector = area_entered.owner as Player
+	collector.heal(health_amount)
+
+	collected.emit(health_amount)
+	SoundManager.play_ambient_sound(App.pickup_sound)
+	
 	queue_free()

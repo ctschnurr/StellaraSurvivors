@@ -5,7 +5,6 @@ signal died(max_health)
 signal hurt(current_health)
 
 @onready var progress_bar = %ProgressBar
-@onready var stat_change_particles = load("res://scenes/effects/stat_change_particles.tscn")
 
 @export var animation_player: AnimationPlayer
 
@@ -15,6 +14,7 @@ var vulnerable: bool = true
 
 func _ready():
 	current_health = max_health
+	
 
 func _process(_delta):
 	progress_bar.global_position = Vector2(owner.global_position.x - 25, owner.global_position.y + 25)
@@ -27,13 +27,7 @@ func damage(damage_amount: float):
 		current_health = max(current_health - damage_amount, 0)
 		hurt.emit(current_health)
 		Callable(check_death).call_deferred()
-		var stat_effect = stat_change_particles.instantiate() as Stat_particles
-		add_child(stat_effect)
-		stat_effect.set_label(str(damage_amount), Color.RED)
-		stat_effect.position = owner.position
-		stat_effect.restart()
-		await stat_effect.finished
-		stat_effect.queue_free()
+		App.spawn_manager.spawn_status_effect_particles(damage_amount, Color.RED, owner.global_position)
 		
 		
 func check_death():
@@ -59,6 +53,12 @@ func update_health_bar():
 	vulnerable = true
 	
 	
-func heal():
-	current_health = max_health
+func heal(heal_input):
+	var heal_amount = heal_input
+	var missing_health = max_health - current_health
+	if heal_amount >= missing_health or heal_input == 0: 
+		heal_amount = missing_health
+		current_health = max_health
+	else: current_health += heal_amount
+	App.spawn_manager.spawn_status_effect_particles(heal_amount, Color.GREEN, owner.global_position)
 	update_health_bar()

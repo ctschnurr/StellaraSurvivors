@@ -1,6 +1,6 @@
 class_name Pickup extends CharacterBody2D
 
-@export var raycast_shape = load("res://resources/new_circle_shape_2d.tres")
+@export var raycast_shape = load("res://scenes/game_objects/health_pack/pickup_ray_sphere.tres")
 var player: Player
 var player_in_range: bool = false
 @onready var shapecast: ShapeCast2D = %ShapeCast
@@ -11,12 +11,13 @@ func _ready():
 	
 	
 func _process(delta):
-	if App.player == null: return
-	if global_position.distance_to(player.global_position) < App.orb_attract_distance:
-		var target_velocity = global_position.direction_to(player.global_position) * (App.orb_attract_distance / global_position.distance_to(player.global_position) * 25)
+	if App.player != null:
 	
-		velocity = velocity.lerp(target_velocity, 1 - exp(-delta * 5))
-		move_and_slide()
+		if global_position.distance_to(player.global_position) < App.pickup_attract_distance:
+			var target_velocity = global_position.direction_to(player.global_position) * (App.pickup_attract_distance / global_position.distance_to(player.global_position) * 25)
+		
+			velocity = velocity.lerp(target_velocity, 1 - exp(-delta * 5))
+			move_and_slide()
 		
 		
 func _physics_process(delta):
