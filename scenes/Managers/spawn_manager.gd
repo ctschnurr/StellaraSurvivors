@@ -11,9 +11,12 @@ var health_pack_scene = load("res://scenes/game_objects/pickups/health_pack/heal
 signal object_destroyed_signal(kill_count)
 
 var spawn_datas: Array
+
 var spawned_objects: Array
 var spawned_bolts: Array
 var spawned_pickups: Array
+var spawned_effects: Array
+
 var data_timers: Array[Timer]
 
 #Destructable_objects:
@@ -50,6 +53,10 @@ func clear_spawns():
 		if pickup != null: pickup.queue_free()	
 	spawned_pickups = []
 	
+	for effect in spawned_effects:
+		if effect != null: effect.queue_free()
+	spawned_effects = []
+	
 	
 func add_data(data: Spawn_data):
 	spawn_datas.append(data)
@@ -71,7 +78,9 @@ func spawn_status_effect_particles(input, color: Color, position):
 	stat_effect.set_label(str(input), color)
 	stat_effect.position = position
 	stat_effect.restart()
+	spawned_effects.append(stat_effect)
 	await stat_effect.finished
+	spawned_effects.erase(spawned_effects)
 	stat_effect.queue_free()
 
 

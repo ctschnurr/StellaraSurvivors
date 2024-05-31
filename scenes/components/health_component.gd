@@ -23,11 +23,13 @@ func _process(_delta):
 # Called when the node enters the scene tree for the first time.
 func damage(damage_amount: float):
 	if vulnerable:
-		vulnerable = false
+		if owner is Player: vulnerable = false
 		current_health = max(current_health - damage_amount, 0)
 		hurt.emit(current_health)
 		Callable(check_death).call_deferred()
 		App.spawn_manager.spawn_status_effect_particles(damage_amount, Color.RED, owner.global_position)
+		await get_tree().create_timer(0.15).timeout
+		vulnerable = true
 		
 		
 func check_death():
@@ -49,8 +51,6 @@ func update_health_bar():
 	elif progress_bar.visible && current_health == max_health: progress_bar.visible = false
 	var percent = current_health / max_health
 	progress_bar.value = percent
-	await get_tree().create_timer(0.15).timeout
-	vulnerable = true
 	
 	
 func heal(heal_input):

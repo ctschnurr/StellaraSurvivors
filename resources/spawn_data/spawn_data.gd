@@ -3,6 +3,7 @@ class_name Spawn_data extends Resource
 #spawn handling:
 @export_group("Spawn Settings:")
 @export var who_to_spawn: Array[Spawn_module] = []
+@export var who_description: String = "object"
 var associated_timer: Timer
 
 enum How_to_spawn{RANDOM,BURST,SQUAD}
@@ -65,7 +66,7 @@ enum Wave_behavior_variation{STEADY,INCREASING,DECREASING}
 
 @export_group("If spawns are tied to an objective:")
 
-@export var associated_objective: Objective
+@export var associated_objective: Objective_data
 
 var ready: bool = true
 

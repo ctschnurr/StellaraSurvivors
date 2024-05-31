@@ -1,117 +1,33 @@
-[gd_scene load_steps=35 format=3 uid="uid://d27as0jcit56m"]
+[gd_scene load_steps=15 format=3 uid="uid://d27as0jcit56m"]
 
 [ext_resource type="Script" path="res://scenes/main/Game_manager.gd" id="1_bqipc"]
 [ext_resource type="Script" path="res://scenes/Managers/Mission_manager.gd" id="2_fmjb6"]
 [ext_resource type="PackedScene" uid="uid://bs5kt5nfyvh5x" path="res://scenes/Managers/experience_manager.tscn" id="2_sc8ta"]
+[ext_resource type="Script" path="res://resources/objective_data/objective_data.gd" id="3_k2tlo"]
+[ext_resource type="Resource" uid="uid://8grhxfgc76dh" path="res://resources/spawn_data/default_survive_spawn_data.tres" id="4_5vyp6"]
 [ext_resource type="PackedScene" uid="uid://cehm72ns3ht5l" path="res://scenes/Managers/event_manager.tscn" id="4_38ncw"]
-[ext_resource type="Script" path="res://scenes/Managers/Objective.gd" id="4_wmw45"]
 [ext_resource type="PackedScene" uid="uid://davbxt12ss23f" path="res://scenes/Managers/upgrade_manager.tscn" id="5_xmfqf"]
-[ext_resource type="PackedScene" uid="uid://cnmjaqosxxcng" path="res://scenes/game_objects/pickups/experience_orb/experience_orb_blue.tscn" id="6_s5c1v"]
 [ext_resource type="PackedScene" uid="uid://cqgyrofudt8mb" path="res://scenes/Managers/spawn_manager.tscn" id="7_h826u"]
-[ext_resource type="Script" path="res://resources/loot_modules/loot_module.gd" id="7_si5gi"]
-[ext_resource type="PackedScene" uid="uid://si6pecgkgbey" path="res://scenes/game_objects/enemies/asteroids/asteroid_sm.tscn" id="8_8mdsr"]
-[ext_resource type="Script" path="res://resources/spawn_data/spawn_data.gd" id="8_e2su8"]
-[ext_resource type="Resource" uid="uid://cd5wp0cd1wnk6" path="res://resources/spawn_asteroid.tres" id="8_wcefd"]
 [ext_resource type="PackedScene" uid="uid://cs36w4xgew7pk" path="res://scenes/UI/win_screen.tscn" id="9_4gj86"]
-[ext_resource type="Script" path="res://resources/spawn_modules/spawn_module.gd" id="9_ku33e"]
 [ext_resource type="PackedScene" uid="uid://55lv4btmtybt" path="res://scenes/Managers/enemy_manager.tscn" id="9_pjcio"]
 [ext_resource type="PackedScene" uid="uid://uf37o2pc5jnx" path="res://scenes/Managers/screen_manager.tscn" id="10_bdcnj"]
-[ext_resource type="PackedScene" uid="uid://cj8vlhs1s27in" path="res://scenes/game_objects/pickups/experience_orb/experience_orb_yellow.tscn" id="10_ewehm"]
-[ext_resource type="PackedScene" uid="uid://de6khcv1nexs0" path="res://scenes/game_objects/enemies/asteroids/asteroid_med.tscn" id="11_s4h6m"]
 [ext_resource type="TileSet" uid="uid://c8qvj247x6ny6" path="res://resources/space_tileset.tres" id="12_1o13u"]
-[ext_resource type="PackedScene" uid="uid://nw0xpvmoj4ol" path="res://scenes/game_objects/pickups/experience_orb/experience_orb_red.tscn" id="12_gx46y"]
-[ext_resource type="PackedScene" uid="uid://d0lsq5yi27jo1" path="res://scenes/game_objects/enemies/asteroids/asteroid_lg.tscn" id="13_c4qg7"]
 [ext_resource type="PackedScene" uid="uid://b645103cbbe1x" path="res://scenes/game_objects/game_camera/game_camera.tscn" id="13_f7ttr"]
 
-[sub_resource type="Resource" id="Resource_guy1o"]
-script = ExtResource("4_wmw45")
+[sub_resource type="Resource" id="Resource_ipnnd"]
+script = ExtResource("3_k2tlo")
 objective_type = 1
-objective_description = "Destroy the Asteroids"
+spawn_data = ExtResource("4_5vyp6")
+objective_description = "Survive!"
 survive_timer_minutes = 5
 objective_target = 0
-
-[sub_resource type="Resource" id="Resource_m76uu"]
-script = ExtResource("7_si5gi")
-loot_scene = ExtResource("6_s5c1v")
-loot_drop_probability = 100
-
-[sub_resource type="Resource" id="Resource_j40t5"]
-script = ExtResource("7_si5gi")
-loot_scene = ExtResource("6_s5c1v")
-loot_drop_probability = 10
-
-[sub_resource type="Resource" id="Resource_q2tju"]
-script = ExtResource("9_ku33e")
-scene_to_spawn = ExtResource("8_8mdsr")
-spawn_probability = 100
-loot_module_array = Array[ExtResource("7_si5gi")]([SubResource("Resource_m76uu"), SubResource("Resource_j40t5")])
-
-[sub_resource type="Resource" id="Resource_im8ic"]
-script = ExtResource("7_si5gi")
-loot_scene = ExtResource("10_ewehm")
-loot_drop_probability = 100
-
-[sub_resource type="Resource" id="Resource_rgj2e"]
-script = ExtResource("7_si5gi")
-loot_scene = ExtResource("6_s5c1v")
-loot_drop_probability = 10
-
-[sub_resource type="Resource" id="Resource_x8s7k"]
-script = ExtResource("9_ku33e")
-scene_to_spawn = ExtResource("11_s4h6m")
-spawn_probability = 40
-loot_module_array = Array[ExtResource("7_si5gi")]([SubResource("Resource_im8ic"), SubResource("Resource_rgj2e")])
-
-[sub_resource type="Resource" id="Resource_2m2s2"]
-script = ExtResource("7_si5gi")
-loot_scene = ExtResource("12_gx46y")
-loot_drop_probability = 100
-
-[sub_resource type="Resource" id="Resource_a2blu"]
-script = ExtResource("7_si5gi")
-loot_scene = ExtResource("6_s5c1v")
-loot_drop_probability = 20
-
-[sub_resource type="Resource" id="Resource_pvop1"]
-script = ExtResource("7_si5gi")
-loot_scene = ExtResource("10_ewehm")
-loot_drop_probability = 10
-
-[sub_resource type="Resource" id="Resource_sv3g0"]
-script = ExtResource("9_ku33e")
-scene_to_spawn = ExtResource("13_c4qg7")
-spawn_probability = 10
-loot_module_array = Array[ExtResource("7_si5gi")]([SubResource("Resource_2m2s2"), SubResource("Resource_a2blu"), SubResource("Resource_pvop1")])
-
-[sub_resource type="Resource" id="Resource_b0wog"]
-script = ExtResource("8_e2su8")
-who_to_spawn = Array[ExtResource("9_ku33e")]([SubResource("Resource_q2tju"), SubResource("Resource_x8s7k"), SubResource("Resource_sv3g0")])
-how_to_spawn = 0
-where_to_spawn = 0
-defined_spawn_position = Vector2(0, 0)
-quantity_per_wave = 5
-quantity_variation_behavior = 1
-quantity_change_start_seconds = 60
-quantity_change_increase_seconds = 60
-quantity_change_amount = 1
-repeat_until = 0
-number_of_waves = 1
-total_time_in_minutes = 0.0
-wave_behavior = 0
-wave_behavior_variation = 0
-seconds_between_waves = 5.0
-kill_target = 0
-behavior_variation_start = 0.0
-behavior_variation_amount = 0.0
-associated_objective = SubResource("Resource_guy1o")
 
 [node name="Main" type="Node"]
 script = ExtResource("1_bqipc")
 
 [node name="Mission_manager" type="Node" parent="."]
 script = ExtResource("2_fmjb6")
-possible_spawn_commands = Array[Resource("res://Spawn_command.gd")]([ExtResource("8_wcefd")])
-possible_spawn_datas = Array[ExtResource("8_e2su8")]([SubResource("Resource_b0wog")])
+objective_array = Array[ExtResource("3_k2tlo")]([SubResource("Resource_ipnnd")])
 
 [node name="Experience_manager" parent="." instance=ExtResource("2_sc8ta")]
 

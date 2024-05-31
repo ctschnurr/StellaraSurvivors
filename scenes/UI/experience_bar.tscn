@@ -16,7 +16,7 @@ mouse_filter = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="MarginContainer"]
 modulate = Color(0.768627, 0.878431, 1, 1)
-custom_minimum_size = Vector2(0, 20)
+custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("2_pke83")

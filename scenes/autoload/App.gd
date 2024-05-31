@@ -9,6 +9,7 @@ const START_TARGET_XP = 3
 const TARGET_XP_GROWTH = 5
 const UPGRADES_PER_LEVEL = 2
 const BASE_PICKUP_ATTRACT: float = 150
+const GOLDEN_ASTEROID_CHANCE: int = 2
 
 const play_area_x_min = -100
 const play_area_x_max = 1380
