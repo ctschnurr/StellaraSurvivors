@@ -10,7 +10,7 @@ func _ready():
 
 
 func set_player_upgrades(upgrades: Array[Player_upgrade], current_upgrades: Dictionary):
-	var new_cards: Array
+	var new_cards: Array = []
 	var choices = upgrades.duplicate()
 	while choices.size() > App.UPGRADES_PER_LEVEL:
 		choices.erase(choices.pick_random())

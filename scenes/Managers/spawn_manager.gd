@@ -2,11 +2,11 @@ class_name Spawn_manager extends Node
 
 var oneoff_random_spawn_data: Resource = load("res://resources/spawn_data/oneoff_random_spawn_data.tres")
 #Pickups:
-var xp_orb_blue: PackedScene = load("res://scenes/game_objects/experience_orb/experience_orb_blue.tscn")
-var xp_orb_yellow: PackedScene = load("res://scenes/game_objects/experience_orb/experience_orb_yellow.tscn")
-var xp_orb_red: PackedScene = load("res://scenes/game_objects/experience_orb/experience_orb_red.tscn")
+var xp_orb_blue: PackedScene = load("res://scenes/game_objects/pickups/experience_orb/experience_orb_blue.tscn")
+var xp_orb_yellow: PackedScene = load("res://scenes/game_objects/pickups/experience_orb/experience_orb_yellow.tscn")
+var xp_orb_red: PackedScene = load("res://scenes/game_objects/pickups/experience_orb/experience_orb_red.tscn")
 var xp_orbs: Array[PackedScene] = [xp_orb_blue, xp_orb_yellow, xp_orb_red]
-var health_pack_scene = load("res://scenes/game_objects/health_pack/health_pack.tscn")
+var health_pack_scene = load("res://scenes/game_objects/pickups/health_pack/health_pack.tscn")
 
 signal object_destroyed_signal(kill_count)
 
@@ -107,9 +107,9 @@ func process_data(data: Spawn_data):
 			if kill_count >= data.data.behavior_variation_start:
 				match data.wave_behavior_variation:
 					Spawn_data.Wave_behavior_variation.INCREASING:
-						data.kill_target += data.behavior_variation_amount
+						data.kill_target += int(data.behavior_variation_amount)
 					Spawn_data.Wave_behavior_variation.DECREASING:
-						data.kill_target -= data.behavior_variation_amount
+						data.kill_target -= int(data.behavior_variation_amount)
 						if data.kill_target < 1: data.seconds_between_waves = 1
 		
 	match data.repeat_until:
@@ -224,7 +224,7 @@ func add_score(health_amt: int):
 	
 	
 func prep_loot_crate():
-	var loot_array: Array[Loot_module]
+	var loot_array: Array[Loot_module] = []
 	var player_health_percent = App.player.get_health()
 	if player_health_percent < 1:
 		var health_pack_module = Loot_module.new()
@@ -243,7 +243,7 @@ func prep_loot_crate():
 	spawn_module.scene_to_spawn = crate_scene
 	spawn_module.spawn_probability = 100
 	spawn_module.loot_module_array = loot_array
-	var spawn_module_array: Array[Spawn_module]
+	var spawn_module_array: Array[Spawn_module] = []
 	spawn_module_array.append(spawn_module)
 	prepare_oneshot_spawn_data(spawn_module_array)
 	

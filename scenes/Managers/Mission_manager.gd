@@ -24,7 +24,7 @@ func _process(_delta):
 	if current_objective != null:
 		if current_objective.objective_type == Objective.Objective_type.SURVIVE:
 			if survive_timer.is_stopped() == false:
-				current_objective.update_survival_objective(survive_timer.time_left)
+				current_objective.update_survival_objective(int(survive_timer.time_left))
 		
 		
 func start_mission():

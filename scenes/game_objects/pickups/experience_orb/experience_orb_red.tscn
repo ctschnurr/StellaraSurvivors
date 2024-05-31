@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://nw0xpvmoj4ol"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/pickups/experience_orb/experience_orb.gd" id="1_ndki2"]
+[ext_resource type="Texture2D" uid="uid://cu4rajt1rm1t5" path="res://scenes/game_objects/pickups/experience_orb/xp_orb_red.png" id="2_qxajg"]
+[ext_resource type="Shape2D" uid="uid://35lmvwy8udv0" path="res://scenes/game_objects/pickups/pickup_ray_sphere.tres" id="3_yeost"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r06yx"]
+radius = 15.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csfu0"]
+atlas = ExtResource("2_qxajg")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sr0qk"]
+atlas = ExtResource("2_qxajg")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_guy2k"]
+atlas = ExtResource("2_qxajg")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kauyb"]
+atlas = ExtResource("2_qxajg")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cxvc3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_csfu0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sr0qk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_guy2k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kauyb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_11skx"]
+radius = 15.0
+
+[node name="Experience_orb_red" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_ndki2")
+xp_amount = 5.0
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("CircleShape2D_r06yx")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cxvc3")
+autoplay = "default"
+frame_progress = 0.316787
+
+[node name="ShapeCast" type="ShapeCast2D" parent="."]
+unique_name_in_owner = true
+visible = false
+shape = ExtResource("3_yeost")
+target_position = Vector2(0, 0)
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_11skx")

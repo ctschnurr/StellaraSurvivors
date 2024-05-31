@@ -17,6 +17,7 @@ var trauma_power = 2  # Trauma exponent. Use [2, 3].
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	@warning_ignore("integer_division")
 	global_position = Vector2(App.play_area_x_max / 2, App.play_area_y_max / 2)
 	make_current();
 	App.camera = self
