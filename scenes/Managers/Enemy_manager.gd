@@ -17,7 +17,7 @@ var kill_count = 0
 #enum Enemy_type{ASTEROID_SMALL, ASTEROID_MEDIUM, ASTEROID_LARGE}
 #@onready var enemy_dictionary: Dictionary = {"ASTEROID_SMALL": asteroid_small, #"ASTEROID_MEDIUM": asteroid_medium, "ASTEROID_LARGE": asteroid_large}
 
-var location_mod_amount = 300
+#var location_mod_amount = 300
 
 var spawn_commands: Array
 var current_command: Spawn_command

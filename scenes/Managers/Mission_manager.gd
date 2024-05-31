@@ -5,6 +5,7 @@ var game_manager: Game_manager
 var player: Player
 
 @export var possible_spawn_commands:Array[Spawn_command] = []
+@export var possible_spawn_datas:Array[Spawn_data] = []
 
 var objective_text = null
 var bolts: Array
@@ -30,15 +31,16 @@ func start_mission():
 	App.instantiate_player()
 	App.player.mission_manager = self
 	App.player.global_position = Vector2(App.play_area_x_max / 2, App.play_area_y_max / 2)
+
+	#var spawn_command: Spawn_command = possible_spawn_commands.pick_random().duplicate()
+	#App.enemy_manager.add_command(spawn_command)
 	
+	var spawn_data: Spawn_data = possible_spawn_datas.pick_random().duplicate()
+	App.spawn_manager.add_data(spawn_data)
 	
+	current_objective = spawn_data.associated_objective
 	
-	
-	# old system:
-	var spawn_command: Spawn_command = possible_spawn_commands.pick_random().duplicate()
-	App.enemy_manager.add_command(spawn_command)
-	
-	current_objective = spawn_command.associated_objective
+	#current_objective = spawn_command.associated_objective
 	current_objective.objective_complete_signal.connect(complete_objective, CONNECT_ONE_SHOT)
 	current_objective.objective_updated_signal.connect(update_objective)
 	current_objective.update_objective_info()

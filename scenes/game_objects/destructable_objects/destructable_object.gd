@@ -1,12 +1,12 @@
 class_name Destructable_object extends CharacterBody2D
 
-@onready var enemy_manager: Enemy_manager
+@onready var spawn_manager: Spawn_manager
 
 var object_sprite
 @onready var health_component: HealthComponent = %HealthComponent
 @onready var explosion_effect_scene = load("res://scenes/effects/asteroid_explosion.tscn")
 @onready var impact_effect_scene = load("res://scenes/effects/asteroid_impact.tscn")
-@onready var cluster_command = load("res://resources/asteroid_cluster_command.tres")
+@onready var burst_data = load("res://resources/spawn_data/spawn_data_burst.tres")
 @export var spawn_module_array: Array[Spawn_module]
 var loot_module_array: Array[Loot_module]
 
@@ -194,7 +194,7 @@ func send_spawn_module_array():
 	if spawn_module_array.size() == 0: return
 	#if size == Asteroid_size.SMALL: return
 	
-	var command = cluster_command.duplicate() as Spawn_command
-	command.spawn_location = global_position
-	command.possible_enemies = spawn_module_array
-	enemy_manager.add_command(command)
+	var data = burst_data.duplicate() as Spawn_data
+	data.defined_spawn_position = global_position
+	data.who_to_spawn = spawn_module_array
+	spawn_manager.add_data(data)

@@ -2,6 +2,7 @@ extends Node
 class_name Game_manager
 
 var input_set: bool = false
+var game_timer = Timer
 
 func _ready():
 	SoundManager.set_default_music_bus("Music")

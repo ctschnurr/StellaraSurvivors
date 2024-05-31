@@ -10,12 +10,12 @@ const TARGET_XP_GROWTH = 5
 const UPGRADES_PER_LEVEL = 2
 const BASE_PICKUP_ATTRACT: float = 150
 
-const play_area_x_min = 0
-const play_area_x_max = 1280
-const play_area_y_min = 0
-const play_area_y_max = 720
+const play_area_x_min = -100
+const play_area_x_max = 1380
+const play_area_y_min = -100
+const play_area_y_max = 820
 
-const CRATE_EVENT_TARGET: float = 10.0
+const CRATE_EVENT_TARGET: float = 25.0
 
 var main_music: AudioStream = load("res://resources/audio/Cosmic Journey.mp3")
 var asteroid_collision_sound: AudioStream = load("res://resources/audio/asteroid_collision.wav")

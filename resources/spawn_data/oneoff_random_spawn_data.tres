@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Spawn_data" load_steps=2 format=3 uid="uid://dp2rnlqqa6b3m"]
+
+[ext_resource type="Script" path="res://resources/spawn_data/spawn_data.gd" id="1_1wa6f"]
+
+[resource]
+script = ExtResource("1_1wa6f")
+who_to_spawn = Array[Resource("res://resources/spawn_modules/spawn_module.gd")]([])
+how_to_spawn = 0
+where_to_spawn = 0
+defined_spawn_position = Vector2(0, 0)
+quantity_per_wave = 1
+quantity_variation_behavior = 0
+quantity_change_start_seconds = 1
+quantity_change_increase_seconds = 1
+quantity_change_amount = 1
+repeat_until = 1
+number_of_waves = 0
+total_time_in_minutes = 0.0
+wave_behavior = 0
+wave_behavior_variation = 0
+seconds_between_waves = 0.0
+kill_target = 0
+behavior_variation_start = 0.0
+behavior_variation_amount = 0.0
