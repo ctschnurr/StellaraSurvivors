@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://ufwlefymwwqa"]
+
+[ext_resource type="Texture2D" uid="uid://c131sdwoqq0y6" path="res://scenes/game_objects/pickups/pickups_spritesheet.png" id="1_efuny"]
+[ext_resource type="Shape2D" uid="uid://35lmvwy8udv0" path="res://scenes/game_objects/pickups/pickup_ray_sphere.tres" id="2_j1gv2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edalx"]
+atlas = ExtResource("1_efuny")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_np7sv"]
+atlas = ExtResource("1_efuny")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r422s"]
+atlas = ExtResource("1_efuny")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exq41"]
+atlas = ExtResource("1_efuny")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3gqpy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edalx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_np7sv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r422s")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_exq41")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_splsq"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hia7a"]
+radius = 20.0
+
+[node name="Attract_pickup" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_3gqpy")
+autoplay = "default"
+frame_progress = 0.793032
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_splsq")
+
+[node name="ShapeCast" type="ShapeCast2D" parent="."]
+unique_name_in_owner = true
+visible = false
+shape = ExtResource("2_j1gv2")
+target_position = Vector2(0, 0)
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_hia7a")

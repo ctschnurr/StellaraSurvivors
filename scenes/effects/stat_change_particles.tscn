@@ -16,7 +16,7 @@ lifetime = 0.75
 one_shot = true
 texture = ExtResource("1_1rp4p")
 direction = Vector2(0, -1)
-spread = 0.0
+spread = 30.0
 gravity = Vector2(0, 500)
 initial_velocity_min = 100.0
 initial_velocity_max = 100.0
@@ -28,27 +28,15 @@ script = ExtResource("2_4vvpy")
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true
 transparent_bg = true
-size = Vector2i(64, 64)
-size_2d_override_stretch = true
+size = Vector2i(64, 78)
+render_target_update_mode = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="SubViewport"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -12.5
-offset_top = -18.0
-offset_right = 12.5
-offset_bottom = 18.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Label" type="Label" parent="SubViewport/MarginContainer"]
+[node name="ParticleLabel" type="Label" parent="SubViewport"]
 unique_name_in_owner = true
-layout_mode = 2
+offset_left = 19.5
+offset_top = 21.0
+offset_right = 44.5
+offset_bottom = 57.0
 theme = ExtResource("2_5c5sc")
 theme_override_font_sizes/font_size = 30
 text = "1"

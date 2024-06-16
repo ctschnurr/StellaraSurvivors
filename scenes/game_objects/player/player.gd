@@ -76,6 +76,9 @@ func _process(delta):
 			if Input.is_action_pressed("input_fire"):
 				fire_blaster()
 				
+			if Input.is_action_just_pressed("input_pulse"):
+				App.spawn_manager.spawn_rocket(fire_position.global_position, ship_cannon.global_rotation)
+				
 
 func get_movement_vector():
 	var x_movement = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -188,7 +191,7 @@ func player_hurt(_damage):
 	
 func player_died(_max_health):
 	state = State.INACTIVE
-	engine_particles.queue_free()
+	#engine_particles.queue_free()
 	var tween = get_tree().create_tween()
 	tween.parallel().tween_property(ship_body, "modulate", Color(100, 100, 100, 100), 0.25)
 	tween.parallel().tween_property(ship_cannon, "modulate", Color(100, 100, 100, 100), 0.25)

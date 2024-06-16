@@ -38,7 +38,7 @@ func get_survive_time_left():
 func start_mission():
 	App.instantiate_player()
 	App.player.mission_manager = self
-	App.player.global_position = Vector2(App.play_area_x_max / 2, App.play_area_y_max / 2)
+	App.player.global_position = App.play_area_mid
 
 	#var spawn_command: Spawn_command = possible_spawn_commands.pick_random().duplicate()
 	#App.enemy_manager.add_command(spawn_command)
@@ -70,8 +70,8 @@ func start_mission():
 	
 	
 func end_mission():
-	if current_objective.objective_type == Objective.Objective_type.SURVIVE:
-		pass
+	#if current_objective.objective_type == Objective.Objective_type.SURVIVE:
+		#pass
 		
 	current_objective = null
 	

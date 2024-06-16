@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Spawn_module" load_steps=8 format=3 uid="uid://d0vqv3173v41n"]
+
+[ext_resource type="PackedScene" uid="uid://cj8vlhs1s27in" path="res://scenes/game_objects/pickups/experience_orb/experience_orb_yellow.tscn" id="1_fhyow"]
+[ext_resource type="PackedScene" uid="uid://cnmjaqosxxcng" path="res://scenes/game_objects/pickups/experience_orb/experience_orb_blue.tscn" id="1_qsksv"]
+[ext_resource type="Script" path="res://resources/loot_modules/loot_module.gd" id="2_6m736"]
+[ext_resource type="PackedScene" uid="uid://de6khcv1nexs0" path="res://scenes/game_objects/enemies/asteroids/asteroid_med.tscn" id="3_iohb1"]
+[ext_resource type="Script" path="res://resources/spawn_modules/spawn_module.gd" id="4_6lh0n"]
+
+[sub_resource type="Resource" id="Resource_1h3wb"]
+script = ExtResource("2_6m736")
+loot_scene = ExtResource("1_fhyow")
+loot_drop_probability = 100
+
+[sub_resource type="Resource" id="Resource_w8tu5"]
+script = ExtResource("2_6m736")
+loot_scene = ExtResource("1_qsksv")
+loot_drop_probability = 25
+
+[resource]
+script = ExtResource("4_6lh0n")
+scene_to_spawn = ExtResource("3_iohb1")
+spawn_probability = 35
+loot_module_array = Array[ExtResource("2_6m736")]([SubResource("Resource_1h3wb"), SubResource("Resource_w8tu5")])

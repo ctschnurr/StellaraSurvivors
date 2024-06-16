@@ -28,7 +28,7 @@ func damage(damage_amount: float):
 		hurt.emit(current_health)
 		Callable(check_death).call_deferred()
 		App.spawn_manager.spawn_status_effect_particles(damage_amount, Color.RED, owner.global_position)
-		await get_tree().create_timer(0.15).timeout
+		await get_tree().create_timer(0.25).timeout
 		vulnerable = true
 		
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d27as0jcit56m"]
+[gd_scene load_steps=16 format=3 uid="uid://d27as0jcit56m"]
 
 [ext_resource type="Script" path="res://scenes/main/Game_manager.gd" id="1_bqipc"]
 [ext_resource type="Script" path="res://scenes/Managers/Mission_manager.gd" id="2_fmjb6"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cqgyrofudt8mb" path="res://scenes/Managers/spawn_manager.tscn" id="7_h826u"]
 [ext_resource type="PackedScene" uid="uid://cs36w4xgew7pk" path="res://scenes/UI/win_screen.tscn" id="9_4gj86"]
 [ext_resource type="PackedScene" uid="uid://55lv4btmtybt" path="res://scenes/Managers/enemy_manager.tscn" id="9_pjcio"]
+[ext_resource type="PackedScene" uid="uid://bspdvgidt3b4r" path="res://scenes/game_objects/explosion/explosion.tscn" id="9_vuock"]
 [ext_resource type="PackedScene" uid="uid://uf37o2pc5jnx" path="res://scenes/Managers/screen_manager.tscn" id="10_bdcnj"]
 [ext_resource type="TileSet" uid="uid://c8qvj247x6ny6" path="res://resources/space_tileset.tres" id="12_1o13u"]
 [ext_resource type="PackedScene" uid="uid://b645103cbbe1x" path="res://scenes/game_objects/game_camera/game_camera.tscn" id="13_f7ttr"]
@@ -37,6 +38,7 @@ experience_manager = NodePath("../Experience_manager")
 [node name="Enemy_manager" parent="." instance=ExtResource("9_pjcio")]
 
 [node name="Spawn_manager" parent="." instance=ExtResource("7_h826u")]
+explosion_scene = ExtResource("9_vuock")
 
 [node name="Event_manager" parent="." instance=ExtResource("4_38ncw")]
 

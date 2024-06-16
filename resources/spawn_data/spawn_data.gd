@@ -60,9 +60,9 @@ enum Wave_behavior_variation{STEADY,INCREASING,DECREASING}
 
 @export_subgroup("- If Behavior Variation != Steady:")
 ## Input Time in Seconds or Kill Amount Reached when variation should start.
-@export var behavior_variation_start: float = 0
-## Input Time in Seconds or Kill Amount that should be deducted from wave goal.
-@export var behavior_variation_amount: float = 0
+@export var behavior_change_start_amount: int = 1
+@export var behavior_change_start_increase: int = 1
+@export var behavior_change_amount: int = 1
 
 @export_group("If spawns are tied to an objective:")
 

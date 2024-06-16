@@ -9,12 +9,15 @@ const START_TARGET_XP = 3
 const TARGET_XP_GROWTH = 5
 const UPGRADES_PER_LEVEL = 2
 const BASE_PICKUP_ATTRACT: float = 150
-const GOLDEN_ASTEROID_CHANCE: int = 2
+const GOLDEN_ASTEROID_CHANCE: int = 1
+const STAT_CHANGE_PARTICLE_MULTIPLIER: int = 1
 
-const play_area_x_min = -100
-const play_area_x_max = 1380
-const play_area_y_min = -100
-const play_area_y_max = 820
+const play_area_x_min = 0
+const play_area_x_max = 1280
+const play_area_y_min = 0
+const play_area_y_max = 720
+
+const play_area_mid = Vector2(play_area_x_max / 2, play_area_y_max / 2)
 
 const CRATE_EVENT_TARGET: float = 25.0
 

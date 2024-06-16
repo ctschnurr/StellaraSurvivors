@@ -1,5 +1,8 @@
 class_name Spawn_manager extends Node
 
+#temp
+@export var explosion_scene: PackedScene
+
 var oneoff_random_spawn_data: Resource = load("res://resources/spawn_data/oneoff_random_spawn_data.tres")
 #Pickups:
 var xp_orb_blue: PackedScene = load("res://scenes/game_objects/pickups/experience_orb/experience_orb_blue.tscn")
@@ -7,13 +10,14 @@ var xp_orb_yellow: PackedScene = load("res://scenes/game_objects/pickups/experie
 var xp_orb_red: PackedScene = load("res://scenes/game_objects/pickups/experience_orb/experience_orb_red.tscn")
 var xp_orbs: Array[PackedScene] = [xp_orb_blue, xp_orb_yellow, xp_orb_red]
 var health_pack_scene = load("res://scenes/game_objects/pickups/health_pack/health_pack.tscn")
+var rocket_scene = load("res://scenes/game_objects/rocket/rocket.tscn")
 
 signal object_destroyed_signal(kill_count)
 
 var spawn_datas: Array
 
 var spawned_objects: Array
-var spawned_bolts: Array
+var spawned_weapons: Array
 var spawned_pickups: Array
 var spawned_effects: Array
 
@@ -45,9 +49,9 @@ func clear_spawns():
 		if object != null: object.queue_free()
 	spawned_objects = []
 
-	for bolt in spawned_bolts:
-		if bolt != null: bolt.queue_free()	
-	spawned_bolts = []
+	for weapon in spawned_weapons:
+		if weapon != null: weapon.queue_free()	
+	spawned_weapons = []
 
 	for pickup in spawned_pickups:
 		if pickup != null: pickup.queue_free()	
@@ -70,18 +74,6 @@ func add_data(data: Spawn_data):
 	if data.total_time_in_minutes == 0: data.total_time_in_minutes = (60 * 100)
 	data_timer.start(data.total_time_in_minutes)
 	data.associated_timer = data_timer
-	
-	
-func spawn_status_effect_particles(input, color: Color, position):
-	var stat_effect = App.stat_change_particles.instantiate() as Stat_particles
-	add_child(stat_effect)
-	stat_effect.set_label(str(input), color)
-	stat_effect.position = position
-	stat_effect.restart()
-	spawned_effects.append(stat_effect)
-	await stat_effect.finished
-	spawned_effects.erase(spawned_effects)
-	stat_effect.queue_free()
 
 
 func process_data(data: Spawn_data):
@@ -100,18 +92,22 @@ func process_data(data: Spawn_data):
 			data.quantity_per_wave += data.quantity_change_amount
 			
 					
-	print("Seconds Passed: ", int(data.associated_timer.wait_time - data.associated_timer.time_left), " Quantity Per Wave: ", data.quantity_per_wave, " Next Change: ", data.quantity_change_start_seconds)
+	print("Time: ", int(data.associated_timer.wait_time - data.associated_timer.time_left), " Qty: ", data.quantity_per_wave, " Next Change: ", data.quantity_change_start_seconds)
 	
 	match data.wave_behavior:
 		Spawn_data.Wave_behavior.TIMER_BASED:
-			if int(data.associated_timer.wait_time - data.associated_timer.time_left) > data.behavior_variation_start:
+			var seconds_passed = data.associated_timer.wait_time - data.associated_timer.time_left
+			if int(seconds_passed) > data.behavior_change_start_amount:
+				data.behavior_change_start_amount += data.behavior_change_start_increase
+
 				match data.wave_behavior_variation:
 					Spawn_data.Wave_behavior_variation.INCREASING:
-						data.seconds_between_waves += data.behavior_variation_amount
+						data.seconds_between_waves += data.behavior_change_amount
 					Spawn_data.Wave_behavior_variation.DECREASING:
-						data.seconds_between_waves -= data.behavior_variation_amount
+						data.seconds_between_waves -= data.behavior_change_amount
 						if data.seconds_between_waves < 1: data.seconds_between_waves = 1
-		
+			print("Time: ", int(data.associated_timer.wait_time - data.associated_timer.time_left), " SBW: ", data.seconds_between_waves, " Next Change: ", data.behavior_change_start_amount)
+			
 		Spawn_data.Wave_behavior.KILL_BASED:
 			if kill_count >= data.data.behavior_variation_start:
 				match data.wave_behavior_variation:
@@ -191,6 +187,7 @@ func spawn_burst(data: Spawn_data):
 				elif module.spawn_probability < lowest.spawn_probability: lowest = module
 				
 		var new_spawn = lowest.scene_to_spawn.instantiate()
+		new_spawn.loot_module_array = lowest.loot_module_array
 		add_child(new_spawn)
 		spawned_objects.append(new_spawn)
 		asteroids.append(new_spawn)
@@ -211,14 +208,26 @@ func spawn_burst(data: Spawn_data):
 			data.associated_objective.connect_signal(asteroid.health_component.died)
 
 
+func spawn_status_effect_particles(input, color: Color, position):
+	var stat_effect = App.stat_change_particles.instantiate() as Stat_particles
+	add_child(stat_effect)
+	stat_effect.set_label(input, color)
+	stat_effect.position = position
+	stat_effect.restart()
+	spawned_effects.append(stat_effect)
+	await stat_effect.finished
+	spawned_effects.erase(stat_effect)
+	stat_effect.queue_free()
+	
+
 func pick_location():
 	var rand = randi_range(1, 4)
 	var location = Vector2.ZERO
 	match rand:
-		1: location = Vector2(randf_range(App.play_area_x_min, App.play_area_x_max), randf_range(App.play_area_y_min - 400, App.play_area_y_min - 50))
-		2: location = Vector2(randf_range(App.play_area_x_min, App.play_area_x_max), randf_range(App.play_area_y_max + 50, App.play_area_y_max + 400))
-		3: location = Vector2(randf_range(App.play_area_x_min - 400, App.play_area_x_min - 50), randf_range(App.play_area_y_min, App.play_area_y_max))
-		4: location = Vector2(randf_range(App.play_area_x_max + 50, App.play_area_x_max + 400), randf_range(App.play_area_y_min, App.play_area_y_max))
+		1: location = Vector2(randf_range(App.play_area_x_min, App.play_area_x_max), randf_range(App.play_area_y_min - 500, App.play_area_y_min - 100))
+		2: location = Vector2(randf_range(App.play_area_x_min, App.play_area_x_max), randf_range(App.play_area_y_max + 100, App.play_area_y_max + 500))
+		3: location = Vector2(randf_range(App.play_area_x_min - 500, App.play_area_x_min - 100), randf_range(App.play_area_y_min, App.play_area_y_max))
+		4: location = Vector2(randf_range(App.play_area_x_max + 100, App.play_area_x_max + 500), randf_range(App.play_area_y_min, App.play_area_y_max))
 	return location
 
 
@@ -234,6 +243,8 @@ func add_score(health_amt: int):
 	
 func prep_loot_crate():
 	var loot_array: Array[Loot_module] = []
+	
+	#Checks if player needs healing:
 	var player_health_percent = App.player.get_health()
 	if player_health_percent < 1:
 		var health_pack_module = Loot_module.new()
@@ -256,9 +267,26 @@ func prep_loot_crate():
 	spawn_module_array.append(spawn_module)
 	prepare_oneshot_spawn_data(spawn_module_array)
 	
+	
 func prepare_oneshot_spawn_data(spawn_module_array: Array[Spawn_module]):
 	var new_spawn_data: Spawn_data = oneoff_random_spawn_data.duplicate()
 	new_spawn_data.who_to_spawn = spawn_module_array
 	add_data(new_spawn_data)
 	
+
+func spawn_expolsion(location):
+	deferred_explosion.call_deferred(location)
 	
+	
+func deferred_explosion(location):
+	var explosion_instance = explosion_scene.instantiate() as Node2D
+	add_child(explosion_instance)
+	explosion_instance.global_position = location
+
+	
+func spawn_rocket(location, rotation):
+	var rocket_instance = rocket_scene.instantiate() as Node2D
+	get_tree().root.add_child(rocket_instance)
+	spawned_weapons.append(rocket_instance)
+	rocket_instance.global_position = location
+	rocket_instance.global_rotation = rotation

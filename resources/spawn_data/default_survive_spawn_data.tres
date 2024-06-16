@@ -1,76 +1,18 @@
-[gd_resource type="Resource" script_class="Spawn_data" load_steps=20 format=3 uid="uid://8grhxfgc76dh"]
+[gd_resource type="Resource" script_class="Spawn_data" load_steps=5 format=3 uid="uid://8grhxfgc76dh"]
 
 [ext_resource type="Script" path="res://resources/spawn_data/spawn_data.gd" id="1_gneu4"]
-[ext_resource type="PackedScene" uid="uid://cnmjaqosxxcng" path="res://scenes/game_objects/pickups/experience_orb/experience_orb_blue.tscn" id="2_povdn"]
-[ext_resource type="Script" path="res://resources/loot_modules/loot_module.gd" id="3_f4q6u"]
-[ext_resource type="PackedScene" uid="uid://si6pecgkgbey" path="res://scenes/game_objects/enemies/asteroids/asteroid_sm.tscn" id="4_du2lr"]
-[ext_resource type="Script" path="res://resources/spawn_modules/spawn_module.gd" id="5_jbjj1"]
-[ext_resource type="PackedScene" uid="uid://cj8vlhs1s27in" path="res://scenes/game_objects/pickups/experience_orb/experience_orb_yellow.tscn" id="6_q6qlb"]
-[ext_resource type="PackedScene" uid="uid://de6khcv1nexs0" path="res://scenes/game_objects/enemies/asteroids/asteroid_med.tscn" id="7_hli3t"]
-[ext_resource type="PackedScene" uid="uid://nw0xpvmoj4ol" path="res://scenes/game_objects/pickups/experience_orb/experience_orb_red.tscn" id="8_eeb1l"]
-[ext_resource type="PackedScene" uid="uid://d0lsq5yi27jo1" path="res://scenes/game_objects/enemies/asteroids/asteroid_lg.tscn" id="9_48cpv"]
-
-[sub_resource type="Resource" id="Resource_ao6o6"]
-script = ExtResource("3_f4q6u")
-loot_scene = ExtResource("2_povdn")
-loot_drop_probability = 100
-
-[sub_resource type="Resource" id="Resource_r5r4h"]
-script = ExtResource("3_f4q6u")
-loot_scene = ExtResource("2_povdn")
-loot_drop_probability = 25
-
-[sub_resource type="Resource" id="Resource_vg8py"]
-script = ExtResource("5_jbjj1")
-scene_to_spawn = ExtResource("4_du2lr")
-spawn_probability = 100
-loot_module_array = Array[ExtResource("3_f4q6u")]([SubResource("Resource_ao6o6"), SubResource("Resource_r5r4h")])
-
-[sub_resource type="Resource" id="Resource_aaep5"]
-script = ExtResource("3_f4q6u")
-loot_scene = ExtResource("6_q6qlb")
-loot_drop_probability = 100
-
-[sub_resource type="Resource" id="Resource_a1las"]
-script = ExtResource("3_f4q6u")
-loot_scene = ExtResource("2_povdn")
-loot_drop_probability = 35
-
-[sub_resource type="Resource" id="Resource_uogmn"]
-script = ExtResource("5_jbjj1")
-scene_to_spawn = ExtResource("7_hli3t")
-spawn_probability = 35
-loot_module_array = Array[ExtResource("3_f4q6u")]([SubResource("Resource_aaep5"), SubResource("Resource_a1las")])
-
-[sub_resource type="Resource" id="Resource_c8has"]
-script = ExtResource("3_f4q6u")
-loot_scene = ExtResource("8_eeb1l")
-loot_drop_probability = 100
-
-[sub_resource type="Resource" id="Resource_xl2nq"]
-script = ExtResource("3_f4q6u")
-loot_scene = ExtResource("6_q6qlb")
-loot_drop_probability = 20
-
-[sub_resource type="Resource" id="Resource_uox8o"]
-script = ExtResource("3_f4q6u")
-loot_scene = ExtResource("2_povdn")
-loot_drop_probability = 40
-
-[sub_resource type="Resource" id="Resource_eox3n"]
-script = ExtResource("5_jbjj1")
-scene_to_spawn = ExtResource("9_48cpv")
-spawn_probability = 10
-loot_module_array = Array[ExtResource("3_f4q6u")]([SubResource("Resource_c8has"), SubResource("Resource_xl2nq"), SubResource("Resource_uox8o")])
+[ext_resource type="Resource" uid="uid://d4kmx3vvtxu61" path="res://resources/spawn_modules/small_asteroid_default_module.tres" id="2_et6i8"]
+[ext_resource type="Resource" uid="uid://d0vqv3173v41n" path="res://resources/spawn_modules/medium_asteroid_default_module.tres" id="3_6bwi5"]
+[ext_resource type="Resource" uid="uid://diqirdfewsmg7" path="res://resources/spawn_modules/large_asteroid_default_module.tres" id="4_rnod6"]
 
 [resource]
 script = ExtResource("1_gneu4")
-who_to_spawn = Array[ExtResource("5_jbjj1")]([SubResource("Resource_vg8py"), SubResource("Resource_uogmn"), SubResource("Resource_eox3n")])
+who_to_spawn = Array[Resource("res://resources/spawn_modules/spawn_module.gd")]([ExtResource("2_et6i8"), ExtResource("3_6bwi5"), ExtResource("4_rnod6")])
 who_description = "asteroid"
 how_to_spawn = 0
 where_to_spawn = 0
 defined_spawn_position = Vector2(0, 0)
-quantity_per_wave = 5
+quantity_per_wave = 6
 quantity_variation_behavior = 1
 quantity_change_start_seconds = 60
 quantity_change_increase_seconds = 60
@@ -79,8 +21,9 @@ repeat_until = 0
 number_of_waves = 1
 total_time_in_minutes = 0.0
 wave_behavior = 0
-wave_behavior_variation = 0
+wave_behavior_variation = 2
 seconds_between_waves = 10.0
 kill_target = 0
-behavior_variation_start = 0.0
-behavior_variation_amount = 0.0
+behavior_change_start_amount = 60
+behavior_change_start_increase = 60
+behavior_change_amount = 1
