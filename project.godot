@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 App="*res://scenes/autoload/app.tscn"
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
 
+[debug]
+
+gdscript/warnings/integer_division=0
+
 [display]
 
 window/size/viewport_width=1280

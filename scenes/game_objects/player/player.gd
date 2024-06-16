@@ -102,7 +102,7 @@ func get_controller_look():
 func fire_blaster():
 	if gun_ready:
 		gun_ready = false
-		SoundManager.play_sound(blaster_sound)
+		SoundManager.play_ambient_sound(blaster_sound)
 		App.enemy_manager.spawn_blaster_bolt(fire_position.global_position, ship_cannon.global_rotation)
 		ship_body.stop()
 		ship_body.play("player_fire")
@@ -175,7 +175,7 @@ func heal(heal_amt):
 	
 	
 func player_hurt(_damage):
-	SoundManager.play_sound(App.player_hurt_sound)
+	SoundManager.play_ambient_sound(App.player_hurt_sound)
 	var tween = get_tree().create_tween()
 	
 	tween.tween_property(ship_body, "scale", Vector2(1.25, 1.25), 0.1)
@@ -206,7 +206,7 @@ func player_died(_max_health):
 	
 func play_explosion_effect():
 	App.camera.add_trauma(0.5)
-	SoundManager.play_sound(App.asteroid_burst_sound)
+	SoundManager.play_ambient_sound(App.asteroid_burst_sound)
 	var effect = explosion_effect.instantiate() as CPUParticles2D
 	add_child(effect)
 	effect.global_position = global_position

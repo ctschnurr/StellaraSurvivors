@@ -7,7 +7,7 @@ var game_timer = Timer
 func _ready():
 	SoundManager.set_default_music_bus("Music")
 	SoundManager.set_default_ambient_sound_bus("Sound")
-	SoundManager.set_sound_volume(0.5)
+	SoundManager.set_ambient_sound_volume(0.5)
 	SoundManager.set_music_volume(0.5)
 	SoundManager.play_music(App.main_music, 2.5, "Music")
 	App.screen_manager.show_main_menu()

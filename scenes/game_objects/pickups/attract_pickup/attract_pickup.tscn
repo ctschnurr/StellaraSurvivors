@@ -31,7 +31,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_r422s")
 }, {
-"duration": 2.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_exq41")
 }],
 "loop": true,
@@ -53,7 +53,7 @@ collision_mask = 0
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_3gqpy")
 autoplay = "default"
-frame_progress = 0.793032
+frame_progress = 0.211548
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

@@ -215,11 +215,17 @@ func add_score(health_amt: int):
 	
 func spawn_drops(location: Vector2, loot_dictionary: Array):
 	var loot_roll = randi_range(1, 100)
+	var pickup_group: Array
 	for loot: Loot_module in loot_dictionary:			
 		if loot_roll <= loot.loot_drop_probability:
 			var new_drop = loot.loot_scene.instantiate() as Pickup
 			pickups.append(new_drop)
+			pickup_group.append(new_drop)
 			if new_drop is Experience_orb:
 				App.experience_manager.connect_orb_signal(new_drop.collected)
 			new_drop.global_position = location
 			get_tree().root.add_child(new_drop)
+			
+	for pickup in pickup_group:
+		var direction = Vector2(randf_range(-1, 1), randf_range(-1, 1))
+		pickup.velocity = direction * (pickup_group.size() * 50)

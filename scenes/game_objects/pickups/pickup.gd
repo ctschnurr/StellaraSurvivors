@@ -5,6 +5,8 @@ var player_in_range: bool = false
 @onready var shapecast: ShapeCast2D = %ShapeCast
 
 
+var target_velocity = Vector2.ZERO
+
 func _ready():
 	pass
 	
@@ -13,10 +15,12 @@ func _process(delta):
 	if App.player != null:
 	
 		if App.player != null and global_position.distance_to(App.player.global_position) < App.pickup_attract_distance:
-			var target_velocity = global_position.direction_to(App.player.global_position) * (App.pickup_attract_distance / global_position.distance_to(App.player.global_position) * 25)
+			target_velocity = global_position.direction_to(App.player.global_position) * (App.pickup_attract_distance / global_position.distance_to(App.player.global_position) * 25)
+		elif velocity != Vector2.ZERO:
+			target_velocity = Vector2.ZERO
 		
-			velocity = velocity.lerp(target_velocity, 1 - exp(-delta * 5))
-			move_and_slide()
+		velocity = velocity.lerp(target_velocity, 1 - exp(-delta * 5))
+		move_and_slide()
 		
 		
 func _physics_process(delta):

@@ -19,7 +19,7 @@ func _ready():
 	quit_button.focus_entered.connect(on_focus_entered)
 	
 func play_game():
-	SoundManager.play_sound(App.upgrade_selected_sound)
+	SoundManager.play_ambient_sound(App.upgrade_selected_sound)
 	screen_manager.play_game()
 	queue_free()
 	pass
@@ -49,7 +49,7 @@ func on_quit_entered():
 	
 	
 func on_focus_entered():
-	SoundManager.play_sound(App.asteroid_collision_sound)
+	SoundManager.play_ambient_sound(App.asteroid_collision_sound)
 	
 	
 

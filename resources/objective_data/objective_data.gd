@@ -27,7 +27,7 @@ func update_objective_info():
 			var time_left: int = App.mission_manager.get_survive_time_left()
 			if time_left > 0:
 				var seconds = time_left%60
-				var minutes: float = (time_left/60)%60
+				var minutes = (time_left/60)%60
 				objective_info = "Survive for %01d:%02d" %[minutes, seconds]
 				objective_updated_signal.emit(self, objective_info)
 			else:

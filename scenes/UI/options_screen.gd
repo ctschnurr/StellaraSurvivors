@@ -12,7 +12,7 @@ func _ready():
 	back_button.focus_entered.connect(on_focus_entered)
 	back_button.mouse_entered.connect(on_back_entered)
 	sfx_volume_slider.value_changed.connect(adjust_sound_volume)
-	sfx_volume_slider.value = SoundManager.get_sound_volume()
+	sfx_volume_slider.value = SoundManager.get_ambient_sound_volume()
 	sfx_volume_slider.mouse_entered.connect(on_sfx_entered)
 	sfx_volume_slider.focus_entered.connect(on_focus_entered)
 	music_volume_slider.value_changed.connect(adjust_music_volume)
@@ -23,6 +23,7 @@ func _ready():
 
 func adjust_sound_volume(value):
 	SoundManager.set_ambient_sound_volume(value)
+	SoundManager.set_sound_volume(value)
 	print("Sound: ", value)
 	
 	
@@ -32,7 +33,7 @@ func adjust_music_volume(value):
 	
 	
 func on_focus_entered():
-	SoundManager.play_sound(App.asteroid_collision_sound)
+	SoundManager.play_ambient_sound(App.asteroid_collision_sound)
 
 
 func on_back_entered():

@@ -209,7 +209,7 @@ func death_sequence(_dead_health):
 	tween.parallel().tween_property(object_sprite, "modulate:a", 0, 0.25)
 	tween.parallel().tween_callback(object_explosion).set_delay(0.1)
 	tween.tween_callback(send_spawn_module_array).set_delay(0.11)
-	tween.tween_callback(spawn_drops).set_delay(0.11)
+	tween.tween_callback(spawn_drops)
 
 	
 func spawn_drops():

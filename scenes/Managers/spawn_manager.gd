@@ -206,18 +206,6 @@ func spawn_burst(data: Spawn_data):
 		asteroid.health_component.died.connect(object_destroyed)
 		if data.associated_objective != null:
 			data.associated_objective.connect_signal(asteroid.health_component.died)
-
-
-func spawn_status_effect_particles(input, color: Color, position):
-	var stat_effect = App.stat_change_particles.instantiate() as Stat_particles
-	add_child(stat_effect)
-	stat_effect.set_label(input, color)
-	stat_effect.position = position
-	stat_effect.restart()
-	spawned_effects.append(stat_effect)
-	await stat_effect.finished
-	spawned_effects.erase(stat_effect)
-	stat_effect.queue_free()
 	
 
 func pick_location():
@@ -290,3 +278,15 @@ func spawn_rocket(location, rotation):
 	spawned_weapons.append(rocket_instance)
 	rocket_instance.global_position = location
 	rocket_instance.global_rotation = rotation
+	
+	
+func spawn_status_effect_particles(input, color: Color, position):
+	var stat_effect = App.stat_change_particles.instantiate() as Stat_particles
+	add_child(stat_effect)
+	stat_effect.set_label(input, color)
+	stat_effect.position = position
+	stat_effect.restart()
+	spawned_effects.append(stat_effect)
+	await stat_effect.finished
+	spawned_effects.erase(stat_effect)
+	stat_effect.queue_free()
