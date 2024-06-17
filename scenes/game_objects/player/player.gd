@@ -16,7 +16,7 @@ var sprites: Array = [ship_cannon, ship_body]
 @onready var health_component: HealthComponent = %HealthComponent
 @onready var engine_particles: CPUParticles2D = %EngineParticles
 
-@onready var blaster_sound: AudioStream = load("res://resources/audio/blaster.wav")
+@onready var blaster_sound: AudioStream = load("res://resources/audio/blaster2.wav")
 @export var explosion_effect: PackedScene
 
 var mission_manager: Mission_manager
@@ -102,7 +102,8 @@ func get_controller_look():
 func fire_blaster():
 	if gun_ready:
 		gun_ready = false
-		SoundManager.play_ambient_sound(blaster_sound)
+		var pitch = randf_range(0.8, 1.2)
+		SoundManager.play_sound_with_pitch(blaster_sound, pitch)
 		App.enemy_manager.spawn_blaster_bolt(fire_position.global_position, ship_cannon.global_rotation)
 		ship_body.stop()
 		ship_body.play("player_fire")

@@ -4,10 +4,10 @@
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="1_graix"]
 
 [node name="Upgrade_card" type="MarginContainer"]
-process_mode = 3
 custom_minimum_size = Vector2(300, 300)
 offset_right = 200.0
 offset_bottom = 300.0
+mouse_filter = 2
 theme = ExtResource("1_graix")
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
@@ -17,17 +17,27 @@ script = ExtResource("1_82vuh")
 
 [node name="PanelContainer" type="Button" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 300)
+process_mode = 3
+custom_minimum_size = Vector2(250, 300)
 layout_mode = 2
-mouse_filter = 1
 theme = ExtResource("1_graix")
+theme_type_variation = &"FlatButton"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
-layout_mode = 2
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 245.0
-offset_bottom = 295.0
+custom_minimum_size = Vector2(225, 275)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.5
+offset_top = -137.5
+offset_right = 112.5
+offset_bottom = 137.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2

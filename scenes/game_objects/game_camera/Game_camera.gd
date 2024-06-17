@@ -17,13 +17,15 @@ var trauma_power = 2  # Trauma exponent. Use [2, 3].
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	@warning_ignore("integer_division")
 	global_position = App.play_area_mid
 	make_current();
 	App.camera = self
 	
+	
 func add_trauma(amount):
-	trauma = min(trauma + (amount * 1.7), 1.0)
+	if trauma < App.CAMERA_TRAUMA_MAX:
+		trauma = min(trauma + (amount * 1.7), 1.0)
+		
 	
 func shake():
 	var amount = pow(trauma, trauma_power)

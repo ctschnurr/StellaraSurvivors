@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d27as0jcit56m"]
+[gd_scene load_steps=19 format=3 uid="uid://d27as0jcit56m"]
 
 [ext_resource type="Script" path="res://scenes/main/Game_manager.gd" id="1_bqipc"]
 [ext_resource type="Script" path="res://scenes/Managers/Mission_manager.gd" id="2_fmjb6"]
@@ -8,7 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://cehm72ns3ht5l" path="res://scenes/Managers/event_manager.tscn" id="4_38ncw"]
 [ext_resource type="PackedScene" uid="uid://davbxt12ss23f" path="res://scenes/Managers/upgrade_manager.tscn" id="5_xmfqf"]
 [ext_resource type="PackedScene" uid="uid://cqgyrofudt8mb" path="res://scenes/Managers/spawn_manager.tscn" id="7_h826u"]
+[ext_resource type="Resource" uid="uid://b6g6gp4a81rpk" path="res://resources/upgrades/fire_damage.tres" id="7_tfu58"]
+[ext_resource type="Resource" uid="uid://bkmr7i33e4tkt" path="res://resources/upgrades/fire_rate.tres" id="8_alp8b"]
 [ext_resource type="PackedScene" uid="uid://cs36w4xgew7pk" path="res://scenes/UI/win_screen.tscn" id="9_4gj86"]
+[ext_resource type="Resource" uid="uid://2lukh1xvutwe" path="res://resources/upgrades/speed_upgrade.tres" id="9_hlwa6"]
 [ext_resource type="PackedScene" uid="uid://55lv4btmtybt" path="res://scenes/Managers/enemy_manager.tscn" id="9_pjcio"]
 [ext_resource type="PackedScene" uid="uid://bspdvgidt3b4r" path="res://scenes/game_objects/explosion/explosion.tscn" id="9_vuock"]
 [ext_resource type="PackedScene" uid="uid://uf37o2pc5jnx" path="res://scenes/Managers/screen_manager.tscn" id="10_bdcnj"]
@@ -33,6 +36,7 @@ objective_array = Array[ExtResource("3_k2tlo")]([SubResource("Resource_ipnnd")])
 [node name="Experience_manager" parent="." instance=ExtResource("2_sc8ta")]
 
 [node name="Upgrade_manager" parent="." node_paths=PackedStringArray("experience_manager") instance=ExtResource("5_xmfqf")]
+upgrade_pool = Array[Resource("res://resources/upgrades/player_upgrade.gd")]([ExtResource("7_tfu58"), ExtResource("8_alp8b"), ExtResource("9_hlwa6")])
 experience_manager = NodePath("../Experience_manager")
 
 [node name="Enemy_manager" parent="." instance=ExtResource("9_pjcio")]

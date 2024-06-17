@@ -18,6 +18,7 @@ func _ready():
 	quit_button.mouse_entered.connect(on_quit_entered)
 	quit_button.focus_entered.connect(on_focus_entered)
 	
+	
 func play_game():
 	SoundManager.play_ambient_sound(App.upgrade_selected_sound)
 	screen_manager.play_game()

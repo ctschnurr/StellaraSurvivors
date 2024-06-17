@@ -26,7 +26,7 @@ func set_player_upgrades(upgrades: Array[Player_upgrade], current_upgrades: Dict
 		
 		new_cards.append(new_card)
 		
-	new_cards[0].panel.grab_focus()
+	#new_cards[0].panel.grab_focus()
 		
 func upgrade_clicked(upgrade: Player_upgrade):
 	upgrade_selected.emit(upgrade)

@@ -11,6 +11,7 @@ const UPGRADES_PER_LEVEL = 2
 const BASE_PICKUP_ATTRACT: float = 150
 const GOLDEN_ASTEROID_CHANCE: int = 1
 const STAT_CHANGE_PARTICLE_MULTIPLIER: int = 1
+const CAMERA_TRAUMA_MAX = 10
 
 const play_area_x_min = 0
 const play_area_x_max = 1280
