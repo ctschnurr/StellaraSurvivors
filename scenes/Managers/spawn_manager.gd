@@ -10,6 +10,7 @@ var xp_orb_yellow: PackedScene = load("res://scenes/game_objects/pickups/experie
 var xp_orb_red: PackedScene = load("res://scenes/game_objects/pickups/experience_orb/experience_orb_red.tscn")
 var xp_orbs: Array[PackedScene] = [xp_orb_blue, xp_orb_yellow, xp_orb_red]
 var health_pack_scene = load("res://scenes/game_objects/pickups/health_pack/health_pack.tscn")
+var blaster_bolt_scene = load("res://scenes/game_objects/blaster_bolt/blaster_bolt.tscn")
 var rocket_scene = load("res://scenes/game_objects/rocket/rocket.tscn")
 
 signal object_destroyed_signal(kill_count)
@@ -271,6 +272,16 @@ func deferred_explosion(location):
 	add_child(explosion_instance)
 	explosion_instance.global_position = location
 
+
+func spawn_blaster_bolt(location, rotation, damage, size):
+	var blaster_bolt_instance = blaster_bolt_scene.instantiate() as Node2D
+	blaster_bolt_instance.damage = damage
+	blaster_bolt_instance.size_mult = size
+	get_tree().root.add_child(blaster_bolt_instance)
+	spawned_weapons.append(blaster_bolt_instance)
+	blaster_bolt_instance.global_position = location
+	blaster_bolt_instance.global_rotation = rotation
+	
 	
 func spawn_rocket(location, rotation):
 	var rocket_instance = rocket_scene.instantiate() as Node2D

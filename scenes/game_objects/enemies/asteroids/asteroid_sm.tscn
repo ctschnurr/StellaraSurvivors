@@ -44,4 +44,4 @@ shape = SubResource("CircleShape2D_rvlpy")
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_gsxsf")]
 unique_name_in_owner = true
-max_health = 3.0
+max_health = 5.0

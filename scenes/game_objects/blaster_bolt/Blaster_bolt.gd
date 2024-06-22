@@ -7,6 +7,9 @@ const ACCELERATION_SMOOTHING = 25
 @onready var timer = $Timer
 @export var hit_box: Area2D
 
+@export var damage = 1
+@export var size_mult = 1
+
 var direction = Vector2.ZERO
 var default_damage = 1
 
@@ -16,9 +19,9 @@ var default_damage = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	hitbox.damage = default_damage + App.player.damage_level
+	hitbox.damage = damage + (damage * size_mult)
 	hitbox.hit.connect(blaster_hit)
-	var scale_factor = default_damage + (hitbox.damage * .2)
+	var scale_factor = 1 + (damage * .2) + (size_mult * .25)
 	scale = Vector2(scale_factor, scale_factor)
 	pass
 	

@@ -60,3 +60,8 @@ size_flags_vertical = 0
 theme = ExtResource("2_bo8to")
 text = "high score:
 0000000000"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8

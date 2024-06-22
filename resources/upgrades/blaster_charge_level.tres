@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Player_upgrade" load_steps=2 format=3 uid="uid://kmeljjrhuu2j"]
+
+[ext_resource type="Script" path="res://resources/upgrades/player_upgrade.gd" id="1_tj577"]
+
+[resource]
+script = ExtResource("1_tj577")
+id = "blaster_charge_level"
+name = "Charged Blaster"
+description = "Secondary Weapon: Charges blaster into a concentrated shot that amplifies damage by level."
+max_lvl = 3

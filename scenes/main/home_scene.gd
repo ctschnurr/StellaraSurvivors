@@ -14,7 +14,7 @@ func _ready():
 
 func _process(_delta):
 	for map in active_maps:
-		map.global_position += Vector2(0.25, 0.25)
+		map.global_position += Vector2(0.5, 0.5)
 		if map.global_position > Vector2(1000, 1000): 
 			map.global_position = Vector2(-1000, -1000)
 			move_child(map, 0)

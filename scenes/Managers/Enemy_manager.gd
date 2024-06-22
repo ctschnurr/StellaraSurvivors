@@ -215,7 +215,7 @@ func add_score(health_amt: int):
 	
 func spawn_drops(location: Vector2, loot_dictionary: Array):
 	var loot_roll = randi_range(1, 100)
-	var pickup_group: Array
+	var pickup_group: Array = []
 	for loot: Loot_module in loot_dictionary:			
 		if loot_roll <= loot.loot_drop_probability:
 			var new_drop = loot.loot_scene.instantiate() as Pickup

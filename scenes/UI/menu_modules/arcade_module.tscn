@@ -1,0 +1,93 @@
+[gd_scene load_steps=3 format=3 uid="uid://qrt0p4bi03eb"]
+
+[ext_resource type="Script" path="res://scenes/UI/menu_modules/arcade_module.gd" id="1_igm41"]
+[ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_xt2xo"]
+
+[node name="ArcadeModule" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 30
+script = ExtResource("1_igm41")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_xt2xo")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 50
+text = "Arcade"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_xt2xo")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "Objective: "
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme = ExtResource("2_xt2xo")
+theme_override_font_sizes/font_size = 25
+alignment = 1
+item_count = 2
+selected = 0
+popup/item_0/text = "Survive"
+popup/item_0/id = 0
+popup/item_1/text = "Destroy"
+popup/item_1/id = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_xt2xo")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "Timer: "
+
+[node name="OptionButton" type="SpinBox" parent="VBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme = ExtResource("2_xt2xo")
+min_value = 5.0
+max_value = 30.0
+step = 5.0
+value = 5.0
+alignment = 1

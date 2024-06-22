@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://b53ax7ubeca44"]
+
+[ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="1_gdu72"]
+[ext_resource type="Script" path="res://scenes/UI/options_module.gd" id="1_kpiok"]
+[ext_resource type="Texture2D" uid="uid://duko5xybmteb4" path="res://scenes/game_objects/enemies/asteroids/asteroid_sm02.png" id="2_1dlwx"]
+[ext_resource type="Texture2D" uid="uid://d158mw4vfcy58" path="res://scenes/game_objects/enemies/asteroids/asteroid_sm03.png" id="3_lsmji"]
+
+[node name="OptionsModule" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_top = 30
+script = ExtResource("1_kpiok")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_gdu72")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 50
+text = "Options"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="sfx_label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_gdu72")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 25
+text = "sound effects volume"
+
+[node name="Sound_effects_volume" type="HSlider" parent="VBoxContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+theme = ExtResource("1_gdu72")
+theme_override_icons/grabber = ExtResource("2_1dlwx")
+theme_override_icons/grabber_highlight = ExtResource("2_1dlwx")
+max_value = 1.0
+step = 0.1
+value = 0.5
+
+[node name="music_label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_gdu72")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 30
+text = "music volume"
+
+[node name="Music_volume" type="HSlider" parent="VBoxContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+theme = ExtResource("1_gdu72")
+theme_override_icons/grabber = ExtResource("3_lsmji")
+theme_override_icons/grabber_highlight = ExtResource("3_lsmji")
+max_value = 1.0
+step = 0.1
+value = 0.5

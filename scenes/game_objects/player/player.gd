@@ -5,8 +5,10 @@ const BASE_SPEED = 100
 var speed = BASE_SPEED
 
 enum State{ACTIVE, INACTIVE}
-
 var state: State = State.ACTIVE
+
+enum Secondary_weapon{NONE, CHARGED_SHOT, ROCKET}
+var secondary_weapon = Secondary_weapon.NONE
 
 @export var fire_position: Node2D
 @export var ship_cannon: Sprite2D
@@ -16,16 +18,29 @@ var sprites: Array = [ship_cannon, ship_body]
 @onready var health_component: HealthComponent = %HealthComponent
 @onready var engine_particles: CPUParticles2D = %EngineParticles
 
-@onready var blaster_sound: AudioStream = load("res://resources/audio/blaster2.wav")
+@onready var blaster_sound: AudioStream = load("res://resources/audio/blaster4.wav")
+@onready var blaster_big_sound: AudioStream = load("res://resources/audio/blaster_big.wav")
+@onready var blaster_charge_sound: AudioStream = load("res://resources/audio/blaster_charge2.wav")
 @export var explosion_effect: PackedScene
 
 var mission_manager: Mission_manager
 
-var gun_ready: bool = true
-var fire_rate_base = 0
-var gun_cooldown: float = fire_rate_base
-var damage_level = 0
 var speed_level = 0
+
+#Blaster Variables:
+var blaster_ready: bool = true
+var blaster_cooldown: float = 0
+var blaster_damage_level = 0
+var blaster_charge_level = 0
+var blaster_charge_timer: float = 0.75
+var blaster_max_charge = 3
+var blaster_current_charge = 0
+var blaster_charging: bool = false
+var blaster_charged: bool = false
+
+#Rocket Variables:
+var rocket_ready: bool = true
+var rocket_cooldown: float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -56,8 +71,6 @@ func _process(delta):
 					var rotate_adjust = deg_to_rad(90)
 					ship_cannon.rotation += rotate_adjust
 					
-					fire_blaster()
-					
 				movement_vector = controller_movement()
 					
 					
@@ -72,13 +85,34 @@ func _process(delta):
 
 			if Input.is_action_just_pressed("escape"):
 				App.screen_manager.show_pause()
+						
+			if Input.is_action_pressed("primary_fire"):
+				if blaster_ready and !Input.is_action_pressed("secondary_fire"): 
+					blaster_ready = false
+					fire_blaster()
+					
+			if Input.is_action_pressed("secondary_fire"):
+				match secondary_weapon:
+					Secondary_weapon.CHARGED_SHOT:
+						blaster_charging = true	
+						if blaster_current_charge < blaster_charge_level:
+							if blaster_charge_timer > 0:
+								blaster_charge_timer -= delta
+							else:
+								charge_blaster()
+								blaster_charge_timer = 1.5
+							
+					Secondary_weapon.ROCKET:
+						fire_rocket()
+							
+			if Input.is_action_just_released("secondary_fire"):
+				match secondary_weapon:
+					Secondary_weapon.CHARGED_SHOT:
+						release_charged_blaster()
+						
+			if !Input.is_action_pressed("secondary_fire") and secondary_weapon == Secondary_weapon.CHARGED_SHOT and blaster_charging:
+				release_charged_blaster()
 			
-			if Input.is_action_pressed("input_fire"):
-				fire_blaster()
-				
-			if Input.is_action_just_pressed("input_pulse"):
-				App.spawn_manager.spawn_rocket(fire_position.global_position, ship_cannon.global_rotation)
-				
 
 func get_movement_vector():
 	var x_movement = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -99,16 +133,66 @@ func get_controller_look():
 	return Vector2(x_look, y_look)
 
 
+func charge_blaster():
+	match blaster_current_charge:
+		0:
+			ship_body.stop()
+			ship_body.play("blaster_charge_1")
+			SoundManager.play_sound_with_pitch(blaster_charge_sound, 0.8)
+			blaster_current_charge += 1
+		1:
+			ship_body.stop()
+			ship_body.play("blaster_charge_2")
+			blaster_current_charge += 1
+			SoundManager.stop_sound(blaster_charge_sound)
+			SoundManager.play_sound_with_pitch(blaster_charge_sound, 1)
+		2:
+			ship_body.stop()
+			ship_body.play("blaster_charge_3")
+			SoundManager.stop_sound(blaster_charge_sound)
+			SoundManager.play_sound_with_pitch(blaster_charge_sound, 1.2)
+			blaster_current_charge += 1
+
+
+func release_charged_blaster():
+	if blaster_charging:
+		blaster_ready = false
+		blaster_charging = false
+		blaster_charge_timer = 0.75
+		if blaster_current_charge > 0:
+			SoundManager.stop_sound(blaster_charge_sound)
+			fire_charged_blaster(blaster_current_charge)
+			blaster_current_charge = 0
+			
+
 func fire_blaster():
-	if gun_ready:
-		gun_ready = false
-		var pitch = randf_range(0.8, 1.2)
-		SoundManager.play_sound_with_pitch(blaster_sound, pitch)
-		App.enemy_manager.spawn_blaster_bolt(fire_position.global_position, ship_cannon.global_rotation)
+	var pitch = randf_range(0.8, 1.2)
+	SoundManager.play_sound_with_pitch(blaster_sound, pitch)
+	App.spawn_manager.spawn_blaster_bolt(fire_position.global_position, ship_cannon.global_rotation, 1 + blaster_damage_level, 0)
+	ship_body.stop()
+	ship_body.play("player_fire")
+	await get_tree().create_timer(0.8 - blaster_cooldown).timeout
+	blaster_ready = true
+	
+	
+func fire_charged_blaster(charge_level):
+	SoundManager.play_sound_with_pitch(blaster_big_sound, 1)
+	App.spawn_manager.spawn_blaster_bolt(fire_position.global_position, ship_cannon.global_rotation, 1 + blaster_damage_level, charge_level)
+	ship_body.stop()
+	ship_body.play("player_fire")
+	await get_tree().create_timer(1).timeout
+	blaster_ready = true
+
+
+func fire_rocket():
+	if rocket_ready:
+		rocket_ready = false
+		SoundManager.play_ambient_sound(blaster_sound)
+		App.spawn_manager.spawn_rocket(fire_position.global_position, ship_cannon.global_rotation)
 		ship_body.stop()
 		ship_body.play("player_fire")
-		await get_tree().create_timer(0.8 - gun_cooldown).timeout
-		gun_ready = true
+		await get_tree().create_timer(1 - rocket_cooldown).timeout
+		rocket_ready = true
 
 
 func constrain_player():
@@ -119,8 +203,10 @@ func constrain_player():
 
 
 func animate_player(direction: Vector2):
-	if ship_body.animation == "player_fire" and ship_body.is_playing(): return
-	
+	if ship_body.is_playing():
+		if ship_body.animation == "player_fire" or ship_body.animation == "blaster_charge_1" or ship_body.animation == "blaster_charge_2" or ship_body.animation == "blaster_charge_3":
+			return	
+
 	if (direction.x > 0):
 		if (direction.y == 0):
 			ship_body.play("player_move_h&v")
@@ -220,11 +306,14 @@ func play_explosion_effect():
 func update_abilities(upgrade: Player_upgrade, current_abilities: Dictionary):
 	match upgrade.id:
 		"fire_rate":
-			gun_cooldown = (current_abilities["fire_rate"]["quantity"] * .1)
+			blaster_cooldown = (current_abilities["fire_rate"]["quantity"] * .1)
 		"fire_damage":
-			damage_level = current_abilities["fire_damage"]["quantity"]
+			blaster_damage_level = current_abilities["fire_damage"]["quantity"]
 		"speed_upgrade":
 			speed_level = current_abilities["speed_upgrade"]["quantity"]
 			speed = BASE_SPEED + (speed_level * 20)
+		"blaster_charge_level":
+			blaster_charge_level = current_abilities["blaster_charge_level"]["quantity"]
+			secondary_weapon = Secondary_weapon.CHARGED_SHOT
 		_:
 			return

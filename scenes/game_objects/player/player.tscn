@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dirgwundhi3xq"]
+[gd_scene load_steps=35 format=3 uid="uid://dirgwundhi3xq"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_6xqvq"]
 [ext_resource type="PackedScene" uid="uid://5vpw8p5qkrgg" path="res://scenes/effects/asteroid_explosion.tscn" id="2_tpohu"]
@@ -9,6 +9,30 @@
 [ext_resource type="Texture2D" uid="uid://cdj7nlthlqbl6" path="res://scenes/game_objects/player/engine_beam.png" id="6_j6rsd"]
 [ext_resource type="PackedScene" uid="uid://dqf2fq7p7ip" path="res://scenes/components/health_component.tscn" id="7_arbtb"]
 [ext_resource type="PackedScene" uid="uid://bcmna6wa42j0q" path="res://scenes/components/hurtbox_component.tscn" id="8_nnxdr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmgvu"]
+atlas = ExtResource("3_8n86h")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7upt"]
+atlas = ExtResource("3_8n86h")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4ja4"]
+atlas = ExtResource("3_8n86h")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cc1a8"]
+atlas = ExtResource("3_8n86h")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7m84a"]
+atlas = ExtResource("3_8n86h")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7g4l0"]
+atlas = ExtResource("3_8n86h")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0eyio"]
 atlas = ExtResource("3_8n86h")
@@ -68,6 +92,39 @@ region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ui5fv"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmgvu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7upt")
+}],
+"loop": true,
+"name": &"blaster_charge_1",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4ja4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cc1a8")
+}],
+"loop": true,
+"name": &"blaster_charge_2",
+"speed": 12.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7m84a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7g4l0")
+}],
+"loop": true,
+"name": &"blaster_charge_3",
+"speed": 15.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0eyio")
@@ -156,7 +213,7 @@ explosion_effect = ExtResource("2_tpohu")
 [node name="Ship_Body" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_ui5fv")
-animation = &"player_idle"
+animation = &"blaster_charge_3"
 autoplay = "player_idle"
 
 [node name="EngineParticles" type="CPUParticles2D" parent="Ship_Body"]

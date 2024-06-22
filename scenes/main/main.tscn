@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d27as0jcit56m"]
+[gd_scene load_steps=20 format=3 uid="uid://d27as0jcit56m"]
 
 [ext_resource type="Script" path="res://scenes/main/Game_manager.gd" id="1_bqipc"]
 [ext_resource type="Script" path="res://scenes/Managers/Mission_manager.gd" id="2_fmjb6"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://2lukh1xvutwe" path="res://resources/upgrades/speed_upgrade.tres" id="9_hlwa6"]
 [ext_resource type="PackedScene" uid="uid://55lv4btmtybt" path="res://scenes/Managers/enemy_manager.tscn" id="9_pjcio"]
 [ext_resource type="PackedScene" uid="uid://bspdvgidt3b4r" path="res://scenes/game_objects/explosion/explosion.tscn" id="9_vuock"]
+[ext_resource type="Resource" uid="uid://kmeljjrhuu2j" path="res://resources/upgrades/blaster_charge_level.tres" id="10_aq6f4"]
 [ext_resource type="PackedScene" uid="uid://uf37o2pc5jnx" path="res://scenes/Managers/screen_manager.tscn" id="10_bdcnj"]
 [ext_resource type="TileSet" uid="uid://c8qvj247x6ny6" path="res://resources/space_tileset.tres" id="12_1o13u"]
 [ext_resource type="PackedScene" uid="uid://b645103cbbe1x" path="res://scenes/game_objects/game_camera/game_camera.tscn" id="13_f7ttr"]
@@ -36,7 +37,7 @@ objective_array = Array[ExtResource("3_k2tlo")]([SubResource("Resource_ipnnd")])
 [node name="Experience_manager" parent="." instance=ExtResource("2_sc8ta")]
 
 [node name="Upgrade_manager" parent="." node_paths=PackedStringArray("experience_manager") instance=ExtResource("5_xmfqf")]
-upgrade_pool = Array[Resource("res://resources/upgrades/player_upgrade.gd")]([ExtResource("7_tfu58"), ExtResource("8_alp8b"), ExtResource("9_hlwa6")])
+upgrade_pool = Array[Resource("res://resources/upgrades/player_upgrade.gd")]([ExtResource("7_tfu58"), ExtResource("8_alp8b"), ExtResource("9_hlwa6"), ExtResource("10_aq6f4")])
 experience_manager = NodePath("../Experience_manager")
 
 [node name="Enemy_manager" parent="." instance=ExtResource("9_pjcio")]
