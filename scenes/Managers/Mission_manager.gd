@@ -65,7 +65,7 @@ func start_mission():
 		await get_tree().create_timer(1.5).timeout
 		survive_timer.paused = false
 
-	
+	App.upgrade_manager.set_abilities_and_upgrades(current_objective.player_starting_abilities, current_objective.available_upgrades)
 
 	
 	

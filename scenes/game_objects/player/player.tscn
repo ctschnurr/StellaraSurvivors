@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dirgwundhi3xq"]
+[gd_scene load_steps=36 format=3 uid="uid://dirgwundhi3xq"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/player/player.gd" id="1_6xqvq"]
 [ext_resource type="PackedScene" uid="uid://5vpw8p5qkrgg" path="res://scenes/effects/asteroid_explosion.tscn" id="2_tpohu"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cdj7nlthlqbl6" path="res://scenes/game_objects/player/engine_beam.png" id="6_j6rsd"]
 [ext_resource type="PackedScene" uid="uid://dqf2fq7p7ip" path="res://scenes/components/health_component.tscn" id="7_arbtb"]
 [ext_resource type="PackedScene" uid="uid://bcmna6wa42j0q" path="res://scenes/components/hurtbox_component.tscn" id="8_nnxdr"]
+[ext_resource type="PackedScene" uid="uid://ccxlek7ow2v2u" path="res://scenes/game_objects/player/ability_system.tscn" id="10_kvdmg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xmgvu"]
 atlas = ExtResource("3_8n86h")
@@ -255,3 +256,6 @@ shape = SubResource("CircleShape2D_80xxi")
 [node name="HealthComponent" parent="." instance=ExtResource("7_arbtb")]
 unique_name_in_owner = true
 max_health = 3.0
+
+[node name="ability_system" parent="." instance=ExtResource("10_kvdmg")]
+unique_name_in_owner = true

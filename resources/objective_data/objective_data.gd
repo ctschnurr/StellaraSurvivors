@@ -8,6 +8,9 @@ enum Objective_type {DESTROY,SURVIVE,DEFEND}
 
 @export var spawn_data: Spawn_data
 
+@export var player_starting_abilities: Array[Player_upgrade]
+@export var available_upgrades: Array[Player_upgrade]
+
 @export_multiline var objective_description: String
 @export var survive_timer_minutes: int
 var objective_count: int

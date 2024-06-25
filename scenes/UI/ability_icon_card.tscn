@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwfcx6cbcgeue"]
+
+[ext_resource type="Texture2D" uid="uid://c2d4q5hpm10iw" path="res://scenes/UI/UI_assets/ability_icon_background_placeholder.png" id="1_xaioi"]
+[ext_resource type="Texture2D" uid="uid://cogqihge4838s" path="res://scenes/UI/UI_assets/ability_icon_progress.png" id="3_2w0sq"]
+
+[node name="AbilityIconCard" type="MarginContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+fill_mode = 2
+texture_under = ExtResource("1_xaioi")
+texture_progress = ExtResource("3_2w0sq")

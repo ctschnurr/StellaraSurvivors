@@ -263,12 +263,13 @@ func prepare_oneshot_spawn_data(spawn_module_array: Array[Spawn_module]):
 	add_data(new_spawn_data)
 	
 
-func spawn_expolsion(location):
-	deferred_explosion.call_deferred(location)
+func spawn_expolsion(location, damage):
+	deferred_explosion.call_deferred(location, damage)
 	
 	
-func deferred_explosion(location):
+func deferred_explosion(location, damage):
 	var explosion_instance = explosion_scene.instantiate() as Node2D
+	explosion_instance.explode_strength = damage
 	add_child(explosion_instance)
 	explosion_instance.global_position = location
 
@@ -283,8 +284,9 @@ func spawn_blaster_bolt(location, rotation, damage, size):
 	blaster_bolt_instance.global_rotation = rotation
 	
 	
-func spawn_rocket(location, rotation):
+func spawn_rocket(location, rotation, damage):
 	var rocket_instance = rocket_scene.instantiate() as Node2D
+	rocket_instance.rocket_damage_level = damage
 	get_tree().root.add_child(rocket_instance)
 	spawned_weapons.append(rocket_instance)
 	rocket_instance.global_position = location

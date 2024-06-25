@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Player_upgrade" load_steps=2 format=3 uid="uid://doq0531bjbpt"]
+
+[ext_resource type="Script" path="res://resources/upgrades/player_upgrade.gd" id="1_nxgl4"]
+
+[resource]
+script = ExtResource("1_nxgl4")
+id = "blaster_charge_unlock"
+name = "Charged Blaster"
+description = "Unlocks Charged Blaster Secondary Weapon"
+max_lvl = 1

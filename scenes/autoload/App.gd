@@ -12,6 +12,7 @@ const BASE_PICKUP_ATTRACT: float = 150
 const GOLDEN_ASTEROID_CHANCE: int = 1
 const STAT_CHANGE_PARTICLE_MULTIPLIER: int = 1
 const CAMERA_TRAUMA_MAX: float = 0.25
+const PLAYER_BASE_SPEED = 100
 
 const play_area_x_min = 0
 const play_area_x_max = 1280

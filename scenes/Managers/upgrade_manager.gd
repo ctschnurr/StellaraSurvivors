@@ -9,10 +9,16 @@ var current_pool
 var current_upgrades = {}
 
 func _ready():
-	current_pool = upgrade_pool.duplicate()
 	experience_manager.level_up.connect(on_level_up)
 	App.upgrade_manager = self
 	App.reset_game.connect(reset_upgrade_manager)
+	
+	
+func set_abilities_and_upgrades(starting_abilities, available_upgrades):
+	current_pool = available_upgrades.duplicate()
+	
+	for ability in starting_abilities:
+		apply_upgrade(ability)
 	
 	
 func on_level_up(_current_level: int):

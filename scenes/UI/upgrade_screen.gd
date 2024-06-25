@@ -12,6 +12,20 @@ func _ready():
 func set_player_upgrades(upgrades: Array[Player_upgrade], current_upgrades: Dictionary):
 	var new_cards: Array = []
 	var choices = upgrades.duplicate()
+	var choices_to_remove: Array
+	for choice in choices:
+		if choice.upgrade_prerequisite != null:
+			var has_prereq = current_upgrades.has(choice.upgrade_prerequisite.id)
+			if !has_prereq: 
+				choices_to_remove.append(choice)
+	if choices_to_remove.size() > 0:
+		for remove in choices_to_remove:
+			choices.erase(remove)
+			print("removing: ", remove.id)
+	
+	
+	
+	
 	while choices.size() > App.UPGRADES_PER_LEVEL:
 		choices.erase(choices.pick_random())
 	choices.shuffle()
@@ -26,7 +40,7 @@ func set_player_upgrades(upgrades: Array[Player_upgrade], current_upgrades: Dict
 		
 		new_cards.append(new_card)
 		
-	#new_cards[0].panel.grab_focus()
+	new_cards[0].panel.grab_focus()
 		
 func upgrade_clicked(upgrade: Player_upgrade):
 	upgrade_selected.emit(upgrade)

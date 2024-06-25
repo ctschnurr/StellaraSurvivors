@@ -8,6 +8,7 @@ const ACCELERATION_SMOOTHING = 25
 
 var direction = Vector2.ZERO
 var default_damage = 1
+var rocket_damage_level
 
 @onready var hitbox = %HitboxComponent as HitboxComponent
 
@@ -19,11 +20,12 @@ func _ready():
 	hitbox.hit.connect(rocket_hit)
 	#var scale_factor = default_damage + (hitbox.damage * .2)
 	#scale = Vector2(scale_factor, scale_factor)
+	rocket_damage_level += default_damage
 	
 	
 func rocket_hit():
 	SoundManager.play_ambient_sound(blaster_collision_sound)
-	App.spawn_manager.spawn_expolsion(global_position)
+	App.spawn_manager.spawn_expolsion(global_position, rocket_damage_level)
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -57,7 +59,7 @@ func fire_raycast(raycast_direction: Vector2):
 	
 	if !raycast_output.is_empty():
 					
-		App.spawn_manager.spawn_expolsion(global_position)
+		App.spawn_manager.spawn_expolsion(global_position, rocket_damage_level)
 			
 		collision_cooldown()
 		

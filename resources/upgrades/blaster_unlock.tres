@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Player_upgrade" load_steps=2 format=3 uid="uid://cumvq4wpr6u81"]
+
+[ext_resource type="Script" path="res://resources/upgrades/player_upgrade.gd" id="1_axwmf"]
+
+[resource]
+script = ExtResource("1_axwmf")
+id = "blaster_unlock"
+name = "Primary Blaster"
+description = "Unlocks Primary Blaster Weapon"
+max_lvl = 1

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccxlek7ow2v2u"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/player/ability_system.gd" id="1_xver0"]
+[ext_resource type="PackedScene" uid="uid://bwfcx6cbcgeue" path="res://scenes/UI/ability_icon_card.tscn" id="2_okrdm"]
+
+[node name="ability_system" type="CanvasLayer"]
+script = ExtResource("1_xver0")
+ability_icon_card = ExtResource("2_okrdm")
