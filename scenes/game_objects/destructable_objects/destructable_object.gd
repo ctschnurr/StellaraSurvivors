@@ -18,6 +18,7 @@ var object_speed: float = 0
 var size_multiplier: float = 1
 var has_entered_play_area: bool = false
 var do_collisions: bool = true
+var vulnerable = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -81,7 +82,7 @@ func fire_raycast(direction: Vector2):
 		
 		
 		if has_entered_play_area: 
-			SoundManager.play_ambient_sound(App.asteroid_collision_sound)
+			SoundManager.play_sound(App.asteroid_collision_sound)
 		var collision_normal: Vector2 = raycast_output.normal
 		var new_direction = collision_normal
 		var new_speed = object_speed * 0.8 #(0.3 * size_multiplier)
@@ -135,8 +136,11 @@ func respond_to_bolt_collision(bolt_direction, collision_point, damage_factor):
 
 
 func respond_to_explosion_collision(direction, distance, strength):
+	if !vulnerable: pass
+	else: vulnerable = false
+	
 	var factor = (max((100 - distance), 0) + (strength * strength)) / size_multiplier
-	print(size_multiplier, ":", (max((100 - distance), 0) + (strength * strength)) / size_multiplier)
+	# print(size_multiplier, ":", (max((100 - distance), 0) + (strength * strength)) / size_multiplier)
 
 	var object_angle = object_direction.angle()
 	var diff_angle = object_angle - direction.angle()
@@ -162,9 +166,39 @@ func respond_to_explosion_collision(direction, distance, strength):
 			object_direction = object_direction.rotated(-diff_angle / 2)
 			object_speed = factor / size_multiplier
 		
-	health_component.damage(max(strength - int(distance / 20), 0))
+	health_component.damage(max(strength - int(distance / 10), 1))
 	
 	await get_tree().create_timer(0.25).timeout
+	vulnerable = true
+	
+	
+func respond_to_pulse_collision(direction, distance, strength):
+	if !vulnerable: pass
+	else: vulnerable = false
+
+	var object_angle = object_direction.angle()
+	var diff_angle = object_angle - direction.angle()
+	
+	print(diff_angle)
+	#if the explosion hits an asteroid traveling toward it:
+	if diff_angle < -2.75 or diff_angle > 2.75: 
+		object_direction = direction.normalized()
+		print("toward")
+	
+	#if the explosion hits an asteroid travelling at a diagonal from it:
+	if (diff_angle < 2.75 and diff_angle > 0.5) or (diff_angle > -2.75 and diff_angle <  -0.5): 
+		object_direction = direction.normalized()
+
+	object_speed = (strength * 25) / size_multiplier
+
+	#if the explosion hits an asteroid traveling away from it:
+	if diff_angle > -0.5 and diff_angle < 0.5: 
+		print(object_speed)
+		object_speed = ((strength * 25) / size_multiplier) + object_speed
+		print("away")
+
+	await get_tree().create_timer(0.25).timeout
+	vulnerable = true
 	
 
 func set_movement_vector():
@@ -181,7 +215,7 @@ func object_impact(location):
 func object_explosion():
 	object_direction = Vector2.ZERO
 	App.camera.add_trauma(0.05 + (size_multiplier * .05))
-	SoundManager.play_ambient_sound(App.asteroid_burst_sound)
+	SoundManager.play_sound(App.asteroid_burst_sound)
 	var effect = explosion_effect_scene.instantiate() as CPUParticles2D
 	add_child(effect)
 	effect.global_position = global_position

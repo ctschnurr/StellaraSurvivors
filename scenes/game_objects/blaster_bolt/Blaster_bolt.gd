@@ -27,7 +27,7 @@ func _ready():
 	
 	
 func blaster_hit():
-	SoundManager.play_ambient_sound(blaster_collision_sound)
+	SoundManager.play_sound(blaster_collision_sound)
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

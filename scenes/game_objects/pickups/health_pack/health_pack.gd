@@ -15,6 +15,6 @@ func on_area_entered(area_entered):
 	collector.heal(health_amount)
 
 	collected.emit(health_amount)
-	SoundManager.play_ambient_sound(App.pickup_sound)
+	SoundManager.play_sound(App.pickup_sound)
 	
 	queue_free()

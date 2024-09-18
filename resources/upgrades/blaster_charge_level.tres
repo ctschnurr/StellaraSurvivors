@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_tj577")
 id = "blaster_charge_level"
-name = "Charged Blaster Capacity"
-description = "Unlocks additional charge level for Charged Blaster"
+name = "Charge Capacity"
+description = "Additional Charge Level for Charged Blaster"
 max_lvl = 2
 upgrade_prerequisite = ExtResource("2_t1x80")

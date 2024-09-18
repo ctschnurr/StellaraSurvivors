@@ -21,10 +21,6 @@ func set_player_upgrades(upgrades: Array[Player_upgrade], current_upgrades: Dict
 	if choices_to_remove.size() > 0:
 		for remove in choices_to_remove:
 			choices.erase(remove)
-			print("removing: ", remove.id)
-	
-	
-	
 	
 	while choices.size() > App.UPGRADES_PER_LEVEL:
 		choices.erase(choices.pick_random())
@@ -34,6 +30,7 @@ func set_player_upgrades(upgrades: Array[Player_upgrade], current_upgrades: Dict
 		card_container.add_child(new_card)
 		var has_upgrade = current_upgrades.has(upgrade.id)
 		var upgrade_level = 1
+		if upgrade.max_lvl == 1: upgrade_level = " "
 		if has_upgrade: upgrade_level = current_upgrades[upgrade.id]["quantity"] + 1
 		new_card.setup_card(upgrade, upgrade_level)
 		new_card.selected.connect(upgrade_clicked.bind(upgrade))

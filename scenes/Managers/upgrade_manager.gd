@@ -41,8 +41,9 @@ func apply_upgrade(upgrade: Player_upgrade):
 		}
 	else:
 		current_upgrades[upgrade.id]["quantity"] += 1
-		if current_upgrades[upgrade.id]["quantity"] == upgrade.max_lvl:
-			current_pool.erase(upgrade)
+		
+	if current_upgrades[upgrade.id]["quantity"] == upgrade.max_lvl:
+		current_pool.erase(upgrade)
 					
 	App.player.update_abilities(upgrade, current_upgrades)
 

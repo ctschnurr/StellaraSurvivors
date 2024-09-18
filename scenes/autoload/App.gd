@@ -22,6 +22,7 @@ const play_area_y_max = 720
 const play_area_mid = Vector2(play_area_x_max / 2, play_area_y_max / 2)
 
 const CRATE_EVENT_TARGET: float = 25.0
+const COMET_EVENT_TARGET: float = 100.0
 
 var main_music: AudioStream = load("res://resources/audio/Cosmic Journey.mp3")
 var asteroid_collision_sound: AudioStream = load("res://resources/audio/asteroid_collision.wav")

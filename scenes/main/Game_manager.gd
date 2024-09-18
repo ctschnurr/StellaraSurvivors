@@ -6,10 +6,10 @@ var game_timer = Timer
 
 func _ready():
 	SoundManager.set_default_music_bus("Music")
-	SoundManager.set_default_ambient_sound_bus("Sound")
-	SoundManager.set_ambient_sound_volume(0.5)
+	SoundManager.set_default_sound_bus("Sound")
+	SoundManager.set_sound_volume(0.5)
 	SoundManager.set_music_volume(0.5)
-	SoundManager.play_music(App.main_music, 2.5, "Music")
+	SoundManager.play_music(App.main_music, 2.5)
 	App.screen_manager.show_main_menu()
 
 
@@ -29,5 +29,4 @@ func _unhandled_input(event):
 func _process(_delta):
 	if !SoundManager.is_music_playing(): SoundManager.play_music(App.main_music, 2.5)
 	if Input.is_action_just_pressed("F1"):
-		App.screen_manager.clear_screens()
-		App.screen_manager.show_controls_screen()
+		App.spawn_manager.spawn_comet()

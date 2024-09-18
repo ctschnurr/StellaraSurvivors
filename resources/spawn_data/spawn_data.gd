@@ -9,7 +9,7 @@ var associated_timer: Timer
 enum How_to_spawn{RANDOM,BURST,SQUAD}
 @export var how_to_spawn: How_to_spawn = How_to_spawn.RANDOM
 
-enum Where_to_spawn{OUTSIDE_PLAY_AREA, DEFINED}
+enum Where_to_spawn{OUTSIDE_PLAY_AREA, CORNER, DEFINED}
 @export var where_to_spawn: Where_to_spawn = Where_to_spawn.OUTSIDE_PLAY_AREA
 @export_subgroup("- If 'Defined':")
 @export var defined_spawn_position: Vector2

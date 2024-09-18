@@ -1,6 +1,7 @@
 class_name Explosion extends CharacterBody2D
 
 @onready var shape_resource = load("res://scenes/game_objects/pulse_ability/pulse_shape.tres")
+@onready var explosion_sound: AudioStream = load("res://resources/audio/explosionA.wav")
 @onready var pulse = $Area2D/PulseShape
 @onready var sprite = %Sprite
 
@@ -14,9 +15,10 @@ func _ready():
 	
 func explode(strength: int):
 	sprite.play()
+	SoundManager.play_sound_with_pitch(explosion_sound, 1 - (strength * 0.05))
 	var tween = get_tree().create_tween()
-	tween.parallel().tween_property(self, "scale", Vector2(strength + 5, strength + 5), 0.25).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(sprite, "modulate:a", 0, 0.25).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(self, "scale", Vector2(strength + 5, strength + 5), 0.375).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(sprite, "modulate:a", 0, 0.4).set_ease(Tween.EASE_OUT)
 	await sprite.animation_finished
 	queue_free()
 	
@@ -38,3 +40,6 @@ func fire_raycast(other_area_pos: Vector2):
 			var direction = global_position.direction_to(raycast_output.collider.global_position)
 			var distance = global_position.distance_to(raycast_output.position)
 			raycast_output.collider.respond_to_explosion_collision(direction, distance, explode_strength)
+			
+		if raycast_output.collider is Player:
+			raycast_output.collider.health_component.damage(1)

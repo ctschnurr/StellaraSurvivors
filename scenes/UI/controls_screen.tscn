@@ -1,19 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ntl4s2i8knd7"]
+[gd_scene load_steps=3 format=3 uid="uid://ntl4s2i8knd7"]
 
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="1_1md7s"]
 [ext_resource type="Script" path="res://scenes/UI/controls_screen.gd" id="1_bw75k"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3u1pd"]
-bg_color = Color(0, 0.392157, 0.980392, 0.882353)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [node name="Controls_screen" type="CanvasLayer"]
 process_mode = 3
@@ -41,7 +29,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_1md7s")
-theme_override_styles/panel = SubResource("StyleBoxFlat_3u1pd")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
@@ -60,6 +47,7 @@ texture_filter = 2
 custom_minimum_size = Vector2(0, 550)
 layout_mode = 2
 theme = ExtResource("1_1md7s")
+allow_reselect = true
 select_mode = 1
 scroll_horizontal_enabled = false
 scroll_vertical_enabled = false
@@ -75,4 +63,3 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_1md7s")
-theme_override_styles/panel = SubResource("StyleBoxFlat_3u1pd")

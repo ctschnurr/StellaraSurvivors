@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://bm2uy3gr521j4"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/enemies/asteroids/comet.gd" id="1_15d0x"]
+[ext_resource type="Texture2D" uid="uid://ptmjfeyg4bj6" path="res://scenes/game_objects/enemies/asteroids/asteroid_comet.png" id="6_0wfpd"]
+[ext_resource type="PackedScene" uid="uid://bcmna6wa42j0q" path="res://scenes/components/hurtbox_component.tscn" id="6_k6nhf"]
+[ext_resource type="PackedScene" uid="uid://cxmypx8uu0kun" path="res://scenes/components/hitbox_component.tscn" id="7_7eahl"]
+[ext_resource type="PackedScene" uid="uid://dqf2fq7p7ip" path="res://scenes/components/health_component.tscn" id="8_ck71o"]
+[ext_resource type="Texture2D" uid="uid://b67fu5vrlvjke" path="res://scenes/effects/asteroid_explosion.png" id="10_4olkr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rvlpy"]
+radius = 70.0
+
+[sub_resource type="Gradient" id="Gradient_suqdg"]
+colors = PackedColorArray(0.564706, 0.729412, 0.854902, 1, 0.717647, 0.823529, 0.905882, 1)
+
+[sub_resource type="Gradient" id="Gradient_ggmo1"]
+offsets = PackedFloat32Array(0.789954, 1)
+colors = PackedColorArray(0.831373, 0.894118, 0.945098, 1, 0.27451, 0.54902, 0.756863, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_026wd"]
+radius = 76.0
+
+[node name="Comet" type="CharacterBody2D" node_paths=PackedStringArray("object_sprite")]
+script = ExtResource("1_15d0x")
+object_sprite = NodePath("Asteroid_sprite")
+
+[node name="Asteroid_sprite" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("6_0wfpd")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_k6nhf")]
+collision_layer = 0
+collision_mask = 8
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_rvlpy")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("7_7eahl")]
+hurtbox = NodePath("../HurtboxComponent")
+damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_rvlpy")
+
+[node name="HealthComponent" parent="." instance=ExtResource("8_ck71o")]
+unique_name_in_owner = true
+max_health = 30.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 200
+lifetime = 0.5
+speed_scale = 0.5
+texture = ExtResource("10_4olkr")
+emission_shape = 1
+emission_sphere_radius = 60.0
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+scale_amount_min = 0.1
+scale_amount_max = 0.5
+color_ramp = SubResource("Gradient_suqdg")
+color_initial_ramp = SubResource("Gradient_ggmo1")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_026wd")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

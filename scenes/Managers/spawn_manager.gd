@@ -10,8 +10,12 @@ var xp_orb_yellow: PackedScene = load("res://scenes/game_objects/pickups/experie
 var xp_orb_red: PackedScene = load("res://scenes/game_objects/pickups/experience_orb/experience_orb_red.tscn")
 var xp_orbs: Array[PackedScene] = [xp_orb_blue, xp_orb_yellow, xp_orb_red]
 var health_pack_scene = load("res://scenes/game_objects/pickups/health_pack/health_pack.tscn")
+
+#Non-Pickups:
 var blaster_bolt_scene = load("res://scenes/game_objects/blaster_bolt/blaster_bolt.tscn")
 var rocket_scene = load("res://scenes/game_objects/rocket/rocket.tscn")
+var pulse_scene = load("res://scenes/game_objects/pulse_ability/pulse_ability.tscn")
+var comet_scene = load("res://scenes/game_objects/enemies/asteroids/comet.tscn")
 
 signal object_destroyed_signal(kill_count)
 
@@ -79,6 +83,8 @@ func add_data(data: Spawn_data):
 
 func process_data(data: Spawn_data):
 	data.ready = false
+	#First Section handles the spawning of the objects according to 
+	#HOW TO instructions from Spawn_data
 	match data.how_to_spawn:
 		Spawn_data.How_to_spawn.RANDOM:
 			spawn_random(data)
@@ -86,6 +92,7 @@ func process_data(data: Spawn_data):
 		Spawn_data.How_to_spawn.BURST:
 			spawn_burst(data)
 	
+
 	if data.quantity_variation_behavior == Spawn_data.Quantity_variation_behavior.DYNAMIC:
 		var seconds_passed = data.associated_timer.wait_time - data.associated_timer.time_left
 		if int(seconds_passed) > data.quantity_change_start_seconds:
@@ -158,12 +165,22 @@ func spawn_random(data: Spawn_data):
 				
 		var new_spawn = lowest.scene_to_spawn.instantiate()
 		new_spawn.loot_module_array = lowest.loot_module_array
-		add_child(new_spawn)
+		
 		spawned_objects.append(new_spawn)
 		new_spawn.spawn_manager = self as Spawn_manager
 		
-		new_spawn.global_position = pick_location()
-		if App.player != null: new_spawn.object_direction = new_spawn.global_position.direction_to(App.player.global_position)
+		var spawn_location
+		
+		match data.where_to_spawn:
+			Spawn_data.Where_to_spawn.OUTSIDE_PLAY_AREA:
+				spawn_location = pick_location()
+			Spawn_data.Where_to_spawn.CORNER:
+				spawn_location = pick_corner_location()
+		
+		new_spawn.global_position = spawn_location
+		#if App.player != null: new_spawn.object_direction = new_spawn.global_position.direction_to(App.player.global_position)
+		
+		add_child(new_spawn)
 		
 		new_spawn.health_component.died.connect(object_destroyed)
 		if data.associated_objective != null: data.associated_objective.connect_signal(new_spawn.health_component.died)
@@ -220,6 +237,17 @@ func pick_location():
 	return location
 
 
+func pick_corner_location():
+	var rand = randi_range(1, 4)
+	var location = Vector2.ZERO
+	match rand:
+		1: location = Vector2(App.play_area_x_min - 300, App.play_area_y_min - 150)
+		2: location = Vector2(App.play_area_x_max + 300, App.play_area_y_min - 150)
+		3: location = Vector2(App.play_area_x_min - 300, App.play_area_y_max + 150)
+		4: location = Vector2(App.play_area_x_max + 300, App.play_area_y_max + 150)
+	return location
+
+
 func object_destroyed(health_amt: int):
 	kill_count += 1
 	object_destroyed_signal.emit(kill_count)
@@ -229,7 +257,11 @@ func object_destroyed(health_amt: int):
 func add_score(health_amt: int):
 	App.update_score(health_amt)
 	
-	
+
+func spawn_loot_crate():
+	prep_loot_crate()
+
+
 func prep_loot_crate():
 	var loot_array: Array[Loot_module] = []
 	
@@ -241,7 +273,7 @@ func prep_loot_crate():
 		health_pack_module.loot_drop_probability = 100
 		loot_array.append(health_pack_module)
 		
-	var extra_xp_number = randi_range(3, 5) + App.difficulty_factor
+	var extra_xp_number = randi_range(5, 10) + App.difficulty_factor
 	for number in extra_xp_number:
 		var extra_xp_module = Loot_module.new()
 		extra_xp_module.loot_scene = App.spawn_manager.xp_orbs.pick_random()
@@ -261,7 +293,7 @@ func prepare_oneshot_spawn_data(spawn_module_array: Array[Spawn_module]):
 	var new_spawn_data: Spawn_data = oneoff_random_spawn_data.duplicate()
 	new_spawn_data.who_to_spawn = spawn_module_array
 	add_data(new_spawn_data)
-	
+
 
 func spawn_expolsion(location, damage):
 	deferred_explosion.call_deferred(location, damage)
@@ -272,6 +304,18 @@ func deferred_explosion(location, damage):
 	explosion_instance.explode_strength = damage
 	add_child(explosion_instance)
 	explosion_instance.global_position = location
+	
+	
+func spawn_energy_pulse(location, strength, ability_system):
+	deferred_pulse.call_deferred(location, strength, ability_system)
+	
+	
+func deferred_pulse(location, strength, ability_system: Ability_System):
+	var pulse_instance = pulse_scene.instantiate() as Node2D
+	pulse_instance.pulse_done.connect(ability_system.pulse_done)
+	pulse_instance.pulse_strength = strength
+	add_child(pulse_instance)
+	pulse_instance.global_position = location
 
 
 func spawn_blaster_bolt(location, rotation, damage, size):
@@ -303,3 +347,27 @@ func spawn_status_effect_particles(input, color: Color, position):
 	await stat_effect.finished
 	spawned_effects.erase(stat_effect)
 	stat_effect.queue_free()
+	
+	
+func spawn_comet():
+	var spawn_module = Spawn_module.new()
+	spawn_module.scene_to_spawn = comet_scene
+	spawn_module.spawn_probability = 100
+	
+	var spawn_module_array: Array[Spawn_module] = []
+	var loot_array: Array[Loot_module] = []
+	
+	var extra_xp_number = randi_range(20, 30) + App.difficulty_factor
+	for number in extra_xp_number:
+		var extra_xp_module = Loot_module.new()
+		extra_xp_module.loot_scene = App.spawn_manager.xp_orbs.pick_random()
+		extra_xp_module.loot_drop_probability = 100
+		loot_array.append(extra_xp_module)
+	
+	spawn_module.loot_module_array = loot_array
+	spawn_module_array.append(spawn_module)
+	
+	var new_spawn_data: Spawn_data = oneoff_random_spawn_data.duplicate()
+	new_spawn_data.who_to_spawn = spawn_module_array
+	new_spawn_data.where_to_spawn = Spawn_data.Where_to_spawn.CORNER
+	add_data(new_spawn_data)

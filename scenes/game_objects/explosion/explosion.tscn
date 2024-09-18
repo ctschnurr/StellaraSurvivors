@@ -81,7 +81,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"default",
-"speed": 20.0
+"speed": 15.0
 }]
 
 [node name="Explosion" type="CharacterBody2D"]
@@ -89,7 +89,7 @@ script = ExtResource("1_e1ute")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 4
+collision_mask = 5
 
 [node name="PulseShape" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_6ke6i")

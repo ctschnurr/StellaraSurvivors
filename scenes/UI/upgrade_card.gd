@@ -21,7 +21,7 @@ func on_focus_enter():
 	SoundManager.play_sound(App.asteroid_collision_sound)
 
 
-func setup_card(upgrade: Player_upgrade, level: int):
+func setup_card(upgrade: Player_upgrade, level):
 	name_label.text = upgrade.name
 	level_label.text = str(level)
 	description_label.text = upgrade.description

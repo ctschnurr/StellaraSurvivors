@@ -14,8 +14,6 @@ var sprites: Array = [ship_cannon, ship_body]
 @onready var engine_particles: CPUParticles2D = %EngineParticles
 @onready var ability_system: Ability_System = %ability_system
 
-@export var explosion_effect: PackedScene
-
 var mission_manager: Mission_manager
 
 # Called when the node enters the scene tree for the first time.
@@ -90,7 +88,7 @@ func constrain_player():
 
 func animate_player(direction: Vector2):
 	if ship_body.is_playing():
-		if ship_body.animation == "player_fire" or ship_body.animation == "blaster_charge_1" or ship_body.animation == "blaster_charge_2" or ship_body.animation == "blaster_charge_3":
+		if ship_body.animation == "player_fire" or ship_body.animation == "blaster_charging_A" or ship_body.animation == "blaster_charging_B" or ship_body.animation == "blaster_charging_C" or ship_body.animation == "blaster_charged":
 			return	
 
 	if (direction.x > 0):
@@ -148,7 +146,7 @@ func heal(heal_amt):
 	
 	
 func player_hurt(_damage):
-	SoundManager.play_ambient_sound(App.player_hurt_sound)
+	SoundManager.play_sound(App.player_hurt_sound)
 	var tween = get_tree().create_tween()
 	
 	tween.tween_property(ship_body, "scale", Vector2(1.25, 1.25), 0.1)
@@ -174,18 +172,12 @@ func player_died(_max_health):
 	tween.parallel().tween_property(ship_cannon, "scale", Vector2(0, 0), 0.25)
 	tween.parallel().tween_property(ship_body, "modulate:a", 0, 0.25)
 	tween.parallel().tween_property(ship_cannon, "modulate:a", 0, 0.25)
-	tween.parallel().tween_callback(play_explosion_effect).set_delay(0.1)
+	tween.parallel().tween_callback(trigger_explosion).set_delay(0.1)
 	
 	
-func play_explosion_effect():
+func trigger_explosion():
 	App.camera.add_trauma(0.5)
-	SoundManager.play_ambient_sound(App.asteroid_burst_sound)
-	var effect = explosion_effect.instantiate() as CPUParticles2D
-	add_child(effect)
-	effect.global_position = global_position
-	effect.scale_amount_max = 3
-	effect.restart()
-	await effect.finished
+	App.spawn_manager.spawn_expolsion(global_position, 5)
 	queue_free()
 	
 	

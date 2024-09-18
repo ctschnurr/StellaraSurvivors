@@ -6,3 +6,12 @@
 [node name="ability_system" type="CanvasLayer"]
 script = ExtResource("1_xver0")
 ability_icon_card = ExtResource("2_okrdm")
+
+[node name="BlasterTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="ChargedBlasterTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="BlasterTimer" to="." method="_on_blaster_timer_timeout"]
+[connection signal="timeout" from="ChargedBlasterTimer" to="." method="_on_charged_blaster_timer_timeout"]

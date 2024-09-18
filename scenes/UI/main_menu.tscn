@@ -23,7 +23,7 @@ theme_override_constants/margin_bottom = 200
 layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(600, 200)
+custom_minimum_size = Vector2(600, 230)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -35,7 +35,13 @@ text = "[center]
 [pulse freq=0.5.0 color=#ffffff80 ease=-2.0]
 [font_size=90]Stellara[/font_size]
 [font_size=75]Survivors[/font_size]
-[/pulse]"
+
+
+
+
+
+[color=ff0000]
+[font_size=35]* Asteroid assault *[/font_size]"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

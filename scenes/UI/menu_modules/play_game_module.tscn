@@ -1,0 +1,511 @@
+[gd_scene load_steps=3 format=3 uid="uid://ql4b8np52oqi"]
+
+[ext_resource type="Script" path="res://scenes/UI/menu_modules/play_game_module.gd" id="1_sil4w"]
+[ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_kc5ld"]
+
+[node name="PlayGameModule" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_top = 30
+script = ExtResource("1_sil4w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_kc5ld")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 40
+text = "* Asteroid Assault *"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_kc5ld")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "Game Mode: "
+
+[node name="GameModeButton" type="OptionButton" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_kc5ld")
+theme_override_font_sizes/font_size = 20
+item_count = 5
+selected = 0
+popup/item_0/text = " 5 Minute Survival"
+popup/item_0/id = 0
+popup/item_1/text = " 15 Minute Survival"
+popup/item_1/id = 1
+popup/item_2/text = " 30 Minute Survival"
+popup/item_2/id = 2
+popup/item_3/text = " Endless Survival"
+popup/item_3/id = 3
+popup/item_4/text = " Custom Survival"
+popup/item_4/id = 4
+
+[node name="CustomModeWindow" type="MarginContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CustomModeWindow"]
+layout_mode = 2
+
+[node name="LabelContainer" type="MarginContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="CustomModeLabel" type="Label" parent="VBoxContainer/CustomModeWindow/VBoxContainer/LabelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_kc5ld")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "Custom Survival Mode:"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_kc5ld")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="OptionsSection" type="HBoxContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LeftColumn" type="HBoxContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection/LeftColumn"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Labels" type="VBoxContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection/LeftColumn"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label2" type="Label" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection/LeftColumn/Labels"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_kc5ld")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 18
+text = "Time Limit:"
+
+[node name="Label3" type="Label" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection/LeftColumn/Labels"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_kc5ld")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 18
+text = "Player Health: "
+
+[node name="Options" type="VBoxContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection/LeftColumn"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="OptionButton3" type="OptionButton" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection/LeftColumn/Options"]
+layout_mode = 2
+theme = ExtResource("2_kc5ld")
+alignment = 1
+item_count = 4
+selected = 0
+popup/item_0/text = "5"
+popup/item_0/id = 0
+popup/item_1/text = "15"
+popup/item_1/id = 1
+popup/item_2/text = "30"
+popup/item_2/id = 2
+popup/item_3/text = "Endless"
+popup/item_3/id = 3
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection/LeftColumn/Options"]
+layout_mode = 2
+theme = ExtResource("2_kc5ld")
+alignment = 1
+item_count = 4
+selected = 0
+popup/item_0/text = "3"
+popup/item_0/id = 0
+popup/item_1/text = "5"
+popup/item_1/id = 1
+popup/item_2/text = "10"
+popup/item_2/id = 2
+popup/item_3/text = "Infinite"
+popup/item_3/id = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="RightColumn" type="HBoxContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Labels" type="VBoxContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection/RightColumn"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label2" type="Label" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection/RightColumn/Labels"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_kc5ld")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 18
+text = "Player Takes Damage: "
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection/RightColumn/Labels"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_kc5ld")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 18
+text = "Player Health: "
+vertical_alignment = 1
+
+[node name="Options" type="VBoxContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection/RightColumn"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="OptionButton2" type="OptionButton" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection/RightColumn/Options"]
+layout_mode = 2
+theme = ExtResource("2_kc5ld")
+alignment = 1
+item_count = 2
+selected = 0
+popup/item_0/text = " YES"
+popup/item_0/id = 4
+popup/item_1/text = " NO"
+popup/item_1/id = 0
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection/RightColumn/Options"]
+layout_mode = 2
+theme = ExtResource("2_kc5ld")
+alignment = 1
+item_count = 3
+selected = 0
+popup/item_0/text = "3"
+popup/item_0/id = 4
+popup/item_1/text = "5"
+popup/item_1/id = 0
+popup/item_2/text = "10"
+popup/item_2/id = 1
+
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/OptionsSection"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="UpgradesLabel" type="Label" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_kc5ld")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "Upgrades:"
+
+[node name="UpgradesSection" type="HBoxContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="LeftColumn" type="HBoxContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Labels" type="VBoxContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/LeftColumn"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/LeftColumn/Labels"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_kc5ld")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 18
+text = "Blaster Damage: "
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/LeftColumn/Labels"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_kc5ld")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 18
+text = "Blaster Cooldown: "
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/LeftColumn/Labels"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/LeftColumn/Labels"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_kc5ld")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 18
+text = "Rocket Damage: "
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/LeftColumn/Labels"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_kc5ld")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 18
+text = "Rocket Cooldown: "
+vertical_alignment = 1
+
+[node name="Options" type="VBoxContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/LeftColumn"]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/LeftColumn/Options"]
+layout_mode = 2
+theme = ExtResource("2_kc5ld")
+theme_override_font_sizes/font_size = 20
+item_count = 5
+selected = 0
+popup/item_0/text = " 0"
+popup/item_0/id = 4
+popup/item_1/text = " 1"
+popup/item_1/id = 0
+popup/item_2/text = " 2"
+popup/item_2/id = 1
+popup/item_3/text = " 3"
+popup/item_3/id = 2
+popup/item_4/text = " 4"
+popup/item_4/id = 3
+
+[node name="OptionButton2" type="OptionButton" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/LeftColumn/Options"]
+layout_mode = 2
+theme = ExtResource("2_kc5ld")
+item_count = 5
+selected = 0
+popup/item_0/text = " 0"
+popup/item_0/id = 4
+popup/item_1/text = " 1"
+popup/item_1/id = 0
+popup/item_2/text = " 2"
+popup/item_2/id = 1
+popup/item_3/text = " 3"
+popup/item_3/id = 2
+popup/item_4/text = " 4"
+popup/item_4/id = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/LeftColumn/Options"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="OptionButton3" type="OptionButton" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/LeftColumn/Options"]
+layout_mode = 2
+theme = ExtResource("2_kc5ld")
+item_count = 5
+selected = 0
+popup/item_0/text = " 0"
+popup/item_0/id = 4
+popup/item_1/text = " 1"
+popup/item_1/id = 0
+popup/item_2/text = " 2"
+popup/item_2/id = 1
+popup/item_3/text = " 3"
+popup/item_3/id = 2
+popup/item_4/text = " 4"
+popup/item_4/id = 3
+
+[node name="OptionButton4" type="OptionButton" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/LeftColumn/Options"]
+layout_mode = 2
+theme = ExtResource("2_kc5ld")
+item_count = 5
+selected = 0
+popup/item_0/text = " 0"
+popup/item_0/id = 4
+popup/item_1/text = " 1"
+popup/item_1/id = 0
+popup/item_2/text = " 2"
+popup/item_2/id = 1
+popup/item_3/text = " 3"
+popup/item_3/id = 2
+popup/item_4/text = " 4"
+popup/item_4/id = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="RightColumn" type="HBoxContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Labels" type="VBoxContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/RightColumn"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/RightColumn/Labels"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_kc5ld")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 18
+text = "Charged Blaster Level: "
+
+[node name="Label2" type="Label" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/RightColumn/Labels"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_kc5ld")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 18
+text = "Charged Blaster Cooldown: "
+
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/RightColumn/Labels"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/RightColumn/Labels"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_kc5ld")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 18
+text = "Energy Pulse Level: "
+
+[node name="Label4" type="Label" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/RightColumn/Labels"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_kc5ld")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 18
+text = "Energy Pulse Cooldown: "
+
+[node name="Options" type="VBoxContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/RightColumn"]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/RightColumn/Options"]
+layout_mode = 2
+theme = ExtResource("2_kc5ld")
+item_count = 5
+selected = 0
+popup/item_0/text = " 0"
+popup/item_0/id = 4
+popup/item_1/text = " 1"
+popup/item_1/id = 0
+popup/item_2/text = " 2"
+popup/item_2/id = 1
+popup/item_3/text = " 3"
+popup/item_3/id = 2
+popup/item_4/text = " 4"
+popup/item_4/id = 3
+
+[node name="OptionButton2" type="OptionButton" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/RightColumn/Options"]
+layout_mode = 2
+theme = ExtResource("2_kc5ld")
+item_count = 5
+selected = 0
+popup/item_0/text = " 0"
+popup/item_0/id = 4
+popup/item_1/text = " 1"
+popup/item_1/id = 0
+popup/item_2/text = " 2"
+popup/item_2/id = 1
+popup/item_3/text = " 3"
+popup/item_3/id = 2
+popup/item_4/text = " 4"
+popup/item_4/id = 3
+
+[node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/RightColumn/Options"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="OptionButton3" type="OptionButton" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/RightColumn/Options"]
+layout_mode = 2
+theme = ExtResource("2_kc5ld")
+item_count = 5
+selected = 0
+popup/item_0/text = " 0"
+popup/item_0/id = 4
+popup/item_1/text = " 1"
+popup/item_1/id = 0
+popup/item_2/text = " 2"
+popup/item_2/id = 1
+popup/item_3/text = " 3"
+popup/item_3/id = 2
+popup/item_4/text = " 4"
+popup/item_4/id = 3
+
+[node name="OptionButton4" type="OptionButton" parent="VBoxContainer/CustomModeWindow/VBoxContainer/ScrollContainer/VBoxContainer/UpgradesSection/RightColumn/Options"]
+layout_mode = 2
+theme = ExtResource("2_kc5ld")
+item_count = 5
+selected = 0
+popup/item_0/text = " 0"
+popup/item_0/id = 4
+popup/item_1/text = " 1"
+popup/item_1/id = 0
+popup/item_2/text = " 2"
+popup/item_2/id = 1
+popup/item_3/text = " 3"
+popup/item_3/id = 2
+popup/item_4/text = " 4"
+popup/item_4/id = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_constants/margin_top = 25
+
+[node name="Button" type="Button" parent="VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_kc5ld")
+text = "PLAY GAME"
