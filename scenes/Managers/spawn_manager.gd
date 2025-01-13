@@ -37,6 +37,7 @@ func _ready():
 	App.spawn_manager = self
 	App.reset_game.connect(reset_spawn_manager)
 
+
 func _process(_delta):
 	if !spawn_datas.is_empty():
 		for data in spawn_datas:
@@ -47,6 +48,7 @@ func reset_spawn_manager():
 	spawn_datas = []
 	kill_count = 0
 	clear_spawns()
+	print("SPAWN MANAGER: spawn_data: ", spawn_datas.size())
 	
 	
 func clear_spawns():
@@ -69,7 +71,6 @@ func clear_spawns():
 	
 func add_data(data: Spawn_data):
 	spawn_datas.append(data)
-	#if current_command == null: current_command = command
 	if data.associated_objective != null: 
 		data.associated_objective = data.associated_objective.duplicate()
 		data.associated_objective.objective_complete_signal.connect(data.clear_associated_objective,CONNECT_ONE_SHOT)
@@ -100,7 +101,8 @@ func process_data(data: Spawn_data):
 			data.quantity_per_wave += data.quantity_change_amount
 			
 					
-	print("Time: ", int(data.associated_timer.wait_time - data.associated_timer.time_left), " Qty: ", data.quantity_per_wave, " Next Change: ", data.quantity_change_start_seconds)
+	print("SPAWN MANAGER: Time: ", int(data.associated_timer.wait_time - data.associated_timer.time_left), "s - Next Change: ", data.quantity_change_start_seconds, "s - Seconds Between Waves: ", data.seconds_between_waves, "s")
+	print("SPAWN MANAGER: Spawn Qty: ", data.quantity_per_wave)
 	
 	match data.wave_behavior:
 		Spawn_data.Wave_behavior.TIMER_BASED:
@@ -114,7 +116,6 @@ func process_data(data: Spawn_data):
 					Spawn_data.Wave_behavior_variation.DECREASING:
 						data.seconds_between_waves -= data.behavior_change_amount
 						if data.seconds_between_waves < 1: data.seconds_between_waves = 1
-			print("Time: ", int(data.associated_timer.wait_time - data.associated_timer.time_left), " SBW: ", data.seconds_between_waves, " Next Change: ", data.behavior_change_start_amount)
 			
 		Spawn_data.Wave_behavior.KILL_BASED:
 			if kill_count >= data.data.behavior_variation_start:
@@ -182,8 +183,8 @@ func spawn_random(data: Spawn_data):
 		
 		add_child(new_spawn)
 		
-		new_spawn.health_component.died.connect(object_destroyed)
-		if data.associated_objective != null: data.associated_objective.connect_signal(new_spawn.health_component.died)
+		new_spawn.health_system.died.connect(object_destroyed)
+		if data.associated_objective != null: data.associated_objective.connect_signal(new_spawn.health_system.died)
 
 
 func spawn_burst(data: Spawn_data):	
@@ -221,9 +222,9 @@ func spawn_burst(data: Spawn_data):
 		asteroid.object_direction = position
 		asteroid.object_speed = 75
 		
-		asteroid.health_component.died.connect(object_destroyed)
+		asteroid.health_system.died.connect(object_destroyed)
 		if data.associated_objective != null:
-			data.associated_objective.connect_signal(asteroid.health_component.died)
+			data.associated_objective.connect_signal(asteroid.health_system.died)
 	
 
 func pick_location():

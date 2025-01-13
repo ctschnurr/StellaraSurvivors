@@ -13,14 +13,11 @@ const ACCELERATION_SMOOTHING = 25
 var direction = Vector2.ZERO
 var default_damage = 1
 
-@onready var hitbox = %HitboxComponent as HitboxComponent
-
 @onready var blaster_collision_sound: AudioStream = load("res://resources/audio/blaster_impact.wav")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	hitbox.damage = damage + (damage * size_mult)
-	hitbox.hit.connect(blaster_hit)
+	damage = damage + (damage * size_mult)
 	var scale_factor = 1 + (damage * .2) + (size_mult * .25)
 	scale = Vector2(scale_factor, scale_factor)
 	pass
@@ -28,7 +25,8 @@ func _ready():
 	
 func blaster_hit():
 	SoundManager.play_sound(blaster_collision_sound)
-	
+	App.camera.add_trauma(0.05 + (damage * .01))
+	queue_free()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -61,9 +59,10 @@ func fire_raycast(raycast_direction: Vector2):
 	if !raycast_output.is_empty():
 					
 		if raycast_output.collider is Destructable_object:
-			raycast_output.collider.respond_to_bolt_collision(raycast_direction, raycast_output.position, hitbox.damage)
+			raycast_output.collider.respond_to_bolt_collision(raycast_direction, raycast_output.position, damage)
 			
-		collision_cooldown()
+			collision_cooldown()
+			blaster_hit()
 		
 
 func collision_cooldown():

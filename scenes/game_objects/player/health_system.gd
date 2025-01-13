@@ -1,31 +1,26 @@
-extends Node
-class_name HealthComponent
+class_name HealthSystem extends Node
 
 signal died(max_health)
-signal hurt(current_health)
 
-@onready var progress_bar = %ProgressBar
-
-@export var animation_player: AnimationPlayer
-
+@export var health_bar: ProgressBar
 @export var max_health: float = 10
+@export var damage_dealt: int
+
 var current_health
 var vulnerable: bool = true
 
 func _ready():
 	current_health = max_health
-	
+
 
 func _process(_delta):
-	progress_bar.global_position = Vector2(owner.global_position.x - 25, owner.global_position.y + 25)
+	health_bar.global_position = Vector2(owner.global_position.x - 25, owner.global_position.y + 25)
 	
-	
-# Called when the node enters the scene tree for the first time.
+
 func damage(damage_amount: float):
 	if vulnerable:
 		if owner is Player: vulnerable = false
 		current_health = max(current_health - damage_amount, 0)
-		hurt.emit(current_health)
 		Callable(check_death).call_deferred()
 		App.spawn_manager.spawn_status_effect_particles(damage_amount, Color.RED, owner.global_position)
 		await get_tree().create_timer(0.25).timeout
@@ -34,7 +29,7 @@ func damage(damage_amount: float):
 		
 func check_death():
 		if current_health == 0:
-			if progress_bar.visible: progress_bar.visible = false
+			if health_bar.visible: health_bar.visible = false
 			died.emit(max_health)
 
 		else:
@@ -42,10 +37,10 @@ func check_death():
 			
 			
 func update_health_bar():
-	if !progress_bar.visible && current_health < max_health: progress_bar.visible = true
-	elif progress_bar.visible && current_health == max_health: progress_bar.visible = false
+	if !health_bar.visible && current_health < max_health: health_bar.visible = true
+	elif health_bar.visible && current_health == max_health: health_bar.visible = false
 	var percent = current_health / max_health
-	progress_bar.value = percent
+	health_bar.value = percent
 	
 	
 func heal(heal_input):

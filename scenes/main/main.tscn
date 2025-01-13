@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d27as0jcit56m"]
+[gd_scene load_steps=26 format=3 uid="uid://d27as0jcit56m"]
 
 [ext_resource type="Script" path="res://scenes/main/Game_manager.gd" id="1_bqipc"]
 [ext_resource type="Script" path="res://scenes/Managers/Mission_manager.gd" id="2_fmjb6"]
@@ -22,15 +22,17 @@
 [ext_resource type="TileSet" uid="uid://c8qvj247x6ny6" path="res://resources/space_tileset.tres" id="12_1o13u"]
 [ext_resource type="Resource" uid="uid://bp36owtk2pqqm" path="res://resources/upgrades/rocket_damage.tres" id="12_lokw2"]
 [ext_resource type="PackedScene" uid="uid://b645103cbbe1x" path="res://scenes/game_objects/game_camera/game_camera.tscn" id="13_f7ttr"]
+[ext_resource type="Resource" uid="uid://0xfdrp36ftfa" path="res://resources/upgrades/pulse_unlock.tres" id="15_aj7cv"]
+[ext_resource type="Resource" uid="uid://p7phy4dxr680" path="res://resources/upgrades/pulse_power.tres" id="16_06h4e"]
 
 [sub_resource type="Resource" id="Resource_ipnnd"]
 script = ExtResource("3_k2tlo")
 objective_type = 1
 spawn_data = ExtResource("4_5vyp6")
 player_starting_abilities = Array[Resource("res://resources/upgrades/player_upgrade.gd")]([ExtResource("3_l8u8i")])
-available_upgrades = Array[Resource("res://resources/upgrades/player_upgrade.gd")]([ExtResource("10_aq6f4"), ExtResource("4_fjlxf"), ExtResource("7_tfu58"), ExtResource("8_alp8b"), ExtResource("12_lokw2"), ExtResource("11_1m62l"), ExtResource("9_hlwa6")])
+available_upgrades = Array[Resource("res://resources/upgrades/player_upgrade.gd")]([ExtResource("10_aq6f4"), ExtResource("4_fjlxf"), ExtResource("7_tfu58"), ExtResource("8_alp8b"), ExtResource("12_lokw2"), ExtResource("11_1m62l"), ExtResource("9_hlwa6"), ExtResource("16_06h4e"), ExtResource("15_aj7cv")])
 objective_description = "Survive!"
-survive_timer_minutes = 5
+survive_timer_minutes = 10
 objective_target = 0
 
 [node name="Main" type="Node"]
@@ -43,7 +45,7 @@ objective_array = Array[ExtResource("3_k2tlo")]([SubResource("Resource_ipnnd")])
 [node name="Experience_manager" parent="." instance=ExtResource("2_sc8ta")]
 
 [node name="Upgrade_manager" parent="." node_paths=PackedStringArray("experience_manager") instance=ExtResource("5_xmfqf")]
-upgrade_pool = Array[Resource("res://resources/upgrades/player_upgrade.gd")]([ExtResource("7_tfu58"), ExtResource("8_alp8b"), ExtResource("9_hlwa6"), ExtResource("10_aq6f4"), ExtResource("11_1m62l"), ExtResource("12_lokw2")])
+upgrade_pool = Array[Resource("res://resources/upgrades/player_upgrade.gd")]([ExtResource("7_tfu58"), ExtResource("8_alp8b"), ExtResource("9_hlwa6"), ExtResource("10_aq6f4"), ExtResource("11_1m62l"), ExtResource("12_lokw2"), ExtResource("15_aj7cv"), ExtResource("16_06h4e")])
 experience_manager = NodePath("../Experience_manager")
 
 [node name="Enemy_manager" parent="." instance=ExtResource("9_pjcio")]

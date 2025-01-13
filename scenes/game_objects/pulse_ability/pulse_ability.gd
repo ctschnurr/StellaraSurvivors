@@ -17,9 +17,9 @@ func explode(strength: int):
 	sprite.play()
 	#SoundManager.play_sound_with_pitch(explosion_sound, 1 - (strength * 0.05))
 	var tween = get_tree().create_tween()
-	tween.parallel().tween_property(self, "scale", Vector2(pulse_strength + 7.5, pulse_strength + 7.5), 0.375).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
-	#tween.tween_property(sprite, "modulate:a", 0, 1).set_ease(Tween.EASE_OUT)
-	await sprite.animation_finished
+	tween.tween_property(self, "scale", Vector2(pulse_strength + 7.5, pulse_strength + 7.5), 0.75).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tween.parallel().tween_property(sprite, "modulate:a", 0, 0.75).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+	await tween.finished
 	pulse_done.emit()
 	queue_free()
 	

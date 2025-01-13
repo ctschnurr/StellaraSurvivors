@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bm2uy3gr521j4"]
+[gd_scene load_steps=10 format=3 uid="uid://bm2uy3gr521j4"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/enemies/asteroids/comet.gd" id="1_15d0x"]
+[ext_resource type="PackedScene" uid="uid://cxkoh26xllbpv" path="res://scenes/game_objects/player/health_system.tscn" id="5_f83ec"]
 [ext_resource type="Texture2D" uid="uid://ptmjfeyg4bj6" path="res://scenes/game_objects/enemies/asteroids/asteroid_comet.png" id="6_0wfpd"]
-[ext_resource type="PackedScene" uid="uid://bcmna6wa42j0q" path="res://scenes/components/hurtbox_component.tscn" id="6_k6nhf"]
 [ext_resource type="PackedScene" uid="uid://cxmypx8uu0kun" path="res://scenes/components/hitbox_component.tscn" id="7_7eahl"]
-[ext_resource type="PackedScene" uid="uid://dqf2fq7p7ip" path="res://scenes/components/health_component.tscn" id="8_ck71o"]
 [ext_resource type="Texture2D" uid="uid://b67fu5vrlvjke" path="res://scenes/effects/asteroid_explosion.png" id="10_4olkr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rvlpy"]
@@ -28,24 +27,12 @@ object_sprite = NodePath("Asteroid_sprite")
 z_index = 1
 texture = ExtResource("6_0wfpd")
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_k6nhf")]
-collision_layer = 0
-collision_mask = 8
-health_component = NodePath("../HealthComponent")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
-shape = SubResource("CircleShape2D_rvlpy")
-
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("7_7eahl")]
-hurtbox = NodePath("../HurtboxComponent")
+hurtbox = NodePath("")
 damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_rvlpy")
-
-[node name="HealthComponent" parent="." instance=ExtResource("8_ck71o")]
-unique_name_in_owner = true
-max_health = 30.0
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 amount = 200
@@ -67,6 +54,10 @@ color_initial_ramp = SubResource("Gradient_ggmo1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_026wd")
+
+[node name="HealthSystem" parent="." instance=ExtResource("5_f83ec")]
+unique_name_in_owner = true
+max_health = 500.0
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

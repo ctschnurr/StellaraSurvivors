@@ -8,5 +8,5 @@ script = ExtResource("1_jj0ti")
 id = "rocket_damage"
 name = "Rocket Damage"
 description = "Increases damage and blast radius for rocket explosions."
-max_lvl = 3
+max_lvl = 4
 upgrade_prerequisite = ExtResource("2_p83fe")

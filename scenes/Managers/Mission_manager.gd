@@ -43,12 +43,12 @@ func start_mission():
 	
 	#current_objective = spawn_command.associated_objective
 	
-	current_objective = objective_array[0].duplicate()
+	current_objective = objective_array[0].duplicate(true)
 		
 	current_objective.objective_complete_signal.connect(complete_objective, CONNECT_ONE_SHOT)
 	current_objective.objective_updated_signal.connect(update_objective)
 	
-	App.spawn_manager.add_data(current_objective.spawn_data)
+	App.spawn_manager.add_data(current_objective.spawn_data.duplicate())
 	current_objective.spawn_data.associated_objective = current_objective
 	
 	App.instantiate_player()
@@ -61,7 +61,6 @@ func start_mission():
 		add_child(survive_timer)
 		survive_timer.start(current_objective.survive_timer_minutes * 60)
 		survive_timer.paused = true
-		print(survive_timer.time_left)
 		current_objective.update_objective_info()
 		await get_tree().create_timer(1.5).timeout
 		survive_timer.paused = false

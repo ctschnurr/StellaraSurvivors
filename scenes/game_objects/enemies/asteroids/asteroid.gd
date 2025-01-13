@@ -42,8 +42,8 @@ func _ready():
 		
 		loot_module_array = new_loot
 		
-		health_component.max_health *= 3
-		health_component.current_health *= 3
+		health_system.max_health *= 3
+		health_system.current_health *= 3
 			
 	
 	await get_tree().create_timer(15).timeout

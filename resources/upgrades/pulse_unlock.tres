@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Player_upgrade" load_steps=2 format=3 uid="uid://0xfdrp36ftfa"]
+
+[ext_resource type="Script" path="res://resources/upgrades/player_upgrade.gd" id="1_41yop"]
+
+[resource]
+script = ExtResource("1_41yop")
+id = "pulse_unlock"
+name = "Energy Pulse"
+description = "Unlocks Energy Pulse Secondary Weapon:"
+max_lvl = 1

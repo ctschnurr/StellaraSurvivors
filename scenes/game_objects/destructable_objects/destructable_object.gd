@@ -3,13 +3,13 @@ class_name Destructable_object extends CharacterBody2D
 @onready var spawn_manager: Spawn_manager
 
 var object_sprite
-@onready var health_component: HealthComponent = %HealthComponent
 @onready var explosion_effect_scene = load("res://scenes/effects/asteroid_explosion.tscn")
 @onready var impact_effect_scene = load("res://scenes/effects/asteroid_impact.tscn")
 @onready var burst_data = load("res://resources/spawn_data/spawn_data_burst.tres")
 @export var spawn_module_array: Array[Spawn_module]
 var loot_module_array: Array[Loot_module]
 
+@onready var health_system: HealthSystem = %HealthSystem
 @export var object_colliders: Array[CollisionShape2D]
 
 var object_rotation
@@ -22,11 +22,9 @@ var vulnerable = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#health_component = %HealthComponent
-	health_component.died.connect(death_sequence)
-	health_component.hurt.connect(damage_sequence)
+	health_system.died.connect(death_sequence)
 	
-	object_rotation = randf_range(-0.025, 0.025) #randf_range(-0.025, 0.025)
+	object_rotation = randf_range(-0.025, 0.025)
 	if object_direction == Vector2.ZERO: 
 		if randf_range(1, 5) > 3:
 			if App.player != null: object_direction = object_direction.direction_to(App.player.global_position)
@@ -98,6 +96,9 @@ func fire_raycast(direction: Vector2):
 			raycast_output.collider.collision_cooldown()
 			
 			object_rotation = new_rotation
+			
+		if raycast_output.collider is Player:
+			raycast_output.collider.health_component.damage(1)
 		
 		if new_speed > 5: object_speed = new_speed
 		object_direction = new_direction
@@ -109,6 +110,11 @@ func collision_cooldown():
 	await get_tree().create_timer(0.25).timeout
 	set_physics_process(true)
 
+
+func take_damage(damage_amount):
+	damage_sequence()
+	health_system.damage(damage_amount)
+	
 
 func respond_to_bolt_collision(bolt_direction, collision_point, damage_factor):	
 	var object_angle = object_direction.angle()
@@ -133,40 +139,32 @@ func respond_to_bolt_collision(bolt_direction, collision_point, damage_factor):
 			object_speed *= 0.60
 			
 	object_impact(collision_point)
-
-
+	take_damage(damage_factor)
+	
+	
 func respond_to_explosion_collision(direction, distance, strength):
 	if !vulnerable: pass
 	else: vulnerable = false
-	
-	var factor = (max((100 - distance), 0) + (strength * strength)) / size_multiplier
-	# print(size_multiplier, ":", (max((100 - distance), 0) + (strength * strength)) / size_multiplier)
 
 	var object_angle = object_direction.angle()
 	var diff_angle = object_angle - direction.angle()
-			
+	
 	#if the explosion hits an asteroid traveling toward it:
 	if diff_angle < -2.75 or diff_angle > 2.75: 
-		if object_speed < factor:
-			object_direction = direction.normalized()
-			object_speed = factor / size_multiplier
-		else:
-			object_speed -= factor / size_multiplier
-
-	#if the explosion hits an asteroid traveling away from it:
-	if diff_angle > -0.5 and diff_angle < 0.5: 
-			object_speed += factor / size_multiplier
+		object_direction = direction.normalized()
 	
 	#if the explosion hits an asteroid travelling at a diagonal from it:
 	if (diff_angle < 2.75 and diff_angle > 0.5) or (diff_angle > -2.75 and diff_angle <  -0.5): 
-		if object_speed < factor:
-			object_direction = direction.normalized()
-			object_speed = factor / size_multiplier
-		else:
-			object_direction = object_direction.rotated(-diff_angle / 2)
-			object_speed = factor / size_multiplier
+		object_direction = direction.normalized()
+
+	object_speed = (strength * 25) / size_multiplier
+
+	#if the explosion hits an asteroid traveling away from it:
+	if diff_angle > -0.5 and diff_angle < 0.5: 
+		object_speed = ((strength * 25) / size_multiplier) + object_speed
 		
-	health_component.damage(max(strength - int(distance / 10), 1))
+	var damage = max(strength - int(distance / 20), 1)
+	take_damage(damage)
 	
 	await get_tree().create_timer(0.25).timeout
 	vulnerable = true
@@ -179,11 +177,9 @@ func respond_to_pulse_collision(direction, distance, strength):
 	var object_angle = object_direction.angle()
 	var diff_angle = object_angle - direction.angle()
 	
-	print(diff_angle)
 	#if the explosion hits an asteroid traveling toward it:
 	if diff_angle < -2.75 or diff_angle > 2.75: 
 		object_direction = direction.normalized()
-		print("toward")
 	
 	#if the explosion hits an asteroid travelling at a diagonal from it:
 	if (diff_angle < 2.75 and diff_angle > 0.5) or (diff_angle > -2.75 and diff_angle <  -0.5): 
@@ -193,9 +189,7 @@ func respond_to_pulse_collision(direction, distance, strength):
 
 	#if the explosion hits an asteroid traveling away from it:
 	if diff_angle > -0.5 and diff_angle < 0.5: 
-		print(object_speed)
 		object_speed = ((strength * 25) / size_multiplier) + object_speed
-		print("away")
 
 	await get_tree().create_timer(0.25).timeout
 	vulnerable = true
@@ -250,7 +244,7 @@ func spawn_drops():
 	App.enemy_manager.spawn_drops(global_position, loot_module_array)
 	
 	
-func damage_sequence(_health):
+func damage_sequence():
 	var tween = get_tree().create_tween()
 	
 	tween.tween_property(object_sprite, "scale", Vector2(1.25, 1.25), 0.1)

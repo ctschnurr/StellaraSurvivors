@@ -10,6 +10,7 @@ class_name Ability_System extends CanvasLayer
 
 var player
 var blaster_icon_card
+var debug = true;
 
 enum Secondary_weapons{NONE, CHARGED_BLASTER, ROCKET_LAUNCHER, ENERGY_PULSE}
 var selected_secondary_weapon = Secondary_weapons.ENERGY_PULSE
@@ -76,7 +77,19 @@ func _process(delta):
 			Secondary_weapons.CHARGED_BLASTER:
 				if charged_blaster_charging:
 					release_charged_blaster()
-
+					
+	if debug:
+		if Input.is_action_just_pressed("number1"):
+			selected_secondary_weapon = Secondary_weapons.CHARGED_BLASTER
+			
+		if Input.is_action_just_pressed("number2"):
+			selected_secondary_weapon = Secondary_weapons.ROCKET_LAUNCHER
+			rocket_damage_level = 4
+			
+		if Input.is_action_just_pressed("number3"):
+			selected_secondary_weapon = Secondary_weapons.ENERGY_PULSE
+			pulse_strength_level = 4
+			
 
 func enable_blaster():
 	blaster_enabled = true
@@ -167,6 +180,7 @@ func fire_pulse():
 		SoundManager.play_sound(rocket_fire_sound)
 		App.spawn_manager.spawn_energy_pulse(player.global_position, pulse_strength_level + 1, self)
 		player.toggle_status()
+		player.velocity = Vector2.ZERO
 		player.ship_body.stop()
 		player.ship_body.play("player_fire")
 		await get_tree().create_timer(1 - (rocket_cooldown_level * 0.1)).timeout
@@ -196,6 +210,8 @@ func update_ability(upgrade: Player_upgrade, current_abilities: Dictionary):
 			selected_secondary_weapon = Secondary_weapons.ROCKET_LAUNCHER
 		"rocket_damage":
 			rocket_damage_level = current_abilities["rocket_damage"]["quantity"]
+		"pulse_unlock":
+			selected_secondary_weapon = Secondary_weapons.ENERGY_PULSE
 		_:
 			return
 

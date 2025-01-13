@@ -9,7 +9,6 @@ signal hit
 func _ready():
 	area_entered.connect(on_area_entered)
 
-
 func on_area_entered(_other_area: Area2D):
 	if hurtbox == null:
 		hit.emit()

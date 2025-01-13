@@ -1,35 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://cwhdow3yaqumu"]
+[gd_scene load_steps=12 format=3 uid="uid://cwhdow3yaqumu"]
 
 [ext_resource type="Texture2D" uid="uid://cbwycwcix7yfp" path="res://scenes/game_objects/crate/crate.png" id="1_653wb"]
 [ext_resource type="Script" path="res://scenes/game_objects/crate/crate.gd" id="1_nsycn"]
-[ext_resource type="PackedScene" uid="uid://bcmna6wa42j0q" path="res://scenes/components/hurtbox_component.tscn" id="2_xjcfc"]
-[ext_resource type="PackedScene" uid="uid://dqf2fq7p7ip" path="res://scenes/components/health_component.tscn" id="3_yuuhm"]
-[ext_resource type="PackedScene" uid="uid://cnmjaqosxxcng" path="res://scenes/game_objects/pickups/experience_orb/experience_orb_blue.tscn" id="4_a8shj"]
-[ext_resource type="PackedScene" uid="uid://cj8vlhs1s27in" path="res://scenes/game_objects/pickups/experience_orb/experience_orb_yellow.tscn" id="5_g8cfe"]
-[ext_resource type="Script" path="res://resources/loot_modules/loot_module.gd" id="5_j3a17"]
-[ext_resource type="PackedScene" uid="uid://nw0xpvmoj4ol" path="res://scenes/game_objects/pickups/experience_orb/experience_orb_red.tscn" id="6_5mspj"]
-[ext_resource type="PackedScene" uid="uid://m00jmf08qiyi" path="res://scenes/game_objects/pickups/health_pack/health_pack.tscn" id="7_qywiy"]
+[ext_resource type="PackedScene" uid="uid://cxkoh26xllbpv" path="res://scenes/game_objects/player/health_system.tscn" id="4_u7kfk"]
 [ext_resource type="PackedScene" uid="uid://cxmypx8uu0kun" path="res://scenes/components/hitbox_component.tscn" id="10_p3hne"]
-
-[sub_resource type="Resource" id="Resource_24v7f"]
-script = ExtResource("5_j3a17")
-loot_scene = ExtResource("7_qywiy")
-loot_drop_probability = 100
-
-[sub_resource type="Resource" id="Resource_a0qsb"]
-script = ExtResource("5_j3a17")
-loot_scene = ExtResource("4_a8shj")
-loot_drop_probability = 100
-
-[sub_resource type="Resource" id="Resource_6k1o5"]
-script = ExtResource("5_j3a17")
-loot_scene = ExtResource("5_g8cfe")
-loot_drop_probability = 75
-
-[sub_resource type="Resource" id="Resource_clln2"]
-script = ExtResource("5_j3a17")
-loot_scene = ExtResource("6_5mspj")
-loot_drop_probability = 50
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p3r74"]
 atlas = ExtResource("1_653wb")
@@ -81,7 +55,6 @@ radius = 43.0
 
 [node name="Crate" type="CharacterBody2D" node_paths=PackedStringArray("object_colliders")]
 script = ExtResource("1_nsycn")
-loot_module_array = Array[ExtResource("5_j3a17")]([SubResource("Resource_24v7f"), SubResource("Resource_a0qsb"), SubResource("Resource_6k1o5"), SubResource("Resource_clln2")])
 object_colliders = [null, null]
 
 [node name="Crate_sprite" type="AnimatedSprite2D" parent="."]
@@ -94,21 +67,13 @@ frame_progress = 0.411549
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_w3ks6")
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_xjcfc")]
-collision_layer = 0
-collision_mask = 8
-health_component = NodePath("../HealthComponent")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
-shape = SubResource("CircleShape2D_slrki")
-
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("10_p3hne")]
-hurtbox = NodePath("../HurtboxComponent")
+hurtbox = NodePath("")
 damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_slrki")
 
-[node name="HealthComponent" parent="." instance=ExtResource("3_yuuhm")]
+[node name="HealthSystem" parent="." instance=ExtResource("4_u7kfk")]
 unique_name_in_owner = true
-max_health = 25.0
+max_health = 15.0

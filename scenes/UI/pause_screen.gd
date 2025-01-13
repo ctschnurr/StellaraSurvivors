@@ -12,7 +12,7 @@ func _ready():
 	resume_button.pressed.connect(resume_game)
 	resume_button.mouse_entered.connect(on_resume_entered)
 	resume_button.focus_entered.connect(on_focus_entered)
-	restart_button.pressed.connect(play_game)
+	restart_button.pressed.connect(restart_game)
 	restart_button.mouse_entered.connect(on_restart_entered)
 	restart_button.focus_entered.connect(on_focus_entered)
 	options_button.pressed.connect(show_options)
@@ -32,8 +32,9 @@ func resume_game():
 	get_tree().paused = false
 	
 	
-func play_game():
-	screen_manager.play_game()
+func restart_game():
+	SoundManager.play_sound(App.upgrade_selected_sound)
+	App.screen_manager.restart_game()
 	queue_free()
 	pass
 

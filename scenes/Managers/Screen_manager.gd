@@ -65,9 +65,12 @@ func quit_game():
 
 func play_game():
 	get_tree().paused = false
-	App.request_reset_game()
 	App.request_start_game()
-	#game_manager.mission_manager.start_mission()
+
+
+func restart_game():
+	get_tree().paused = false
+	App.request_reset_game()
 	
 	
 func show_options_screen(back_scene_name: String):

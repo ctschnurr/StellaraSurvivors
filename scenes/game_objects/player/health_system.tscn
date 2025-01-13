@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxkoh26xllbpv"]
+
+[ext_resource type="Script" path="res://scenes/game_objects/player/health_system.gd" id="1_xtm8e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lhygy"]
+bg_color = Color(0, 0, 0, 0.588235)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trnao"]
+bg_color = Color(0.863432, 0.0553816, 0.0318653, 1)
+
+[node name="HealthSystem" type="Node" node_paths=PackedStringArray("health_bar")]
+script = ExtResource("1_xtm8e")
+health_bar = NodePath("HealthBar")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 5
+custom_minimum_size = Vector2(50, 2)
+offset_left = -25.0
+offset_top = 25.0
+offset_right = 25.0
+offset_bottom = 29.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_lhygy")
+theme_override_styles/fill = SubResource("StyleBoxFlat_trnao")
+max_value = 1.0
+value = 1.0
+show_percentage = false

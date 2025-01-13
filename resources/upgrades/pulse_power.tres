@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Player_upgrade" load_steps=3 format=3 uid="uid://p7phy4dxr680"]
+
+[ext_resource type="Script" path="res://resources/upgrades/player_upgrade.gd" id="1_xdvqk"]
+[ext_resource type="Resource" uid="uid://0xfdrp36ftfa" path="res://resources/upgrades/pulse_unlock.tres" id="2_m3jp4"]
+
+[resource]
+script = ExtResource("1_xdvqk")
+id = "pulse_power"
+name = "Pulse Power"
+description = "Increases energy pulse power and radius."
+max_lvl = 4
+upgrade_prerequisite = ExtResource("2_m3jp4")

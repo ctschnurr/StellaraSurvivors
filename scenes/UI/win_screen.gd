@@ -7,7 +7,7 @@ func _ready():
 	SoundManager.play_sound(App.level_up_sound)
 	
 	replay_button.grab_focus()
-	replay_button.pressed.connect(play_game)
+	replay_button.pressed.connect(restart_game)
 	replay_button.mouse_entered.connect(on_play_entered)
 	replay_button.focus_entered.connect(on_focus_entered)
 	quit_button.pressed.connect(quit_game)
@@ -15,10 +15,11 @@ func _ready():
 	quit_button.focus_entered.connect(on_focus_entered)
 	
 	
-func play_game():
+func restart_game():
 	SoundManager.play_sound(App.upgrade_selected_sound)
-	App.screen_manager.play_game()
+	App.screen_manager.restart_game()
 	queue_free()
+	pass
 
 
 func quit_game():

@@ -1,26 +1,23 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0lsq5yi27jo1"]
+[gd_scene load_steps=9 format=3 uid="uid://d0lsq5yi27jo1"]
 
 [ext_resource type="Script" path="res://scenes/game_objects/enemies/asteroids/asteroid.gd" id="1_hccpj"]
 [ext_resource type="Texture2D" uid="uid://d2hllaieve7is" path="res://scenes/game_objects/enemies/asteroids/asteroid_lg02.png" id="4_i75r3"]
 [ext_resource type="Resource" uid="uid://d4kmx3vvtxu61" path="res://resources/spawn_modules/small_asteroid_default_module.tres" id="4_t8c7c"]
 [ext_resource type="Resource" uid="uid://d0vqv3173v41n" path="res://resources/spawn_modules/medium_asteroid_default_module.tres" id="5_d15xa"]
 [ext_resource type="Texture2D" uid="uid://oh51gmsr01fq" path="res://scenes/game_objects/enemies/asteroids/asteroid_lg01.png" id="5_ibq82"]
-[ext_resource type="PackedScene" uid="uid://dqf2fq7p7ip" path="res://scenes/components/health_component.tscn" id="5_jxj7f"]
-[ext_resource type="PackedScene" uid="uid://bcmna6wa42j0q" path="res://scenes/components/hurtbox_component.tscn" id="6_15n0q"]
-[ext_resource type="PackedScene" uid="uid://cxmypx8uu0kun" path="res://scenes/components/hitbox_component.tscn" id="7_e1wmt"]
+[ext_resource type="PackedScene" uid="uid://cxkoh26xllbpv" path="res://scenes/game_objects/player/health_system.tscn" id="6_4kyik"]
+[ext_resource type="PackedScene" uid="uid://cxmypx8uu0kun" path="res://scenes/components/hitbox_component.tscn" id="7_5ikbs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_026wd"]
 radius = 40.5
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rvlpy"]
-radius = 43.0
-
-[node name="Asteroid_lg" type="CharacterBody2D" node_paths=PackedStringArray("object_colliders")]
+[node name="Asteroid_lg" type="CharacterBody2D"]
+collision_layer = 5
+collision_mask = 9
 script = ExtResource("1_hccpj")
 asteroid_textures = Array[Texture]([ExtResource("5_ibq82"), ExtResource("4_i75r3")])
 size = 2
 spawn_module_array = Array[Resource("res://resources/spawn_modules/spawn_module.gd")]([ExtResource("4_t8c7c"), ExtResource("5_d15xa")])
-object_colliders = [NodePath("CollisionShape2D"), NodePath("HurtboxComponent/CollisionShape2D"), NodePath("HitboxComponent/CollisionShape2D")]
 
 [node name="Asteroid_sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -30,21 +27,12 @@ texture = ExtResource("5_ibq82")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_026wd")
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_15n0q")]
-collision_layer = 0
-collision_mask = 8
-health_component = NodePath("../HealthComponent")
+[node name="HealthSystem" parent="." instance=ExtResource("6_4kyik")]
+unique_name_in_owner = true
+max_health = 25.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
-shape = SubResource("CircleShape2D_rvlpy")
-
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("7_e1wmt")]
-hurtbox = NodePath("../HurtboxComponent")
+[node name="HitboxComponent" parent="." instance=ExtResource("7_5ikbs")]
 damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-shape = SubResource("CircleShape2D_rvlpy")
-
-[node name="HealthComponent" parent="." instance=ExtResource("5_jxj7f")]
-unique_name_in_owner = true
-max_health = 30.0
+shape = SubResource("CircleShape2D_026wd")

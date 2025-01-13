@@ -5,7 +5,7 @@ class_name Comet
 
 @export var object_sprite: Sprite2D
 @onready var impact_effect_scene = load("res://scenes/effects/asteroid_impact.tscn")
-@onready var health_component: HealthComponent = %HealthComponent
+@onready var health_system: HealthSystem = %HealthSystem
 @export var object_colliders: Array[CollisionShape2D]
 
 var object_rotation
@@ -188,7 +188,7 @@ func fire_raycast2(other_area_pos: Vector2):
 			
 		if raycast_output.collider is Player:
 			object_direction = -direction
-			raycast_output.collider.health_component.damage(3)
+			raycast_output.collider.health_system.damage(3)
 
 
 func _on_area_2d_area_entered(area):
