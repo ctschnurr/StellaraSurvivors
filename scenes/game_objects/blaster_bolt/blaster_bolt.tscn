@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bxp05dl1dhxw6"]
 
-[ext_resource type="Script" path="res://scenes/game_objects/blaster_bolt/Blaster_bolt.gd" id="1_pickl"]
+[ext_resource type="Script" uid="uid://hp7j541iq7wp" path="res://scenes/game_objects/blaster_bolt/Blaster_bolt.gd" id="1_pickl"]
 [ext_resource type="Texture2D" uid="uid://bg68xefla8nou" path="res://scenes/game_objects/blaster_bolt/blaster_bolt.png" id="2_kk561"]
 
 [node name="Blaster_bolt" type="CharacterBody2D"]

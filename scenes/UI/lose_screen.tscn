@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://brctvkgpivpue"]
 
-[ext_resource type="Script" path="res://scenes/UI/lose_screen.gd" id="1_tae55"]
+[ext_resource type="Script" uid="uid://i3yfxrvu3cga" path="res://scenes/UI/lose_screen.gd" id="1_tae55"]
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_2alls"]
 
 [node name="Lose_screen" type="CanvasLayer"]

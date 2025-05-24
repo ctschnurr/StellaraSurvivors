@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dh2w0vna8rpoy"]
 
-[ext_resource type="Script" path="res://scenes/UI/quit_screen.gd" id="1_8wx8m"]
+[ext_resource type="Script" uid="uid://y67uuyrwqt3t" path="res://scenes/UI/quit_screen.gd" id="1_8wx8m"]
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="1_346ow"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fe66k"]

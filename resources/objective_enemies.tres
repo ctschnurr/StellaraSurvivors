@@ -1,9 +1,13 @@
-[gd_resource type="Resource" script_class="Objective" load_steps=2 format=3 uid="uid://vqfgl6dtwyug"]
+[gd_resource type="Resource" script_class="Objective" load_steps=3 format=3 uid="uid://vqfgl6dtwyug"]
 
-[ext_resource type="Script" path="res://scenes/Managers/Objective.gd" id="1_srb4v"]
-
+[ext_resource type="Script" uid="uid://dy54e3noys34w" path="res://resources/upgrades/player_upgrade.gd" id="1_24uoy"]
+[ext_resource type="Script" uid="uid://dt78dh11ql8ra" path="res://scenes/Managers/Objective.gd" id="1_srb4v"]
 
 [resource]
 script = ExtResource("1_srb4v")
 objective_type = 0
+player_starting_abilities = Array[ExtResource("1_24uoy")]([])
+available_upgrades = Array[ExtResource("1_24uoy")]([])
 objective_description = "Destroy enemies!"
+survive_timer_minutes = 0
+objective_target = 0

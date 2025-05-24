@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ntl4s2i8knd7"]
 
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="1_1md7s"]
-[ext_resource type="Script" path="res://scenes/UI/controls_screen.gd" id="1_bw75k"]
+[ext_resource type="Script" uid="uid://bnedrrnxrj03o" path="res://scenes/UI/controls_screen.gd" id="1_bw75k"]
 
 [node name="Controls_screen" type="CanvasLayer"]
 process_mode = 3

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Player_upgrade" load_steps=2 format=3 uid="uid://cumvq4wpr6u81"]
 
-[ext_resource type="Script" path="res://resources/upgrades/player_upgrade.gd" id="1_axwmf"]
+[ext_resource type="Script" uid="uid://dy54e3noys34w" path="res://resources/upgrades/player_upgrade.gd" id="1_axwmf"]
 
 [resource]
 script = ExtResource("1_axwmf")

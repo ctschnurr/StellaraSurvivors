@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dcbccup1drycl"]
 
 [ext_resource type="Texture2D" uid="uid://c2av5fn7wnt06" path="res://resources/new_viewport_texture.tres" id="1_1rp4p"]
-[ext_resource type="Script" path="res://scenes/effects/stat_change_particles.gd" id="2_4vvpy"]
+[ext_resource type="Script" uid="uid://casa42652l24u" path="res://scenes/effects/stat_change_particles.gd" id="2_4vvpy"]
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_5c5sc"]
 
 [sub_resource type="Gradient" id="Gradient_yc56u"]

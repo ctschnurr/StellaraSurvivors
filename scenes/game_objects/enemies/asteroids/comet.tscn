@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bm2uy3gr521j4"]
 
-[ext_resource type="Script" path="res://scenes/game_objects/enemies/asteroids/comet.gd" id="1_15d0x"]
+[ext_resource type="Script" uid="uid://odf3qydf2o38" path="res://scenes/game_objects/enemies/asteroids/comet.gd" id="1_15d0x"]
 [ext_resource type="PackedScene" uid="uid://cxkoh26xllbpv" path="res://scenes/game_objects/player/health_system.tscn" id="5_f83ec"]
 [ext_resource type="Texture2D" uid="uid://ptmjfeyg4bj6" path="res://scenes/game_objects/enemies/asteroids/asteroid_comet.png" id="6_0wfpd"]
 [ext_resource type="PackedScene" uid="uid://cxmypx8uu0kun" path="res://scenes/components/hitbox_component.tscn" id="7_7eahl"]

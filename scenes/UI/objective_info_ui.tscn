@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://csj7srfalk7r8"]
 
-[ext_resource type="Script" path="res://scenes/UI/Objective_info_ui.gd" id="1_qked6"]
+[ext_resource type="Script" uid="uid://553iv5l2ry6e" path="res://scenes/UI/Objective_info_ui.gd" id="1_qked6"]
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_bo8to"]
 
 [node name="Objective_info_ui" type="CanvasLayer"]

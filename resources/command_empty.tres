@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="Spawn_command" load_steps=2 format=3 uid="uid://osc7c16keff4"]
+[gd_resource type="Resource" script_class="Spawn_command" load_steps=3 format=3 uid="uid://osc7c16keff4"]
 
-[ext_resource type="Script" path="res://Spawn_command.gd" id="1_bvn3k"]
+[ext_resource type="Script" uid="uid://ca3v2yqnm3fqt" path="res://Spawn_command.gd" id="1_bvn3k"]
+[ext_resource type="Script" uid="uid://cwp0kllyd8ds" path="res://resources/spawn_modules/spawn_module.gd" id="1_k6tdv"]
 
 [resource]
 script = ExtResource("1_bvn3k")
-possible_enemies = Array[int]([])
+possible_enemies = Array[ExtResource("1_k6tdv")]([])
 repeat_state = 0
 repeat_mode = 0
-repeat_delay = 0
+repeat_timer = 0.0
+repeat_delay = 0.0
 repeat_amount = 0
 ready = true
 enemy_type = Array[PackedScene]([])

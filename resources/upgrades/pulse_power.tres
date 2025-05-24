@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Player_upgrade" load_steps=3 format=3 uid="uid://p7phy4dxr680"]
 
-[ext_resource type="Script" path="res://resources/upgrades/player_upgrade.gd" id="1_xdvqk"]
+[ext_resource type="Script" uid="uid://dy54e3noys34w" path="res://resources/upgrades/player_upgrade.gd" id="1_xdvqk"]
 [ext_resource type="Resource" uid="uid://0xfdrp36ftfa" path="res://resources/upgrades/pulse_unlock.tres" id="2_m3jp4"]
 
 [resource]

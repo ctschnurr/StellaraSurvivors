@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://de6khcv1nexs0"]
+[gd_scene load_steps=10 format=3 uid="uid://de6khcv1nexs0"]
 
-[ext_resource type="Script" path="res://scenes/game_objects/enemies/asteroids/asteroid.gd" id="1_pnlt3"]
+[ext_resource type="Script" uid="uid://c4ubvw48ktdob" path="res://scenes/game_objects/enemies/asteroids/asteroid.gd" id="1_pnlt3"]
 [ext_resource type="Texture2D" uid="uid://cg8ae7n235w1i" path="res://scenes/game_objects/enemies/asteroids/asteroid_med01.png" id="2_4kuuh"]
 [ext_resource type="Texture2D" uid="uid://d32dekmmcfmtx" path="res://scenes/game_objects/enemies/asteroids/asteroid_med02.png" id="3_tvdu3"]
 [ext_resource type="Texture2D" uid="uid://dsb8ld8yybmto" path="res://scenes/game_objects/enemies/asteroids/asteroid_med03.png" id="4_u82u7"]
+[ext_resource type="Script" uid="uid://cwp0kllyd8ds" path="res://resources/spawn_modules/spawn_module.gd" id="5_h45pb"]
 [ext_resource type="Resource" uid="uid://d4kmx3vvtxu61" path="res://resources/spawn_modules/small_asteroid_default_module.tres" id="5_s1yhp"]
 [ext_resource type="PackedScene" uid="uid://cxkoh26xllbpv" path="res://scenes/game_objects/player/health_system.tscn" id="6_vv42g"]
 [ext_resource type="PackedScene" uid="uid://cxmypx8uu0kun" path="res://scenes/components/hitbox_component.tscn" id="7_v228y"]
@@ -17,7 +18,7 @@ collision_mask = 9
 script = ExtResource("1_pnlt3")
 asteroid_textures = Array[Texture]([ExtResource("2_4kuuh"), ExtResource("3_tvdu3"), ExtResource("4_u82u7")])
 size = 1
-spawn_module_array = Array[Resource("res://resources/spawn_modules/spawn_module.gd")]([ExtResource("5_s1yhp")])
+spawn_module_array = Array[ExtResource("5_h45pb")]([ExtResource("5_s1yhp")])
 object_colliders = [NodePath("CollisionShape2D"), null, null]
 
 [node name="Asteroid_sprite" type="Sprite2D" parent="."]

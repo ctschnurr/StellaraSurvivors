@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://bspdvgidt3b4r"]
 
-[ext_resource type="Script" path="res://scenes/game_objects/explosion/explosion.gd" id="1_e1ute"]
+[ext_resource type="Script" uid="uid://c0jtrjror6jqf" path="res://scenes/game_objects/explosion/explosion.gd" id="1_e1ute"]
 [ext_resource type="Texture2D" uid="uid://d2181wxw66m36" path="res://scenes/game_objects/pulse_ability/Sprite-0001.png" id="1_idb04"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ke6i"]

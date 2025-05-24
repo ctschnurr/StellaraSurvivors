@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b31ijaewr5d52"]
 
-[ext_resource type="Script" path="res://scenes/Managers/Mission_manager.gd" id="1_34s46"]
+[ext_resource type="Script" uid="uid://empd4tiu5le4" path="res://scenes/Managers/Mission_manager.gd" id="1_34s46"]
 [ext_resource type="PackedScene" uid="uid://dirgwundhi3xq" path="res://scenes/game_objects/player/player.tscn" id="2_w5nu7"]
 
 [node name="Mission_manager" type="Node"]

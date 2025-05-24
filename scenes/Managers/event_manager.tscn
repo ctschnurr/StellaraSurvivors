@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cehm72ns3ht5l"]
 
-[ext_resource type="Script" path="res://scenes/Managers/event_manager.gd" id="1_74tng"]
+[ext_resource type="Script" uid="uid://damn8n23wqk6g" path="res://scenes/Managers/event_manager.gd" id="1_74tng"]
 
 [node name="Event_manager" type="Node"]
 script = ExtResource("1_74tng")

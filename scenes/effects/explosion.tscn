@@ -1,10 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://dafqw367xu3yt"]
 
-[ext_resource type="Texture2D" uid="uid://dntky5xyv71i7" path="res://assets/engine_beam.png" id="1_w54l2"]
-[ext_resource type="Script" path="res://scenes/effects/asteroid_burst.gd" id="2_u2rue"]
-[ext_resource type="PackedScene" uid="uid://si6pecgkgbey" path="res://scenes/asteroids/asteroid_sm.tscn" id="3_fu6md"]
-[ext_resource type="PackedScene" uid="uid://de6khcv1nexs0" path="res://scenes/asteroids/asteroid_med.tscn" id="4_5b3dr"]
-[ext_resource type="PackedScene" uid="uid://cx6f0o7sqfwon" path="res://scenes/asteroids/asteroid_cluster_med_01.tscn" id="5_khi0o"]
+[ext_resource type="Script" uid="uid://cvq2gw2d2gx3t" path="res://scenes/effects/asteroid_burst.gd" id="2_u2rue"]
+[ext_resource type="PackedScene" uid="uid://si6pecgkgbey" path="res://scenes/game_objects/enemies/asteroids/asteroid_sm.tscn" id="3_fu6md"]
+[ext_resource type="PackedScene" uid="uid://de6khcv1nexs0" path="res://scenes/game_objects/enemies/asteroids/asteroid_med.tscn" id="4_5b3dr"]
 
 [sub_resource type="Curve" id="Curve_7g676"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.621495, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -14,7 +12,7 @@ point_count = 3
 curve = SubResource("Curve_7g676")
 
 [sub_resource type="Curve" id="Curve_oto7x"]
-max_value = 2.0
+_limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 2.0, 0, 1, Vector2(1, 2), 2.0, 0.0, 1, 0]
 point_count = 2
 
@@ -27,14 +25,20 @@ gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_rrbb5")
 alpha_curve = SubResource("CurveTexture_lqvxi")
 
+[sub_resource type="Resource" id="Resource_d6bb2"]
+metadata/__load_path__ = "res://assets/engine_beam.png"
+
+[sub_resource type="Resource" id="Resource_yqd0p"]
+metadata/__load_path__ = "res://scenes/asteroids/asteroid_cluster_med_01.tscn"
+
 [node name="Asteroid_burst" type="GPUParticles2D"]
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_s5phj")
-texture = ExtResource("1_w54l2")
+texture = SubResource("Resource_d6bb2")
 lifetime = 3.0
 speed_scale = 3.0
 script = ExtResource("2_u2rue")
 small_asteroid = ExtResource("3_fu6md")
 med_asteroid = ExtResource("4_5b3dr")
 
-[node name="Asteroid_cluster_med01" parent="." instance=ExtResource("5_khi0o")]
+[node name="Asteroid_cluster_med01" parent="."]

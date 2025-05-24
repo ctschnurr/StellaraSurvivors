@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Player_upgrade" load_steps=3 format=3 uid="uid://b6g6gp4a81rpk"]
 
-[ext_resource type="Script" path="res://resources/upgrades/player_upgrade.gd" id="1_cho1b"]
+[ext_resource type="Script" uid="uid://dy54e3noys34w" path="res://resources/upgrades/player_upgrade.gd" id="1_cho1b"]
 [ext_resource type="Resource" uid="uid://cumvq4wpr6u81" path="res://resources/upgrades/blaster_unlock.tres" id="2_leu3o"]
 
 [resource]

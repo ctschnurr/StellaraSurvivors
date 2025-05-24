@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://0682oimusjop"]
 
-[ext_resource type="Script" path="res://scenes/UI/main_menu.gd" id="1_jq6jl"]
+[ext_resource type="Script" uid="uid://334yx6eefg20" path="res://scenes/UI/main_menu.gd" id="1_jq6jl"]
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="3_kxuvk"]
 
 [node name="Main_menu" type="CanvasLayer"]

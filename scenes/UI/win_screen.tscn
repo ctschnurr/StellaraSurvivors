@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cs36w4xgew7pk"]
 
-[ext_resource type="Script" path="res://scenes/UI/win_screen.gd" id="1_y8733"]
+[ext_resource type="Script" uid="uid://b1hiu0nnw8rdj" path="res://scenes/UI/win_screen.gd" id="1_y8733"]
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_1wit1"]
 
 [node name="Win_screen" type="CanvasLayer"]

@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="Spawn_data" load_steps=2 format=3 uid="uid://pboli0drjrbu"]
+[gd_resource type="Resource" script_class="Spawn_data" load_steps=3 format=3 uid="uid://pboli0drjrbu"]
 
-[ext_resource type="Script" path="res://resources/spawn_data/spawn_data.gd" id="1_q7v61"]
+[ext_resource type="Script" uid="uid://cu4yynyra1lks" path="res://resources/spawn_data/spawn_data.gd" id="1_q7v61"]
+[ext_resource type="Script" uid="uid://cwp0kllyd8ds" path="res://resources/spawn_modules/spawn_module.gd" id="2_o00oo"]
 
 [resource]
 script = ExtResource("1_q7v61")
-who_to_spawn = Array[Resource("res://resources/spawn_modules/spawn_module.gd")]([])
+who_to_spawn = Array[ExtResource("2_o00oo")]([])
+who_description = "object"
 how_to_spawn = 1
 where_to_spawn = 0
 defined_spawn_position = Vector2(0, 0)
@@ -20,5 +22,6 @@ wave_behavior = 0
 wave_behavior_variation = 0
 seconds_between_waves = 0.0
 kill_target = 0
-behavior_variation_start = 0.0
-behavior_variation_amount = 0.0
+behavior_change_start_amount = 1
+behavior_change_start_increase = 1
+behavior_change_amount = 1

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c35bwb1gim3p8"]
 
-[ext_resource type="Script" path="res://scenes/UI/pause_screen.gd" id="1_8mgbq"]
+[ext_resource type="Script" uid="uid://2ljp0s7h8ywf" path="res://scenes/UI/pause_screen.gd" id="1_8mgbq"]
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_ve1ah"]
 
 [node name="Pause_screen" type="CanvasLayer"]

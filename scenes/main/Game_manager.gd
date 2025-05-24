@@ -28,5 +28,3 @@ func _unhandled_input(event):
 
 func _process(_delta):
 	if !SoundManager.is_music_playing(): SoundManager.play_music(App.main_music, 2.5)
-	if Input.is_action_just_pressed("F1"):
-		App.spawn_manager.spawn_comet()

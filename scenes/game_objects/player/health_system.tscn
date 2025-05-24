@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxkoh26xllbpv"]
 
-[ext_resource type="Script" path="res://scenes/game_objects/player/health_system.gd" id="1_xtm8e"]
+[ext_resource type="Script" uid="uid://bu5txw8fps2df" path="res://scenes/game_objects/player/health_system.gd" id="1_xtm8e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lhygy"]
 bg_color = Color(0, 0, 0, 0.588235)

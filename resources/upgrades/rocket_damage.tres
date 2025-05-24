@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Player_upgrade" load_steps=3 format=3 uid="uid://bp36owtk2pqqm"]
 
-[ext_resource type="Script" path="res://resources/upgrades/player_upgrade.gd" id="1_jj0ti"]
+[ext_resource type="Script" uid="uid://dy54e3noys34w" path="res://resources/upgrades/player_upgrade.gd" id="1_jj0ti"]
 [ext_resource type="Resource" uid="uid://ceoxm8wlh7vgq" path="res://resources/upgrades/rocket_unlock.tres" id="2_p83fe"]
 
 [resource]

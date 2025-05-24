@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="Spawn_command" load_steps=2 format=3 uid="uid://dp2ytit4cchch"]
+[gd_resource type="Resource" script_class="Spawn_command" load_steps=3 format=3 uid="uid://dp2ytit4cchch"]
 
-[ext_resource type="Script" path="res://Spawn_command.gd" id="1_olxhp"]
+[ext_resource type="Script" uid="uid://cwp0kllyd8ds" path="res://resources/spawn_modules/spawn_module.gd" id="1_j5lcx"]
+[ext_resource type="Script" uid="uid://ca3v2yqnm3fqt" path="res://Spawn_command.gd" id="1_olxhp"]
 
 [resource]
 script = ExtResource("1_olxhp")
-possible_enemies = Array[Resource("res://resources/spawn_modules/spawn_module.gd")]([])
+possible_enemies = Array[ExtResource("1_j5lcx")]([])
 repeat_state = 0
 repeat_mode = 0
 repeat_timer = 0.0

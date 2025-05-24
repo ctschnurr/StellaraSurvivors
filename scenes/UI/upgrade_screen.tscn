@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://by5rg1o3614mm"]
 
-[ext_resource type="Script" path="res://scenes/UI/upgrade_screen.gd" id="1_enubb"]
+[ext_resource type="Script" uid="uid://cu2lpfbxuj4hh" path="res://scenes/UI/upgrade_screen.gd" id="1_enubb"]
 [ext_resource type="PackedScene" uid="uid://cjpssyc1gqfku" path="res://scenes/UI/upgrade_card.tscn" id="2_fi3sc"]
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="3_i3ltt"]
 

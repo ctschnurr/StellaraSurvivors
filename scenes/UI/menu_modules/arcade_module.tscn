@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://qrt0p4bi03eb"]
 
-[ext_resource type="Script" path="res://scenes/UI/menu_modules/arcade_module.gd" id="1_igm41"]
+[ext_resource type="Script" uid="uid://bno1in5u2geu3" path="res://scenes/UI/menu_modules/arcade_module.gd" id="1_igm41"]
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_xt2xo"]
 
 [node name="ArcadeModule" type="MarginContainer"]

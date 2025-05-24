@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjpssyc1gqfku"]
 
-[ext_resource type="Script" path="res://scenes/UI/upgrade_card.gd" id="1_82vuh"]
+[ext_resource type="Script" uid="uid://dhq5ssnqvaybd" path="res://scenes/UI/upgrade_card.gd" id="1_82vuh"]
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="1_graix"]
 
 [node name="Upgrade_card" type="MarginContainer"]

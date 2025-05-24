@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Spawn_module" load_steps=7 format=3 uid="uid://d4kmx3vvtxu61"]
 
 [ext_resource type="PackedScene" uid="uid://cnmjaqosxxcng" path="res://scenes/game_objects/pickups/experience_orb/experience_orb_blue.tscn" id="1_7y50t"]
-[ext_resource type="Script" path="res://resources/spawn_modules/spawn_module.gd" id="1_bt6j6"]
-[ext_resource type="Script" path="res://resources/loot_modules/loot_module.gd" id="2_xw6oi"]
+[ext_resource type="Script" uid="uid://cwp0kllyd8ds" path="res://resources/spawn_modules/spawn_module.gd" id="1_bt6j6"]
+[ext_resource type="Script" uid="uid://cnid1t48s6ild" path="res://resources/loot_modules/loot_module.gd" id="2_xw6oi"]
 [ext_resource type="PackedScene" uid="uid://si6pecgkgbey" path="res://scenes/game_objects/enemies/asteroids/asteroid_sm.tscn" id="3_l8x3b"]
 
 [sub_resource type="Resource" id="Resource_1h3wb"]

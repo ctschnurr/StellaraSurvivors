@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://cwhdow3yaqumu"]
 
 [ext_resource type="Texture2D" uid="uid://cbwycwcix7yfp" path="res://scenes/game_objects/crate/crate.png" id="1_653wb"]
-[ext_resource type="Script" path="res://scenes/game_objects/crate/crate.gd" id="1_nsycn"]
+[ext_resource type="Script" uid="uid://dnhi22apy60al" path="res://scenes/game_objects/crate/crate.gd" id="1_nsycn"]
 [ext_resource type="PackedScene" uid="uid://cxkoh26xllbpv" path="res://scenes/game_objects/player/health_system.tscn" id="4_u7kfk"]
 [ext_resource type="PackedScene" uid="uid://cxmypx8uu0kun" path="res://scenes/components/hitbox_component.tscn" id="10_p3hne"]
 

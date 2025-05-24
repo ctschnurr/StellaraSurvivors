@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://btmi2souuyhhe"]
 
-[ext_resource type="Script" path="res://scenes/game_objects/rocket/rocket.gd" id="1_mbd3a"]
+[ext_resource type="Script" uid="uid://5o3fibt70uey" path="res://scenes/game_objects/rocket/rocket.gd" id="1_mbd3a"]
 [ext_resource type="Texture2D" uid="uid://dc8lbnfdymxr8" path="res://scenes/game_objects/rocket/rocket_spritesheet.png" id="2_kr3h0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0trqy"]

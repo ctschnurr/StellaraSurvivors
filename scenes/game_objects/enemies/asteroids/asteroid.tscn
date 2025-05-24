@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://batiubvruu51j"]
 
-[ext_resource type="Script" path="res://scenes/game_objects/enemies/asteroids/asteroid.gd" id="1_e7n4j"]
+[ext_resource type="Script" uid="uid://c4ubvw48ktdob" path="res://scenes/game_objects/enemies/asteroids/asteroid.gd" id="1_e7n4j"]
 [ext_resource type="Texture2D" uid="uid://bd7c37w1m8a2q" path="res://scenes/game_objects/enemies/asteroids/asteroid_sm01.png" id="1_gdfdo"]
 [ext_resource type="PackedScene" uid="uid://dqf2fq7p7ip" path="res://scenes/components/health_component.tscn" id="3_fb6pk"]
 [ext_resource type="PackedScene" uid="uid://bcmna6wa42j0q" path="res://scenes/components/hurtbox_component.tscn" id="4_8y7tw"]
@@ -52,8 +52,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lbpxx"]
 _data = {
-"Damage": SubResource("Animation_ce6m8"),
-"Death": SubResource("Animation_ptf8c")
+&"Damage": SubResource("Animation_ce6m8"),
+&"Death": SubResource("Animation_ptf8c")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_026wd"]

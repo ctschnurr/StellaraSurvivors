@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b0wosxrgmmws0"]
 
-[ext_resource type="Script" path="res://scenes/UI/menu_modules/story_module.gd" id="1_2qckg"]
+[ext_resource type="Script" uid="uid://b740fu8jm67s8" path="res://scenes/UI/menu_modules/story_module.gd" id="1_2qckg"]
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_xgydp"]
 
 [node name="StoryModule" type="MarginContainer"]

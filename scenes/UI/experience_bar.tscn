@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://wulgocmo17gm"]
 
-[ext_resource type="Script" path="res://scenes/UI/experience_bar.gd" id="1_65n54"]
+[ext_resource type="Script" uid="uid://cou3vemud3iqi" path="res://scenes/UI/experience_bar.gd" id="1_65n54"]
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="2_pke83"]
 
 [node name="Experience_bar" type="CanvasLayer"]

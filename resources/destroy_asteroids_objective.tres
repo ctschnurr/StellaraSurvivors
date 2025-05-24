@@ -1,24 +1,13 @@
-[gd_resource type="Resource" script_class="Objective" load_steps=5 format=3 uid="uid://d4dpv4bqccqpy"]
+[gd_resource type="Resource" script_class="Objective" load_steps=3 format=3 uid="uid://d4dpv4bqccqpy"]
 
-[ext_resource type="Script" path="res://scenes/Managers/Objective.gd" id="1_lxo41"]
-[ext_resource type="Script" path="res://Spawn_command.gd" id="2_pl4us"]
-[ext_resource type="PackedScene" uid="uid://batiubvruu51j" path="res://scenes/asteroids/asteroid.tscn" id="2_sa8fb"]
-
-[sub_resource type="Resource" id="Resource_svoqt"]
-script = ExtResource("2_pl4us")
-repeat_state = 3
-repeat_mode = 0
-repeat_delay = 0
-repeat_amount = 0
-ready = true
-enemy_type = Array[PackedScene]([])
-spawn_amount = 10
-spawn_orientation = 0
+[ext_resource type="Script" uid="uid://dy54e3noys34w" path="res://resources/upgrades/player_upgrade.gd" id="1_57chr"]
+[ext_resource type="Script" uid="uid://dt78dh11ql8ra" path="res://scenes/Managers/Objective.gd" id="1_lxo41"]
 
 [resource]
 script = ExtResource("1_lxo41")
-target_types = Array[PackedScene]([ExtResource("2_sa8fb")])
-spawn_command = SubResource("Resource_svoqt")
 objective_type = 0
+player_starting_abilities = Array[ExtResource("1_57chr")]([])
+available_upgrades = Array[ExtResource("1_57chr")]([])
 objective_description = "Destroy 10 Asteroids"
+survive_timer_minutes = 0
 objective_target = 10

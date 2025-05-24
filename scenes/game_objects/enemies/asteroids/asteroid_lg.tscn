@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0lsq5yi27jo1"]
+[gd_scene load_steps=10 format=3 uid="uid://d0lsq5yi27jo1"]
 
-[ext_resource type="Script" path="res://scenes/game_objects/enemies/asteroids/asteroid.gd" id="1_hccpj"]
+[ext_resource type="Script" uid="uid://c4ubvw48ktdob" path="res://scenes/game_objects/enemies/asteroids/asteroid.gd" id="1_hccpj"]
+[ext_resource type="Script" uid="uid://cwp0kllyd8ds" path="res://resources/spawn_modules/spawn_module.gd" id="4_hkcxw"]
 [ext_resource type="Texture2D" uid="uid://d2hllaieve7is" path="res://scenes/game_objects/enemies/asteroids/asteroid_lg02.png" id="4_i75r3"]
 [ext_resource type="Resource" uid="uid://d4kmx3vvtxu61" path="res://resources/spawn_modules/small_asteroid_default_module.tres" id="4_t8c7c"]
 [ext_resource type="Resource" uid="uid://d0vqv3173v41n" path="res://resources/spawn_modules/medium_asteroid_default_module.tres" id="5_d15xa"]
@@ -17,7 +18,7 @@ collision_mask = 9
 script = ExtResource("1_hccpj")
 asteroid_textures = Array[Texture]([ExtResource("5_ibq82"), ExtResource("4_i75r3")])
 size = 2
-spawn_module_array = Array[Resource("res://resources/spawn_modules/spawn_module.gd")]([ExtResource("4_t8c7c"), ExtResource("5_d15xa")])
+spawn_module_array = Array[ExtResource("4_hkcxw")]([ExtResource("4_t8c7c"), ExtResource("5_d15xa")])
 
 [node name="Asteroid_sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true

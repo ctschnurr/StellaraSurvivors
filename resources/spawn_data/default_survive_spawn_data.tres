@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="Spawn_data" load_steps=5 format=3 uid="uid://8grhxfgc76dh"]
+[gd_resource type="Resource" script_class="Spawn_data" load_steps=6 format=3 uid="uid://8grhxfgc76dh"]
 
-[ext_resource type="Script" path="res://resources/spawn_data/spawn_data.gd" id="1_gneu4"]
+[ext_resource type="Script" uid="uid://cu4yynyra1lks" path="res://resources/spawn_data/spawn_data.gd" id="1_gneu4"]
+[ext_resource type="Script" uid="uid://cwp0kllyd8ds" path="res://resources/spawn_modules/spawn_module.gd" id="2_caaax"]
 [ext_resource type="Resource" uid="uid://d4kmx3vvtxu61" path="res://resources/spawn_modules/small_asteroid_default_module.tres" id="2_et6i8"]
 [ext_resource type="Resource" uid="uid://d0vqv3173v41n" path="res://resources/spawn_modules/medium_asteroid_default_module.tres" id="3_6bwi5"]
 [ext_resource type="Resource" uid="uid://diqirdfewsmg7" path="res://resources/spawn_modules/large_asteroid_default_module.tres" id="4_rnod6"]
 
 [resource]
 script = ExtResource("1_gneu4")
-who_to_spawn = Array[Resource("res://resources/spawn_modules/spawn_module.gd")]([ExtResource("2_et6i8"), ExtResource("3_6bwi5"), ExtResource("4_rnod6")])
+who_to_spawn = Array[ExtResource("2_caaax")]([ExtResource("2_et6i8"), ExtResource("3_6bwi5"), ExtResource("4_rnod6")])
 who_description = "asteroid"
 how_to_spawn = 0
 where_to_spawn = 0

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bs5kt5nfyvh5x"]
 
-[ext_resource type="Script" path="res://scenes/Managers/experience_manager.gd" id="1_sab7d"]
-[ext_resource type="PackedScene" uid="uid://cnmjaqosxxcng" path="res://scenes/game_objects/experience_orb/experience_orb_blue.tscn" id="2_ukh0y"]
+[ext_resource type="Script" uid="uid://ijwdpyhgdw1n" path="res://scenes/Managers/experience_manager.gd" id="1_sab7d"]
+[ext_resource type="PackedScene" uid="uid://cnmjaqosxxcng" path="res://scenes/game_objects/pickups/experience_orb/experience_orb_blue.tscn" id="2_ukh0y"]
 [ext_resource type="PackedScene" uid="uid://wulgocmo17gm" path="res://scenes/UI/experience_bar.tscn" id="3_slaqm"]
 
 [node name="Experience_manager" type="Node"]

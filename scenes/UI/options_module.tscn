@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b53ax7ubeca44"]
 
 [ext_resource type="Theme" uid="uid://xdse31n3ef74" path="res://StellaraTheme.tres" id="1_gdu72"]
-[ext_resource type="Script" path="res://scenes/UI/options_module.gd" id="1_kpiok"]
+[ext_resource type="Script" uid="uid://cm3s8gxyp15ep" path="res://scenes/UI/options_module.gd" id="1_kpiok"]
 [ext_resource type="Texture2D" uid="uid://duko5xybmteb4" path="res://scenes/game_objects/enemies/asteroids/asteroid_sm02.png" id="2_1dlwx"]
 [ext_resource type="Texture2D" uid="uid://d158mw4vfcy58" path="res://scenes/game_objects/enemies/asteroids/asteroid_sm03.png" id="3_lsmji"]
 

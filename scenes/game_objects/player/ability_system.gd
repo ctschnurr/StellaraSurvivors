@@ -10,10 +10,10 @@ class_name Ability_System extends CanvasLayer
 
 var player
 var blaster_icon_card
-var debug = true;
+var debug = false;
 
 enum Secondary_weapons{NONE, CHARGED_BLASTER, ROCKET_LAUNCHER, ENERGY_PULSE}
-var selected_secondary_weapon = Secondary_weapons.ENERGY_PULSE
+var selected_secondary_weapon = Secondary_weapons.NONE
 
 var player_speed = App.PLAYER_BASE_SPEED
 var speed_level: int = 0
@@ -229,4 +229,3 @@ class Blaster_Charge:
 	var charge_count: int = 0
 	var charge_level: int = 0
 	var fired: bool = false
-

@@ -1,10 +1,13 @@
-[gd_resource type="Resource" script_class="Objective" load_steps=2 format=3 uid="uid://bfrmqejmt2etf"]
+[gd_resource type="Resource" script_class="Objective" load_steps=3 format=3 uid="uid://bfrmqejmt2etf"]
 
-[ext_resource type="Script" path="res://scenes/Managers/Objective.gd" id="1_grfr1"]
-
+[ext_resource type="Script" uid="uid://dt78dh11ql8ra" path="res://scenes/Managers/Objective.gd" id="1_grfr1"]
+[ext_resource type="Script" uid="uid://dy54e3noys34w" path="res://resources/upgrades/player_upgrade.gd" id="1_ttdph"]
 
 [resource]
 script = ExtResource("1_grfr1")
 objective_type = 0
+player_starting_abilities = Array[ExtResource("1_ttdph")]([])
+available_upgrades = Array[ExtResource("1_ttdph")]([])
 objective_description = "Survive the asteroids."
+survive_timer_minutes = 0
 objective_target = 10
