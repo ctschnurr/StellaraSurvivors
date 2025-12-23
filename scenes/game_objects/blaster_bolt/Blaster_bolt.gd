@@ -58,7 +58,7 @@ func fire_raycast(raycast_direction: Vector2):
 	
 	if !raycast_output.is_empty():
 					
-		if raycast_output.collider is Destructable_object:
+		if raycast_output.collider is Destructable_object or raycast_output.collider is Comet:
 			raycast_output.collider.respond_to_bolt_collision(raycast_direction, raycast_output.position, damage)
 			
 			collision_cooldown()

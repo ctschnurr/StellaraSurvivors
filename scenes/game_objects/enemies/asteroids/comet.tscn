@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bm2uy3gr521j4"]
+[gd_scene load_steps=11 format=3 uid="uid://bm2uy3gr521j4"]
 
 [ext_resource type="Script" uid="uid://odf3qydf2o38" path="res://scenes/game_objects/enemies/asteroids/comet.gd" id="1_15d0x"]
 [ext_resource type="PackedScene" uid="uid://cxkoh26xllbpv" path="res://scenes/game_objects/player/health_system.tscn" id="5_f83ec"]
@@ -19,7 +19,12 @@ colors = PackedColorArray(0.831373, 0.894118, 0.945098, 1, 0.27451, 0.54902, 0.7
 [sub_resource type="CircleShape2D" id="CircleShape2D_026wd"]
 radius = 76.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_i3q0o"]
+radius = 75.0
+
 [node name="Comet" type="CharacterBody2D" node_paths=PackedStringArray("object_sprite")]
+collision_layer = 5
+collision_mask = 0
 script = ExtResource("1_15d0x")
 object_sprite = NodePath("Asteroid_sprite")
 
@@ -27,8 +32,7 @@ object_sprite = NodePath("Asteroid_sprite")
 z_index = 1
 texture = ExtResource("6_0wfpd")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("hurtbox") instance=ExtResource("7_7eahl")]
-hurtbox = NodePath("")
+[node name="HitboxComponent" parent="." instance=ExtResource("7_7eahl")]
 damage = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
@@ -36,9 +40,9 @@ shape = SubResource("CircleShape2D_rvlpy")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 amount = 200
+texture = ExtResource("10_4olkr")
 lifetime = 0.5
 speed_scale = 0.5
-texture = ExtResource("10_4olkr")
 emission_shape = 1
 emission_sphere_radius = 60.0
 direction = Vector2(0, 0)
@@ -58,6 +62,9 @@ shape = SubResource("CircleShape2D_026wd")
 [node name="HealthSystem" parent="." instance=ExtResource("5_f83ec")]
 unique_name_in_owner = true
 max_health = 500.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_i3q0o")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

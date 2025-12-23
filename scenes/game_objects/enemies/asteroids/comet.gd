@@ -10,7 +10,7 @@ class_name Comet
 
 var object_rotation
 var object_direction: = Vector2.ZERO
-var object_speed: float = 150
+var object_speed: float = 100
 var size_multiplier: float = 5
 var has_entered_play_area: bool = false
 var do_collisions: bool = true
@@ -101,27 +101,27 @@ func collision_cooldown():
 	set_physics_process(true)
 
 
-func respond_to_bolt_collision(bolt_direction, collision_point, damage_factor):	
-	var object_angle = object_direction.angle()
-	var diff_angle = object_angle - bolt_direction.angle()
-			
-	#if the bolt hits an asteroid traveling toward it:
-	if diff_angle < -2.75 or diff_angle > 2.75: 
-		if object_speed < 5:
-			object_direction = bolt_direction.normalized()
-			object_speed *= 1 * (size_multiplier * .1)
-		else:
-			object_speed *= 1 - (.1 * (damage_factor / size_multiplier))
-
-					
-	#if the bolt hits an asteroid traveling away from it:
-	if diff_angle > -0.5 and diff_angle < 0.5: 
-			object_speed *= 1 + (.1 * (damage_factor / size_multiplier))
-			
-	#if the bolt hits an asteroid travelling at a diagonal from it:
-	if (diff_angle < 2.75 and diff_angle > 0.5) or (diff_angle > -2.75 and diff_angle <  -0.5): 
-			object_direction = object_direction.rotated(-diff_angle / 2)
-			object_speed *= 0.60
+func respond_to_bolt_collision(_bolt_direction, collision_point, _damage_factor):	
+	#var object_angle = object_direction.angle()
+	#var diff_angle = object_angle - bolt_direction.angle()
+			#
+	##if the bolt hits an asteroid traveling toward it:
+	#if diff_angle < -2.75 or diff_angle > 2.75: 
+		#if object_speed < 5:
+			#object_direction = bolt_direction.normalized()
+			#object_speed *= 1 * (size_multiplier * .1)
+		#else:
+			#object_speed *= 1 - (.1 * (damage_factor / size_multiplier))
+#
+					#
+	##if the bolt hits an asteroid traveling away from it:
+	#if diff_angle > -0.5 and diff_angle < 0.5: 
+			#object_speed *= 1 + (.1 * (damage_factor / size_multiplier))
+			#
+	##if the bolt hits an asteroid travelling at a diagonal from it:
+	#if (diff_angle < 2.75 and diff_angle > 0.5) or (diff_angle > -2.75 and diff_angle <  -0.5): 
+			#object_direction = object_direction.rotated(-diff_angle / 2)
+			#object_speed *= 0.60
 			
 	object_impact(collision_point)
 
@@ -188,7 +188,7 @@ func fire_raycast2(other_area_pos: Vector2):
 			
 		if raycast_output.collider is Player:
 			object_direction = -direction
-			raycast_output.collider.health_system.damage(3)
+			raycast_output.collider.health_component.damage(3)
 
 
 func _on_area_2d_area_entered(area):

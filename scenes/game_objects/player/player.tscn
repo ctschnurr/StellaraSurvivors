@@ -294,9 +294,9 @@ unique_name_in_owner = true
 z_index = -1
 rotation = -3.14159
 amount = 5
+texture = ExtResource("6_j6rsd")
 lifetime = 0.5
 speed_scale = 5.0
-texture = ExtResource("6_j6rsd")
 gravity = Vector2(0, 0)
 color_ramp = SubResource("Gradient_gkmv5")
 
